@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+
+@layer base {
+  input {
+    @apply outline-0;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+}

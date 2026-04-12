@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 // import { fontName } from '@/app/fonts';
+import '@/shared/styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
