@@ -1,5 +1,179 @@
 @import 'tailwindcss';
 
+/* dark 디렉티브 설정 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 라이트 모드 */
+:root {
+  /* === DriftPlan Color Chip === */
+  /* ocean */
+  --ocean-50: #ebf6fa;
+  --ocean-100: #c2e7f3;
+  --ocean-200: #a8e6f0;
+  --ocean-400: #4fc3e8;
+  --ocean-500: #1a9fc0;
+  --ocean-600: #1a82a0;
+  --ocean-700: #5a9db5;
+  --ocean-800: #1a5f7a;
+  --ocean-900: #0d3d50;
+
+  /* wind */
+  --wind-50: #fffbf0;
+  --wind-100: #fff3cc;
+  --wind-300: #ffd580;
+  --wind-400: #ffb347;
+  --wind-500: #ff8c42;
+  --wind-600: #cc6a20;
+  --wind-800: #7a3f0a;
+
+  /* sand */
+  --sand-50: #fff8f0;
+  --sand-100: #f0ede8;
+  --sand-200: #d6d1ca;
+  --sand-400: #a89e94;
+  --sand-600: #6e6560;
+  --sand-800: #3a3330;
+
+  /* === DriftPlan Base === */
+  --bg: var(--ocean-50);
+  --surface: #ffffff;
+  --surface-alt: var(--sand-50);
+
+  --border: var(--ocean-200);
+  --divider: var(--ocean-100);
+
+  /* Text */
+  --text-primary: var(--ocean-800);
+  --text-secondary: var(--ocean-600);
+  --text-muted: var(--sand-400);
+
+  /* Brand */
+  --accent: var(--ocean-500);
+  --accent-soft: var(--ocean-100);
+
+  /* Wind (포인트) */
+  --wind: var(--wind-400);
+  --wind-soft: var(--wind-100);
+  --wind-strong: var(--wind-500);
+
+  /* Interaction */
+  --hover: var(--ocean-50);
+  --active: var(--ocean-200);
+}
+
+/* 다크 모드 설정 */
+.dark {
+  /* === DriftPlan Base === */
+  --bg: var(--ocean-900);
+  --surface: var(--ocean-800);
+  --surface-alt: var(--ocean-900);
+
+  --border: var(--ocean-600);
+  --divider: var(--ocean-800);
+
+  --text-primary: var(--ocean-50);
+  --text-secondary: var(--ocean-200);
+  --text-muted: var(--ocean-600);
+
+  --accent: var(--ocean-400);
+  --accent-soft: var(--ocean-800);
+
+  --wind: var(--wind-300);
+  --wind-soft: var(--wind-800);
+  --wind-strong: var(--wind-400);
+
+  --hover: var(--ocean-800);
+  --active: var(--ocean-600);
+}
+
+@theme {
+  --breakpoint-sm: 280px;
+  --breakpoint-md: 640px;
+  --breakpoint-lg: 1280px;
+
+  /* ocean */
+  --color-ocean-50: var(--ocean-50);
+  --color-ocean-100: var(--ocean-100);
+  --color-ocean-200: var(--ocean-200);
+  --color-ocean-400: var(--ocean-400);
+  --color-ocean-500: var(--ocean-500);
+  --color-ocean-600: var(--ocean-600);
+  --color-ocean-800: var(--ocean-800);
+  --color-ocean-900: var(--ocean-900);
+
+  /* wind */
+  --color-wind-50: var(--wind-50);
+  --color-wind-100: var(--wind-100);
+  --color-wind-300: var(--wind-300);
+  --color-wind-400: var(--wind-400);
+  --color-wind-500: var(--wind-500);
+  --color-wind-600: var(--wind-600);
+  --color-wind-800: var(--wind-800);
+
+  /* sand */
+  --color-sand-50: var(--sand-50);
+  --color-sand-100: var(--sand-100);
+  --color-sand-200: var(--sand-200);
+  --color-sand-400: var(--sand-400);
+  --color-sand-600: var(--sand-600);
+  --color-sand-800: var(--sand-800);
+
+  /* ==================== Base ==================== */
+
+  /* 앱 전체 페이지 배경 */
+  --color-bg: var(--bg);
+
+  /* 카드, 모달, 드로어 등 컨텐츠를 담는 컴포넌트 배경 */
+  --color-surface: var(--surface);
+
+  /* bg 위에 살짝 구분이 필요한 영역 — 사이드바, 입력 필드 배경, 테이블 헤더 등 */
+  --color-surface-alt: var(--surface-alt);
+
+  /* 카드 테두리, 인풋 테두리 등 컴포넌트 외곽선 */
+  --color-border: var(--border);
+
+  /* 섹션 구분선 (hr, 리스트 사이 선 등) — border보다 옅게 */
+  --color-divider: var(--divider);
+
+  /* ==================== Text ==================== */
+
+  /* 제목, 본문 핵심 텍스트 — 가장 강한 강조 */
+  --color-text-primary: var(--text-primary);
+
+  /* 부제목, 레이블, 설명 텍스트 */
+  --color-text-secondary: var(--text-secondary);
+
+  /* placeholder, 비활성 텍스트, 메타 정보 (날짜, 태그 수 등) */
+  --color-text-muted: var(--text-muted);
+
+  /* ==================== Brand ==================== */
+
+  /* 주요 버튼 배경, 링크, 포커스 링 등 핵심 인터랙션 색상 */
+  --color-accent: var(--accent);
+
+  /* 뱃지 배경, 선택된 항목 하이라이트 등 accent의 연한 버전 */
+  --color-accent-soft: var(--accent-soft);
+
+  /* ==================== Wind accent ==================== */
+
+  /* 강조 태그, 아이콘 포인트 컬러 — 메인 wind 색상 */
+  --color-wind: var(--wind);
+
+  /* wind 색상 배경이 필요할 때 — 토스트, 알림 배경 등 */
+  --color-wind-soft: var(--wind-soft);
+
+  /* 호버 시 wind 강조, CTA 보조 버튼 등 */
+  --color-wind-strong: var(--wind-strong);
+
+  /* ==================== Interaction ==================== */
+
+  /* 버튼/리스트 아이템 호버 배경 */
+  --color-hover: var(--hover);
+
+  /* 클릭/선택된 상태 배경 */
+  --color-active: var(--active);
+}
+
 @layer base {
   input {
     @apply outline-0;
