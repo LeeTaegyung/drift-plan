@@ -1,6 +1,9 @@
+import Image from 'next/image';
+
 export default function Home() {
   return (
     <>
+      <Image src='/images/logo.svg' alt='' width={100} height={100} />
       <button className='bg-ocean-500 hover:bg-ocean-800 rounded-xl px-4 py-2 text-white'>
         일정 추가
       </button>
