@@ -3,6 +3,10 @@ import type { Metadata } from 'next';
 import { sCordDream } from '@/app/fonts';
 
 import '@/shared/styles/globals.css';
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='ko'>
+    <html lang='ko' className={cn("font-sans", geist.variable)}>
       <body className={sCordDream.className}>{children}</body>
     </html>
   );
