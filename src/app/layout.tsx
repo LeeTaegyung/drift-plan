@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
-// import { fontName } from '@/app/fonts';
+import { sCordDream } from '@/app/fonts';
+
 import '@/shared/styles/globals.css';
 
 export const metadata: Metadata = {
@@ -15,8 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko'>
-      {/* <body className={fontName.className}> */}
-      <body>{children}</body>
+      <body className={sCordDream.className}>{children}</body>
     </html>
   );
 }
