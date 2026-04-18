@@ -2,8 +2,10 @@
 
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 
 import { createNickname } from '@/features/auth/signup/api/signup.api';
 import {
@@ -11,6 +13,7 @@ import {
   signUpSchema,
 } from '@/features/auth/signup/model/signup.schema';
 import { useSignup } from '@/features/auth/signup/model/useSignup';
+import { PATH } from '@/shared/constants/path';
 import { generateErrorMessage } from '@/shared/lib/supabase/error';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { LabelInputField, PasswordInputField } from '@/shared/ui/form';
@@ -21,6 +24,7 @@ export default function SignupForm() {
     handleSubmit,
     watch,
     trigger,
+    reset,
     formState: { isValid, isSubmitting, errors },
   } = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpSchema),
@@ -32,6 +36,7 @@ export default function SignupForm() {
     mode: 'onChange',
   });
   const { mutateAsync: signMutate } = useSignup();
+  const router = useRouter();
 
   const password = watch('password');
   const passwordConfirm = watch('passwordConfirm');
@@ -51,14 +56,13 @@ export default function SignupForm() {
       { email, password, nickname },
       {
         onSuccess: () => {
-          // 성공후 토스트 알람 -> 메인페이지로 이동
-          console.log('성공!');
+          toast.success('회원가입에 성공하였습니다.');
+          router.push(PATH.global.main);
         },
         onError: (error) => {
-          // 토스트 알람
-          // 폼 reset 처리
           const message = generateErrorMessage(error);
-          console.log(message);
+          toast.error(message);
+          reset();
         },
       }
     );
