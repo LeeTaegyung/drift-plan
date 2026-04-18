@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 
 import QueryProvider from '@/app/_provider/QueryProvider';
-import { sCordDream } from '@/app/fonts';
+import { sCoreDream } from '@/app/fonts';
+import { Toaster } from '@/shared/shadcn/components/ui/sonner';
 
 import '@/shared/styles/globals.css';
 
@@ -17,8 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko'>
-      <body className={sCordDream.className}>
-        <QueryProvider>{children}</QueryProvider>
+      <body className={`${sCoreDream.className} ${sCoreDream.variable}`}>
+        <QueryProvider>
+          {children}
+          <Toaster />
+        </QueryProvider>
       </body>
     </html>
   );

@@ -370,6 +370,8 @@
   --color-completed-bg: var(--completed-bg);
   --color-completed-border: var(--completed-border);
   --color-completed-text: var(--completed-text);
+
+  --font-s-core-dream: var(--font-s-core-dream);
 }
 
 @layer base {
