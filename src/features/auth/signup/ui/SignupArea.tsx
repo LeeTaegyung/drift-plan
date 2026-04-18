@@ -1,5 +1,5 @@
+import { AuthWrapper, BottomLinkList } from '@/features/auth/_common/ui';
 import SignupForm from '@/features/auth/signup/ui/SignupForm';
-import { AuthWrapper, BottomLinkList } from '@/features/auth/ui';
 import { PATH } from '@/shared/constants/path';
 
 const linkList = [
