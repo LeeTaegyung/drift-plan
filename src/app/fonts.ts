@@ -1,6 +1,6 @@
 import localFont from 'next/font/local';
 
-export const sCordDream = localFont({
+export const sCoreDream = localFont({
   src: [
     {
       path: '../../public/fonts/S-CoreDream-1Thin.woff',
@@ -48,6 +48,6 @@ export const sCordDream = localFont({
       style: 'normal',
     },
   ],
-  variable: '--font-S-CoreDream',
+  variable: '--font-s-core-dream',
   display: 'swap',
 });
