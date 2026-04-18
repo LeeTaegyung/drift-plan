@@ -10,7 +10,7 @@
     "type-gen": "npx supabase gen types typescript --project-id \"qitcjxnblmjkvmtkqddx\" --schema public > src/shared/lib/supabase/database.types.ts"
   },
   "dependencies": {
-    "@hookform/resolvers": "^5.2.2",
+    "@hookform/resolvers": "^5",
     "@supabase/ssr": "^0.10.2",
     "@supabase/supabase-js": "^2.103.0",
     "@tailwindcss/postcss": "^4.2.2",
