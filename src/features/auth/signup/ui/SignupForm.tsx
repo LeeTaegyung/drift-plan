@@ -16,7 +16,11 @@ import { useSignup } from '@/features/auth/signup/model/useSignup';
 import { PATH } from '@/shared/constants/path';
 import { generateErrorMessage } from '@/shared/lib/supabase/error';
 import { Button } from '@/shared/shadcn/components/ui/button';
-import { LabelInputField, PasswordInputField } from '@/shared/ui/form';
+import {
+  FormWrapper,
+  LabelInputField,
+  PasswordInputField,
+} from '@/shared/ui/form';
 
 export default function SignupForm() {
   const {
@@ -69,44 +73,39 @@ export default function SignupForm() {
   });
 
   return (
-    <div className='w-full'>
-      <form
-        className='flex flex-col gap-2 md:gap-5'
-        onSubmit={handleSubmitForm}
+    <FormWrapper onSubmit={handleSubmitForm}>
+      <LabelInputField
+        title='아이디(이메일)'
+        placeholder='아이디를 입력해주세요.'
+        errorMsg={errors?.email?.message || ''}
+        {...register('email')}
+      />
+
+      <LabelInputField
+        title='비밀번호'
+        errorMsg={errors?.password?.message || ''}
       >
-        <LabelInputField
-          title='아이디(이메일)'
-          placeholder='아이디를 입력해주세요.'
-          errorMsg={errors?.email?.message || ''}
-          {...register('email')}
+        <PasswordInputField
+          placeholder='영문 대소문자, 숫자, 특수문자 포함 8자 이상'
+          isError={!!errors.password?.message}
+          {...register('password')}
         />
+      </LabelInputField>
 
-        <LabelInputField
-          title='비밀번호'
-          errorMsg={errors?.password?.message || ''}
-        >
-          <PasswordInputField
-            placeholder='영문 대소문자, 숫자, 특수문자 포함 8자 이상'
-            isError={!!errors.password?.message}
-            {...register('password')}
-          />
-        </LabelInputField>
+      <LabelInputField
+        title='비밀번호 확인'
+        errorMsg={errors.passwordConfirm?.message || ''}
+      >
+        <PasswordInputField
+          placeholder='비밀번호를 한번 더 입력해주세요.'
+          isError={!!errors.passwordConfirm?.message}
+          {...register('passwordConfirm')}
+        />
+      </LabelInputField>
 
-        <LabelInputField
-          title='비밀번호 확인'
-          errorMsg={errors.passwordConfirm?.message || ''}
-        >
-          <PasswordInputField
-            placeholder='비밀번호를 한번 더 입력해주세요.'
-            isError={!!errors.passwordConfirm?.message}
-            {...register('passwordConfirm')}
-          />
-        </LabelInputField>
-
-        <Button disabled={!isValid || isSubmitting} size='lg'>
-          회원가입
-        </Button>
-      </form>
-    </div>
+      <Button disabled={!isValid || isSubmitting} size='lg'>
+        회원가입
+      </Button>
+    </FormWrapper>
   );
 }
