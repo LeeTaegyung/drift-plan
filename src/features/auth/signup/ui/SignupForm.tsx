@@ -39,7 +39,7 @@ export default function SignupForm() {
     },
     mode: 'onChange',
   });
-  const { mutateAsync: signMutate } = useSignup();
+  const { mutateAsync: signupMutate } = useSignup();
   const router = useRouter();
 
   const password = watch('password');
@@ -56,7 +56,7 @@ export default function SignupForm() {
 
     const nickname = await createNickname();
 
-    await signMutate(
+    await signupMutate(
       { email, password, nickname },
       {
         onSuccess: () => {
@@ -75,8 +75,8 @@ export default function SignupForm() {
   return (
     <FormWrapper onSubmit={handleSubmitForm}>
       <LabelInputField
-        title='아이디(이메일)'
-        placeholder='아이디를 입력해주세요.'
+        title='이메일'
+        placeholder='이메일을 입력해주세요.'
         errorMsg={errors?.email?.message || ''}
         {...register('email')}
       />
@@ -104,7 +104,7 @@ export default function SignupForm() {
       </LabelInputField>
 
       <Button disabled={!isValid || isSubmitting} size='lg'>
-        회원가입
+        {isSubmitting ? '회원가입중...' : '회원가입'}
       </Button>
     </FormWrapper>
   );
