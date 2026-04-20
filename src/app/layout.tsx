@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import QueryProvider from '@/app/_provider/QueryProvider';
+import UserProvider from '@/app/_provider/UserProvider';
 import { sCoreDream } from '@/app/fonts';
 import { Toaster } from '@/shared/shadcn/components/ui/sonner';
 
@@ -20,8 +21,10 @@ export default function RootLayout({
     <html lang='ko'>
       <body className={`${sCoreDream.className} ${sCoreDream.variable}`}>
         <QueryProvider>
-          {children}
-          <Toaster />
+          <UserProvider>
+            {children}
+            <Toaster />
+          </UserProvider>
         </QueryProvider>
       </body>
     </html>
