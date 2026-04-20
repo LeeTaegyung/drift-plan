@@ -1,7 +1,7 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
@@ -16,9 +16,13 @@ import { generateErrorMessage } from '@/shared/lib/supabase/error';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { LabelInputField, PasswordInputField } from '@/shared/ui/form';
 import { FormWrapper } from '@/shared/ui/form/FormWrapper';
+import { getSafeRedirect } from '@/shared/utils/getSafeRedirect';
 
 export default function SigninForm() {
   const router = useRouter();
+  const params = useSearchParams();
+  const redirect = params.get('redirect');
+
   const {
     register,
     handleSubmit,
@@ -38,7 +42,9 @@ export default function SigninForm() {
     await signInMutate(formData, {
       onSuccess: () => {
         toast.success('로그인에 성공하였습니다.');
-        router.push(PATH.global.main);
+        const nextUrl = getSafeRedirect(redirect);
+
+        router.push(nextUrl);
       },
       onError: (error) => {
         const message = generateErrorMessage(error);
