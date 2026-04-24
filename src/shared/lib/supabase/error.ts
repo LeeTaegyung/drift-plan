@@ -1,6 +1,6 @@
 import { AuthError } from '@supabase/supabase-js';
 
-const AUTH_ERROR_MESSAGE_MAP: Record<string, string> = {
+export const AUTH_ERROR_MESSAGE_MAP: Record<string, string> = {
   email_exists: '이미 사용 중인 이메일입니다.',
   phone_exists: '이미 사용 중인 전화번호입니다.',
   invalid_credentials: '이메일 또는 비밀번호가 올바르지 않습니다.',
@@ -23,6 +23,9 @@ const AUTH_ERROR_MESSAGE_MAP: Record<string, string> = {
   validation_failed: '이메일 주소가 올바르게 입력되지 않았습니다',
   too_many_requests: '요청이 너무 많습니다. 잠시 후 다시 시도해주세요.',
   email_change_email_already_sent: '인증 메일이 이미 발송되었습니다.',
+  invalid_token: '유효하지 않은 링크입니다.',
+  token_expired: '링크가 만료되었습니다.',
+  invalid_email: '이메일 확인에 실패했습니다.',
 };
 
 export function generateErrorMessage(error: unknown) {
