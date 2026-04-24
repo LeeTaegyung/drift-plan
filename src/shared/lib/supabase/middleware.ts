@@ -9,9 +9,14 @@ const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
 // 로그인 없이 접근할 수 있는 페이지 목록
 const PUBLIC_ROUTE = [
+  PATH.global.main,
   PATH.auth.signIn,
   PATH.auth.signUp,
   PATH.auth.forgotPassword,
+  PATH.auth.forgotPasswordSuccess,
+  PATH.auth.confirm,
+  PATH.auth.error,
+  '/color-guide',
 ];
 
 export const updateSession = async (request: NextRequest) => {
@@ -38,10 +43,14 @@ export const updateSession = async (request: NextRequest) => {
     },
   });
 
+  const pathname = request.nextUrl.pathname;
+
+  // 메인 페이지는 인증에 무관하게 접근 가능
+  if (pathname === '/') return supabaseResponse;
+
   const { data } = await supabase.auth.getClaims();
   const user = data?.claims;
 
-  const pathname = request.nextUrl.pathname;
   const isPublic = PUBLIC_ROUTE.some((route) => pathname === route);
 
   // 로그인 O + 공개 페이지 접근시 => 메인 페이지로 리다이렉트

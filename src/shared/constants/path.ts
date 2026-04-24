@@ -3,7 +3,10 @@ export const PATH = {
     signIn: '/sign-in',
     signUp: '/sign-up',
     forgotPassword: '/forgot-password',
+    forgotPasswordSuccess: '/forgot-password/send-success',
     resetPassword: '/reset-password',
+    error: '/auth/error',
+    confirm: '/auth/confirm',
   },
   global: {
     main: '/',
