@@ -4,7 +4,7 @@ import { PATH } from '@/shared/constants/path';
 
 const linkList = [
   { name: '회원가입', url: PATH.auth.signUp },
-  { name: '비밀번호 재설정', url: PATH.auth.forgotPassword },
+  { name: '비밀번호 찾기', url: PATH.auth.forgotPassword },
 ];
 
 export default function SigninArea() {

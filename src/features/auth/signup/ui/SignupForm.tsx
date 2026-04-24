@@ -5,14 +5,14 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { createNickname } from '@/features/auth/signup/api/signup.api';
+import { createNickname, signUp } from '@/features/auth/signup/api/signup.api';
 import {
   SignUpFormValues,
   signUpSchema,
 } from '@/features/auth/signup/model/signup.schema';
-import { useSignup } from '@/features/auth/signup/model/useSignup';
 import { PATH } from '@/shared/constants/path';
 import { generateErrorMessage } from '@/shared/lib/supabase/error';
 import { Button } from '@/shared/shadcn/components/ui/button';
@@ -39,7 +39,18 @@ export default function SignupForm() {
     },
     mode: 'onChange',
   });
-  const { mutateAsync: signupMutate } = useSignup();
+  const { mutateAsync: signupMutate } = useMutation({
+    mutationFn: signUp,
+    onSuccess: () => {
+      toast.success('회원가입에 성공하였습니다.');
+      router.push(PATH.global.main);
+    },
+    onError: (error) => {
+      const message = generateErrorMessage(error);
+      toast.error(message);
+      reset();
+    },
+  });
   const router = useRouter();
 
   const password = watch('password');
@@ -56,20 +67,7 @@ export default function SignupForm() {
 
     const nickname = await createNickname();
 
-    await signupMutate(
-      { email, password, nickname },
-      {
-        onSuccess: () => {
-          toast.success('회원가입에 성공하였습니다.');
-          router.push(PATH.global.main);
-        },
-        onError: (error) => {
-          const message = generateErrorMessage(error);
-          toast.error(message);
-          reset();
-        },
-      }
-    );
+    await signupMutate({ email, password, nickname });
   });
 
   return (

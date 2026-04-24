@@ -4,14 +4,14 @@ import { useForm } from 'react-hook-form';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
+import { signIn } from '@/features/auth/signin/api/signin.api';
 import {
   SignInFormValues,
   signInSchema,
 } from '@/features/auth/signin/model/signin.schema';
-import { useSignin } from '@/features/auth/signin/model/useSignin';
-import { PATH } from '@/shared/constants/path';
 import { generateErrorMessage } from '@/shared/lib/supabase/error';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { LabelInputField, PasswordInputField } from '@/shared/ui/form';
@@ -36,21 +36,22 @@ export default function SigninForm() {
     mode: 'onChange',
   });
 
-  const { mutateAsync: signInMutate } = useSignin();
+  const { mutateAsync: signInMutate } = useMutation({
+    mutationFn: signIn,
+    onSuccess: () => {
+      toast.success('로그인에 성공하였습니다.');
+      const nextUrl = getSafeRedirect(redirect);
+
+      router.push(nextUrl);
+    },
+    onError: (error) => {
+      const message = generateErrorMessage(error);
+      toast.error(message);
+    },
+  });
 
   const handleSubmitForm = handleSubmit(async (formData) => {
-    await signInMutate(formData, {
-      onSuccess: () => {
-        toast.success('로그인에 성공하였습니다.');
-        const nextUrl = getSafeRedirect(redirect);
-
-        router.push(nextUrl);
-      },
-      onError: (error) => {
-        const message = generateErrorMessage(error);
-        toast.error(message);
-      },
-    });
+    await signInMutate(formData);
   });
 
   return (
