@@ -5,9 +5,10 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
+import { userQueries } from '@/entities/user/api/user.query';
 import { createNickname, signUp } from '@/features/auth/signup/api/signup.api';
 import {
   SignUpFormValues,
@@ -23,6 +24,9 @@ import {
 } from '@/shared/ui/form';
 
 export default function SignupForm() {
+  const queryClient = useQueryClient();
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -39,9 +43,11 @@ export default function SignupForm() {
     },
     mode: 'onChange',
   });
+
   const { mutateAsync: signupMutate } = useMutation({
     mutationFn: signUp,
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: userQueries.all });
       toast.success('회원가입에 성공하였습니다.');
       router.push(PATH.global.main);
     },
@@ -51,7 +57,6 @@ export default function SignupForm() {
       reset();
     },
   });
-  const router = useRouter();
 
   const password = watch('password');
   const passwordConfirm = watch('passwordConfirm');

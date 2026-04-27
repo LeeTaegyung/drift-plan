@@ -4,9 +4,10 @@ import { useForm } from 'react-hook-form';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
+import { userQueries } from '@/entities/user/api/user.query';
 import { signIn } from '@/features/auth/signin/api/signin.api';
 import {
   SignInFormValues,
@@ -19,6 +20,7 @@ import { FormWrapper } from '@/shared/ui/form/FormWrapper';
 import { getSafeRedirect } from '@/shared/utils/getSafeRedirect';
 
 export default function SigninForm() {
+  const queryClient = useQueryClient();
   const router = useRouter();
   const params = useSearchParams();
   const redirect = params.get('redirect');
@@ -41,7 +43,7 @@ export default function SigninForm() {
     onSuccess: () => {
       toast.success('로그인에 성공하였습니다.');
       const nextUrl = getSafeRedirect(redirect);
-
+      queryClient.invalidateQueries({ queryKey: userQueries.all });
       router.push(nextUrl);
     },
     onError: (error) => {
