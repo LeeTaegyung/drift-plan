@@ -16,7 +16,9 @@ export function AuthWrapper({ children }: Props) {
             alt='Drift Plan 로고'
             width={100}
             height={100}
-            className='h-auto w-20 md:w-25'
+            style={{ width: 'auto', height: 'auto' }}
+            className='w-20 md:w-25'
+            priority
           />
           <span className='text-text-primary text-base font-bold uppercase md:text-lg'>
             Drift Plan
