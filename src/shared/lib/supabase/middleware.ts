@@ -16,7 +16,6 @@ const PUBLIC_ROUTE = [
   PATH.auth.forgotPasswordSuccess,
   PATH.auth.confirm,
   PATH.auth.error,
-  '/color-guide',
 ];
 
 export const updateSession = async (request: NextRequest) => {
@@ -45,8 +44,8 @@ export const updateSession = async (request: NextRequest) => {
 
   const pathname = request.nextUrl.pathname;
 
-  // 메인 페이지는 인증에 무관하게 접근 가능
-  if (pathname === '/') return supabaseResponse;
+  // 메인 페이지와 컬러 가이드 페이지는 인증에 무관하게 접근 가능
+  if (pathname === '/' || pathname === '/color-guide') return supabaseResponse;
 
   const { data } = await supabase.auth.getClaims();
   const user = data?.claims;
