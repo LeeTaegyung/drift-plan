@@ -386,4 +386,8 @@
   button {
     @apply cursor-pointer;
   }
+
+  .inner {
+    @apply mx-auto w-full max-w-300 px-5;
+  }
 }
