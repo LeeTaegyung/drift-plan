@@ -14,6 +14,57 @@ export type Database = {
   };
   public: {
     Tables: {
+      trips: {
+        Row: {
+          background_color: string | null;
+          background_image_url: string | null;
+          continent: string[] | null;
+          countries: string[] | null;
+          created_at: string;
+          end_date: string;
+          id: string;
+          is_domestic: boolean;
+          participants_count: number;
+          region: string | null;
+          start_date: string;
+          title: string | null;
+          updated_at: string | null;
+          user_id: string;
+        };
+        Insert: {
+          background_color?: string | null;
+          background_image_url?: string | null;
+          continent?: string[] | null;
+          countries?: string[] | null;
+          created_at?: string;
+          end_date: string;
+          id?: string;
+          is_domestic?: boolean;
+          participants_count?: number;
+          region?: string | null;
+          start_date: string;
+          title?: string | null;
+          updated_at?: string | null;
+          user_id?: string;
+        };
+        Update: {
+          background_color?: string | null;
+          background_image_url?: string | null;
+          continent?: string[] | null;
+          countries?: string[] | null;
+          created_at?: string;
+          end_date?: string;
+          id?: string;
+          is_domestic?: boolean;
+          participants_count?: number;
+          region?: string | null;
+          start_date?: string;
+          title?: string | null;
+          updated_at?: string | null;
+          user_id?: string;
+        };
+        Relationships: [];
+      };
       user_profile: {
         Row: {
           avatar_url: string | null;
@@ -37,7 +88,60 @@ export type Database = {
       };
     };
     Views: {
-      [_ in never]: never;
+      trips_with_status: {
+        Row: {
+          background_color: string | null;
+          background_image_url: string | null;
+          continent: string[] | null;
+          countries: string[] | null;
+          created_at: string | null;
+          end_date: string | null;
+          id: string | null;
+          is_domestic: boolean | null;
+          participants_count: number | null;
+          region: string | null;
+          start_date: string | null;
+          status: string | null;
+          title: string | null;
+          updated_at: string | null;
+          user_id: string | null;
+        };
+        Insert: {
+          background_color?: string | null;
+          background_image_url?: string | null;
+          continent?: string[] | null;
+          countries?: string[] | null;
+          created_at?: string | null;
+          end_date?: string | null;
+          id?: string | null;
+          is_domestic?: boolean | null;
+          participants_count?: number | null;
+          region?: string | null;
+          start_date?: string | null;
+          status?: never;
+          title?: string | null;
+          updated_at?: string | null;
+          user_id?: string | null;
+        };
+        Update: {
+          background_color?: string | null;
+          background_image_url?: string | null;
+          continent?: string[] | null;
+          countries?: string[] | null;
+          created_at?: string | null;
+          end_date?: string | null;
+          id?: string | null;
+          is_domestic?: boolean | null;
+          participants_count?: number | null;
+          region?: string | null;
+          start_date?: string | null;
+          status?: never;
+          title?: string | null;
+          updated_at?: string | null;
+          user_id?: string | null;
+        };
+        Relationships: [];
+      };
     };
     Functions: {
       [_ in never]: never;
