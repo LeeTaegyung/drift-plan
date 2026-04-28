@@ -13,9 +13,9 @@ export const PATH = {
     trips: {
       list: '/trips',
       create: '/trips/create',
-      detail: (tripId: number) => `/trips/${tripId}`,
-      edit: (tripId: number) => `/trips/${tripId}/edit`,
-      days: (tripId: number, dateId: string) =>
+      detail: (tripId: string) => `/trips/${tripId}`,
+      edit: (tripId: string) => `/trips/${tripId}/edit`,
+      days: (tripId: string, dateId: string) =>
         `/trips/${tripId}/days/${dateId}`,
     },
   },
