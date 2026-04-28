@@ -7,7 +7,13 @@ import {
   UsersRound,
 } from 'lucide-react';
 
-import { TripsStatusType, TripsViewType } from '@/entities/trips/type';
+import {
+  getParticipantsLabel,
+  getTripLocationLabel,
+  getTripStatus,
+  getTripTitleLabel,
+} from '@/entities/trips/lib/format';
+import { TripsViewType } from '@/entities/trips/type';
 import TripScopeTag from '@/entities/trips/ui/TripScopeTag';
 import TripStatusChip from '@/entities/trips/ui/TripStatusChip';
 import { PATH } from '@/shared/constants/path';
@@ -15,59 +21,6 @@ import { Button } from '@/shared/shadcn/components/ui/button';
 
 interface Props {
   trip: TripsViewType;
-}
-
-function getTripStatus(value: string): TripsStatusType {
-  if (value === 'before' || value === 'during' || value === 'after') {
-    return value;
-  }
-  return 'before';
-}
-
-function getTripLocationLabel({
-  is_domestic,
-  continent,
-  countries,
-  region,
-}: Pick<TripsViewType, 'is_domestic' | 'continent' | 'countries' | 'region'>) {
-  // 국내인 경우, ㅇㅇ 여행 표시
-  if (is_domestic) return region;
-
-  // 해외인 경우,
-  // 나라가 2개 이상이면,
-  if (countries!.length >= 2) {
-    const altText = continent!.length >= 2 ? '전세계' : continent![0];
-
-    return altText;
-  } else {
-    return countries![0];
-  }
-}
-
-function getTripTitleLabel({
-  title,
-  is_domestic,
-  continent,
-  countries,
-  region,
-}: Pick<
-  TripsViewType,
-  'title' | 'is_domestic' | 'continent' | 'countries' | 'region'
->) {
-  if (title) return title;
-
-  const altText = getTripLocationLabel({
-    is_domestic,
-    continent,
-    countries,
-    region,
-  });
-
-  return `${altText} 여행`;
-}
-
-function getParticipantsLabel(count: number) {
-  return count === 1 ? '나혼자' : `${count}명`;
 }
 
 export default function TripItem({ trip }: Props) {
@@ -99,6 +52,7 @@ export default function TripItem({ trip }: Props) {
     countries,
     region,
   });
+  const displayParticipantsCount = getParticipantsLabel(participants_count!);
 
   return (
     <div
@@ -112,7 +66,7 @@ export default function TripItem({ trip }: Props) {
     >
       <Link
         href={PATH.global.trips.detail(id!)}
-        className='flex h-full flex-col bg-black/25 p-3 text-white md:p-5'
+        className='flex h-full flex-col bg-black/30 p-3 text-white md:p-5'
       >
         <div className='mb-1.5 flex gap-1'>
           <TripStatusChip status={status} />
@@ -138,7 +92,7 @@ export default function TripItem({ trip }: Props) {
           {/* 인원수가 1명인 경우 나혼자 로 텍스트 대체 */}
           <div className='flex items-center gap-1 text-xs md:text-sm'>
             <UsersRound className='size-4 md:size-4.5' />
-            {getParticipantsLabel(participants_count!)}
+            {displayParticipantsCount}
           </div>
         </div>
       </Link>
