@@ -390,4 +390,14 @@
   .inner {
     @apply mx-auto w-full max-w-300 px-5;
   }
+
+  /* 국내 */
+  .badge-domestic {
+    @apply bg-sand-600 text-sand-50;
+  }
+
+  /* 해외 */
+  .badge-international {
+    @apply bg-ocean-500 text-ocean-50;
+  }
 }
