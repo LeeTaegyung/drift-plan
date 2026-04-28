@@ -8,7 +8,11 @@ function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
       queries: {
+        throwOnError: true,
         staleTime: 60 * 1000,
+      },
+      mutations: {
+        throwOnError: false,
       },
       dehydrate: {
         // include pending queries in dehydration
