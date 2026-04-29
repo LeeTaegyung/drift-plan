@@ -9,7 +9,7 @@ export type TripsType = Database['public']['Tables']['trips']['Row'];
 
 export type TripsStatusType = 'before' | 'during' | 'after';
 
-// trips ui용 타입
+// trips ui용 타입(status 포함)
 export type TripsUiType = Required<
   Pick<
     TripsViewType,
