@@ -8,3 +8,24 @@ export type TripsViewType =
 export type TripsType = Database['public']['Tables']['trips']['Row'];
 
 export type TripsStatusType = 'before' | 'during' | 'after';
+
+// trips ui용 타입
+export type TripsUiType = Required<
+  Pick<
+    TripsViewType,
+    | 'id'
+    | 'user_id'
+    | 'is_domestic'
+    | 'start_date'
+    | 'end_date'
+    | 'participants_count'
+    | 'status'
+  >
+> & {
+  title: string | null;
+  region: string | null;
+  countries: string[] | null;
+  continent: string[] | null;
+  background_color: string | null;
+  background_image_url: string | null;
+};

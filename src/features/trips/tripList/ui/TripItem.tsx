@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 
 import {
+  generateTrip,
   getParticipantsLabel,
   getTripLocationLabel,
   getTripStatus,
@@ -27,16 +28,16 @@ export default function TripItem({ trip }: Props) {
   const {
     background_color,
     background_image_url,
-    continent,
-    countries,
     end_date,
     id,
     is_domestic,
+    continent,
+    countries,
     participants_count,
     region,
     start_date,
     title,
-  } = trip;
+  } = generateTrip(trip);
 
   const status = getTripStatus(trip.status!);
   const displayTitle = getTripTitleLabel({
