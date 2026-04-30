@@ -1,5 +1,5 @@
-import TripsArea from '@/features/trips/tripList/ui/TripsArea';
+import TripListArea from '@/features/trips/tripList/ui/TripListArea';
 
 export default function TripsPage() {
-  return <TripsArea />;
+  return <TripListArea />;
 }

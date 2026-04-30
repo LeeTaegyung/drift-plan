@@ -73,7 +73,7 @@ import { useCurrentPage } from '@/shared/utils/hooks/useCurrentPage';
 //   },
 // ];
 
-export default function TripsArea() {
+export default function TripListArea() {
   const { currentPage, setCurrentPage } = useCurrentPage();
   const [selectScope, setSelectScope] = useState<undefined | boolean>(
     undefined
