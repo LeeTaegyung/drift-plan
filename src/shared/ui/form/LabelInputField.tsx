@@ -33,7 +33,10 @@ export function LabelInputField({
         children
       ) : (
         <Input
-          className={cn('text-sm', errorMsg && 'border-error-border')}
+          className={cn(
+            'bg-surface text-sm',
+            errorMsg && 'border-error-border'
+          )}
           {...props}
         />
       )}
