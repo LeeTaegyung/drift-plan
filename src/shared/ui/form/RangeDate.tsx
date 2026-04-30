@@ -18,9 +18,14 @@ import {
 interface Props {
   selectDate: DateRange | undefined;
   setSelectDate: (date: DateRange | undefined) => void;
+  btnText?: string;
 }
 
-export default function RangeDate({ selectDate, setSelectDate }: Props) {
+export default function RangeDate({
+  selectDate,
+  setSelectDate,
+  btnText = '날짜 선택',
+}: Props) {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState<DateRange | undefined>(selectDate);
 
@@ -63,7 +68,7 @@ export default function RangeDate({ selectDate, setSelectDate }: Props) {
           locale={ko}
         />
         <div className='flex justify-end px-2 py-1'>
-          <Button onClick={handleClickApply}>기간 조회</Button>
+          <Button onClick={handleClickApply}>{btnText}</Button>
         </div>
       </PopoverContent>
     </Popover>

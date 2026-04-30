@@ -9,12 +9,12 @@ import { format } from 'date-fns';
 import { ArrowRight, PlusIcon } from 'lucide-react';
 
 import { getTrips } from '@/entities/trips/api/trips.api';
-import RangeDate from '@/features/trips/tripList/ui/RangeDate';
 import ScopFilter from '@/features/trips/tripList/ui/ScopFilter';
 import TripItem from '@/features/trips/tripList/ui/TripItem';
 import { PATH } from '@/shared/constants/path';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { NoData } from '@/shared/ui/empty';
+import RangeDate from '@/shared/ui/form/RangeDate';
 import Pagination from '@/shared/ui/Pagination';
 import { useCurrentPage } from '@/shared/utils/hooks/useCurrentPage';
 
@@ -125,7 +125,11 @@ export default function TripListArea() {
         {/* 국내/해외 */}
         <ScopFilter selectScope={selectScope} setSelectScope={setSelectScope} />
         {/* 기간 */}
-        <RangeDate selectDate={date} setSelectDate={setDate} />
+        <RangeDate
+          selectDate={date}
+          setSelectDate={setDate}
+          btnText='기간 조회'
+        />
       </div>
 
       {/* 리스트 */}
