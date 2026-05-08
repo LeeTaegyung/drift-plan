@@ -27,8 +27,11 @@ export default function KoreaRegionSearch({
 }: Props) {
   const [search, setSearch] = useState(value || '');
   const debouncedSearch = useDebouncedValue(search, 300);
-  const initValue =
-    value === null ? null : KOREA_REGIONS.find((item) => item.name === value);
+
+  const selectRegion = useMemo(
+    () => (value ? KOREA_REGIONS.find((item) => item.name === value) : null),
+    [value]
+  );
 
   const filterItems = useMemo(
     () =>
@@ -48,7 +51,7 @@ export default function KoreaRegionSearch({
   return (
     <Combobox
       items={filterItems}
-      defaultValue={initValue}
+      value={selectRegion}
       onValueChange={handleChange}
     >
       <ComboboxInput

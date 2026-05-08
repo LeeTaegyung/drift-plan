@@ -1,5 +1,10 @@
 // 국내 - 검색용 정적 데이터
-export const KOREA_REGIONS = [
+export const KOREA_REGIONS: {
+  name: string;
+  code: string;
+  type: string;
+  parent: string | null;
+}[] = [
   {
     name: '서울',
     code: '11',
