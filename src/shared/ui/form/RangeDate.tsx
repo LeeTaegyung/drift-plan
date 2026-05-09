@@ -14,17 +14,20 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/shared/shadcn/components/ui/popover';
+import { cn } from '@/shared/shadcn/lib/utils';
 
 interface Props {
   selectDate: DateRange | undefined;
   setSelectDate: (date: DateRange | undefined) => void;
   btnText?: string;
+  errorMsg?: string;
 }
 
 export default function RangeDate({
   selectDate,
   setSelectDate,
   btnText = '날짜 선택',
+  errorMsg,
 }: Props) {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState<DateRange | undefined>(selectDate);
@@ -40,7 +43,10 @@ export default function RangeDate({
         <Button
           variant='outline'
           id='date-picker-range'
-          className='bg-surface! border-dp-accent-soft h-11 justify-start px-2.5 font-normal'
+          className={cn(
+            'bg-surface! border-dp-accent-soft h-10 justify-start px-2.5 font-normal md:h-12',
+            errorMsg && 'border-error-border'
+          )}
         >
           <CalendarIcon />
           {date?.from ? (
