@@ -36,7 +36,7 @@ export default function KoreaRegionSearch({
   const filterItems = useMemo(
     () =>
       KOREA_REGIONS.filter((item) => {
-        const keyword = debouncedSearch.trim().toLowerCase();
+        const keyword = debouncedSearch.trim();
         return item.name.includes(keyword);
       }),
     [debouncedSearch]
@@ -60,7 +60,7 @@ export default function KoreaRegionSearch({
         placeholder='여행지를 입력해주세요. (ex. 경기도, 제주...)'
         className={cn(
           'bg-surface border-input! h-10 text-sm ring-0! md:h-12',
-          errorMsg && 'border-error-border'
+          errorMsg && 'border-error-border!'
         )}
       />
       <ComboboxContent>
