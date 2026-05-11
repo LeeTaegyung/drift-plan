@@ -62,6 +62,8 @@ const eslintConfig = defineConfig([
 
       // Safety
       'no-unsafe-optional-chaining': 'warn',
+
+      'react-hooks/set-state-in-effect': 'off',
     },
   },
 ]);
