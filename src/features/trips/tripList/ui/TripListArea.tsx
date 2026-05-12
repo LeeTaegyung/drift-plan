@@ -36,7 +36,9 @@ export default function TripListArea() {
     TRIPS_QUERIES.list.queryOptions(tripListFilter)
   );
 
-  if (!tripsData || tripsData?.length === 0)
+  console.log(tripsData);
+
+  if (!tripsData || tripsData.data?.length === 0)
     return (
       <NoData title='아직 계획한 여행이 없어요.'>
         <Button
@@ -88,7 +90,7 @@ export default function TripListArea() {
       {/* 리스트 */}
       <div>
         <ul className='grid grid-cols-1 items-stretch gap-3 md:grid-cols-3 md:gap-5 lg:grid-cols-4'>
-          {tripsData.map((trip) => (
+          {tripsData.data.map((trip) => (
             <li key={trip.id}>
               <TripItem trip={trip} />
             </li>
@@ -98,8 +100,8 @@ export default function TripListArea() {
 
       {/* 페이지네이션 */}
       <Pagination
-        currentPage={1}
-        totalPage={2}
+        currentPage={Number(currentPage)}
+        totalPage={tripsData.totalPages}
         onChangePage={(currentPage: number) => setCurrentPage(currentPage)}
       />
     </div>
