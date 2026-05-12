@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
 
-import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { CalendarIcon } from 'lucide-react';
 
+import { formatTripDate } from '@/entities/trips/lib/dateFormatter';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { Calendar } from '@/shared/shadcn/components/ui/calendar';
 import {
@@ -52,11 +52,10 @@ export default function RangeDate({
           {date?.from ? (
             date.to ? (
               <>
-                {format(date.from, 'yyyy.MM.dd')} ~{' '}
-                {format(date.to, 'yyyy.MM.dd')}
+                {formatTripDate(date.from)} ~ {formatTripDate(date.to)}
               </>
             ) : (
-              format(date.from, 'yyyy.MM.dd')
+              formatTripDate(date.from)
             )
           ) : (
             <span>날짜를 선택해주세요.</span>

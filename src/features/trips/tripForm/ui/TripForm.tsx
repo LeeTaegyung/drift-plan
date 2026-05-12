@@ -3,8 +3,8 @@
 import { Controller, useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { format } from 'date-fns';
 
+import { formatTripDate } from '@/entities/trips/lib/dateFormatter';
 import { TripValuesType } from '@/entities/trips/type';
 import {
   tripFormSchema,
@@ -54,8 +54,8 @@ export default function TripForm({ onSubmit, initValues }: Props) {
 
     if (date === undefined) return;
 
-    const start_date = format(date.from, 'yyyy.MM.dd');
-    const end_date = format(date.to || date.from, 'yyyy.MM.dd');
+    const start_date = formatTripDate(date.from);
+    const end_date = formatTripDate(date.to || date.from);
 
     const newCountries =
       countries === null ? null : countries.map((country) => country.name);
