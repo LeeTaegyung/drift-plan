@@ -1,6 +1,7 @@
 'use client';
 
 import { Controller, useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -26,6 +27,7 @@ interface Props {
 }
 
 export default function TripForm({ onSubmit, initValues }: Props) {
+  const router = useRouter();
   const {
     handleSubmit,
     register,
@@ -239,7 +241,12 @@ export default function TripForm({ onSubmit, initValues }: Props) {
 
         <div className='mt-5 flex gap-2 md:mt-10'>
           <Button className='flex-1'>등록</Button>
-          <Button type='button' className='flex-1' variant={'outline'}>
+          <Button
+            type='button'
+            className='flex-1'
+            variant={'outline'}
+            onClick={() => router.back()}
+          >
             취소
           </Button>
         </div>
