@@ -3,14 +3,22 @@
 import { ReactNode } from 'react';
 import Image from 'next/image';
 
+import { cn } from '@/shared/shadcn/lib/utils';
+
 interface Props {
   title: string;
+  className?: string;
   children?: ReactNode;
 }
 
-export function NoData({ title, children }: Props) {
+export function NoData({ title, className, children }: Props) {
   return (
-    <div className='flex-full flex flex-1 flex-col items-center justify-center gap-5'>
+    <div
+      className={cn(
+        'flex-full flex flex-1 flex-col items-center justify-center gap-5',
+        className
+      )}
+    >
       <Image
         src='/images/no-data.svg'
         width={303}
