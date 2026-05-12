@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DateRange } from 'react-day-picker';
 
 import { ko } from 'date-fns/locale';
@@ -36,6 +36,10 @@ export default function RangeDate({
     setSelectDate(date);
     setOpen(false);
   };
+
+  useEffect(() => {
+    if (selectDate === undefined) setDate(undefined);
+  }, [selectDate]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
