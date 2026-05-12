@@ -1,13 +1,18 @@
 import { InputHTMLAttributes, ReactNode } from 'react';
 
-import { Info, TriangleAlert } from 'lucide-react';
+import { TriangleAlert } from 'lucide-react';
 
-import { Field, FieldLabel } from '@/shared/shadcn/components/ui/field';
+import {
+  Field,
+  FieldDescription,
+  FieldLabel,
+} from '@/shared/shadcn/components/ui/field';
 import { Input } from '@/shared/shadcn/components/ui/input';
 import { cn } from '@/shared/shadcn/lib/utils';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
+  desc?: string;
   required?: boolean;
   children?: ReactNode;
   errorMsg?: string;
@@ -16,6 +21,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 
 export function LabelInputField({
   title,
+  desc,
   required = false,
   children,
   errorMsg,
@@ -39,6 +45,9 @@ export function LabelInputField({
           )}
           {...props}
         />
+      )}
+      {desc && (
+        <FieldDescription className='text-[13px]'>{desc}</FieldDescription>
       )}
 
       {errorMsg && (
