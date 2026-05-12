@@ -29,3 +29,8 @@ export type TripsUiType = Required<
   background_color: string | null;
   background_image_url: string | null;
 };
+
+export type TripValuesType = Omit<
+  TripsType,
+  'id' | 'user_id' | 'updated_at' | 'created_at'
+>;

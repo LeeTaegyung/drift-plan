@@ -1,3 +1,4 @@
+import { TripValuesType } from '@/entities/trips/type';
 import { createClient } from '@/shared/lib/supabase/client';
 
 const supabase = createClient();
@@ -25,6 +26,18 @@ export const getTrips = async (filters?: {
   }
 
   const { data, error } = await query;
+
+  if (error) throw error;
+
+  return data;
+};
+
+export const createTrip = async (formValues: TripValuesType) => {
+  const { data, error } = await supabase
+    .from('trips')
+    .insert(formValues)
+    .select()
+    .single();
 
   if (error) throw error;
 
