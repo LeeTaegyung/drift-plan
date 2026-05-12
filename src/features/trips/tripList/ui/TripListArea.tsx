@@ -4,11 +4,12 @@ import { useState } from 'react';
 import { type DateRange } from 'react-day-picker';
 import Link from 'next/link';
 
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ArrowRight, PlusIcon } from 'lucide-react';
 
 import { TRIPS_QUERIES } from '@/entities/trips/api/trips.queries';
 import { formatTripDate } from '@/entities/trips/lib/dateFormatter';
+import { GetTripsResponse } from '@/entities/trips/type';
 import ScopFilter from '@/features/trips/tripList/ui/ScopFilter';
 import TripItem from '@/features/trips/tripList/ui/TripItem';
 import { PATH } from '@/shared/constants/path';
@@ -19,6 +20,7 @@ import Pagination from '@/shared/ui/Pagination';
 import { useCurrentPage } from '@/shared/utils/hooks/useCurrentPage';
 
 export default function TripListArea() {
+  const queryClient = useQueryClient();
   const { currentPage, setCurrentPage } = useCurrentPage();
   const [selectScope, setSelectScope] = useState<undefined | boolean>(
     undefined
@@ -36,11 +38,18 @@ export default function TripListArea() {
     TRIPS_QUERIES.list.queryOptions(tripListFilter)
   );
 
-  console.log(tripsData);
+  const initData = queryClient.getQueryData<GetTripsResponse>(
+    TRIPS_QUERIES.list.queryKey({
+      currentPage: 1,
+      is_domestic: undefined,
+      start_date: undefined,
+      end_date: undefined,
+    })
+  );
 
-  if (!tripsData || tripsData.data?.length === 0)
+  if (!initData || initData.data?.length === 0)
     return (
-      <NoData title='아직 계획한 여행이 없어요.'>
+      <NoData title='아직 계획한 여행이 없어요.' className='py-10 md:py-15'>
         <Button
           className='bg-surface gap-1 rounded-md text-sm'
           variant='outline'
@@ -87,23 +96,40 @@ export default function TripListArea() {
         />
       </div>
 
-      {/* 리스트 */}
-      <div>
-        <ul className='grid grid-cols-1 items-stretch gap-3 md:grid-cols-3 md:gap-5 lg:grid-cols-4'>
-          {tripsData.data.map((trip) => (
-            <li key={trip.id}>
-              <TripItem trip={trip} />
-            </li>
-          ))}
-        </ul>
-      </div>
+      {tripsData && tripsData.total === 0 ? (
+        <NoData title='검색 결과가 없어요.' className='py-10 md:py-15'>
+          <p className='text-sm text-gray-600'>
+            다른 조건으로 다시 검색해보세요.
+          </p>
+          <Button
+            onClick={() => {
+              setSelectScope(undefined);
+              setDate(undefined);
+              setCurrentPage(1);
+            }}
+          >
+            필터 초기화
+          </Button>
+        </NoData>
+      ) : (
+        <>
+          <div>
+            <ul className='grid grid-cols-1 items-stretch gap-3 md:grid-cols-3 md:gap-5 lg:grid-cols-4'>
+              {tripsData!.data.map((trip) => (
+                <li key={trip.id}>
+                  <TripItem trip={trip} />
+                </li>
+              ))}
+            </ul>
+          </div>
 
-      {/* 페이지네이션 */}
-      <Pagination
-        currentPage={Number(currentPage)}
-        totalPage={tripsData.totalPages}
-        onChangePage={(currentPage: number) => setCurrentPage(currentPage)}
-      />
+          <Pagination
+            currentPage={Number(currentPage)}
+            totalPage={tripsData!.totalPages}
+            onChangePage={(currentPage: number) => setCurrentPage(currentPage)}
+          />
+        </>
+      )}
     </div>
   );
 }

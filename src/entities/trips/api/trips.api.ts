@@ -1,15 +1,7 @@
-import { TripValuesType } from '@/entities/trips/type';
+import { GetTripsResponse, TripValuesType } from '@/entities/trips/type';
 import { createClient } from '@/shared/lib/supabase/client';
 
 const supabase = createClient();
-
-interface GetTripsParams {
-  is_domestic?: boolean;
-  start_date?: string;
-  end_date?: string;
-  currentPage?: number;
-  pageSize?: number;
-}
 
 const DEFAULT_CURRENT_PAGE = 1;
 const DEFAULT_PAGE_SIZE = 12;
@@ -20,7 +12,13 @@ export const getTrips = async ({
   end_date,
   currentPage = DEFAULT_CURRENT_PAGE,
   pageSize = DEFAULT_PAGE_SIZE,
-}: GetTripsParams) => {
+}: {
+  is_domestic?: boolean;
+  start_date?: string;
+  end_date?: string;
+  currentPage?: number;
+  pageSize?: number;
+}): Promise<GetTripsResponse> => {
   let query = supabase
     .from('trips_with_status')
     .select('*', { count: 'exact' })

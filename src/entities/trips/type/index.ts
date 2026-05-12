@@ -34,3 +34,9 @@ export type TripValuesType = Omit<
   TripsType,
   'id' | 'user_id' | 'updated_at' | 'created_at'
 >;
+
+export interface GetTripsResponse {
+  data: TripsViewType[];
+  total: number;
+  totalPages: number;
+}
