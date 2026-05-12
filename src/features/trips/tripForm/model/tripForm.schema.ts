@@ -84,13 +84,13 @@ const tripFormDomesticField = z
   });
 
 const tripFormCommonField = z.object({
-  title: z.string().min(1, '여행 제목을 입력해주세요.'),
+  title: z.string().nullable(),
   date: tripFormDateRange,
   participants_count: z
     .number('인원을 입력해주세요.')
     .min(1, '최소 1명 이상이어야 합니다.'),
-  background_color: z.string().nullable(),
   background_image_url: z.string().nullable(),
+  background_color: z.string().nullable(),
 });
 
 export const tripFormSchema = z.intersection(
