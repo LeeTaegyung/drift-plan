@@ -57,7 +57,7 @@ export default function TripItem({ trip }: Props) {
 
   return (
     <div
-      className='border-border relative aspect-auto h-full overflow-hidden rounded-lg bg-cover md:aspect-9/11'
+      className='border-dp-accent-soft bg-dp-accent relative aspect-auto h-full overflow-hidden rounded-lg border-2 bg-cover text-white md:aspect-9/11'
       style={{
         backgroundImage: background_image_url
           ? `url(${background_image_url})`
@@ -67,7 +67,8 @@ export default function TripItem({ trip }: Props) {
     >
       <Link
         href={PATH.global.trips.detail(id!)}
-        className='flex h-full flex-col bg-black/30 p-3 text-white md:p-5'
+        // bg-black/30 text-white
+        className='flex h-full flex-col p-3 md:p-5'
       >
         <div className='mb-1.5 flex gap-1'>
           <TripStatusChip status={status} />
