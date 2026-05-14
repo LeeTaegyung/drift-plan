@@ -1,11 +1,6 @@
 import Link from 'next/link';
 
-import {
-  CalendarIcon,
-  EllipsisVertical,
-  MapPin,
-  UsersRound,
-} from 'lucide-react';
+import { CalendarIcon, MapPin, UsersRound } from 'lucide-react';
 
 import {
   generateTrip,
@@ -18,13 +13,15 @@ import { TripsViewType } from '@/entities/trips/type';
 import TripScopeTag from '@/entities/trips/ui/TripScopeTag';
 import TripStatusChip from '@/entities/trips/ui/TripStatusChip';
 import { PATH } from '@/shared/constants/path';
-import { Button } from '@/shared/shadcn/components/ui/button';
+import ActionMenu from '@/shared/ui/ActionMenu';
 
 interface Props {
   trip: TripsViewType;
+  onEdit: (tripId: string) => void;
+  onDelete: (tripId: string) => void;
 }
 
-export default function TripItem({ trip }: Props) {
+export default function TripItem({ trip, onEdit, onDelete }: Props) {
   const {
     background_color,
     background_image_url,
@@ -98,14 +95,11 @@ export default function TripItem({ trip }: Props) {
           </div>
         </div>
       </Link>
-      <div className='absolute'>
-        <Button
-          variant={'ghost'}
-          size={'icon'}
-          className='hover:bg-transparent'
-        >
-          <EllipsisVertical />
-        </Button>
+      <div className='absolute top-3 right-3'>
+        <ActionMenu
+          onClickEdit={() => onEdit(id || '')}
+          onClickDelete={() => onDelete(id || '')}
+        />
       </div>
     </div>
   );

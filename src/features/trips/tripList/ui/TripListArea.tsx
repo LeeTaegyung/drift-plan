@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { type DateRange } from 'react-day-picker';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ArrowRight, PlusIcon } from 'lucide-react';
@@ -10,34 +11,58 @@ import { ArrowRight, PlusIcon } from 'lucide-react';
 import { TRIPS_QUERIES } from '@/entities/trips/api/trips.queries';
 import { formatTripDate } from '@/entities/trips/lib/dateFormatter';
 import { GetTripsResponse } from '@/entities/trips/type';
+import { useTripDelete } from '@/features/trips/tripList/hook/useTripDelete';
 import ScopFilter from '@/features/trips/tripList/ui/ScopFilter';
 import TripItem from '@/features/trips/tripList/ui/TripItem';
 import { PATH } from '@/shared/constants/path';
 import { Button } from '@/shared/shadcn/components/ui/button';
+import { useAlertModalStore } from '@/shared/store/alertModalStore';
 import { NoData } from '@/shared/ui/empty';
 import RangeDate from '@/shared/ui/form/RangeDate';
+import Loading from '@/shared/ui/Loading';
 import Pagination from '@/shared/ui/Pagination';
 import { useCurrentPage } from '@/shared/utils/hooks/useCurrentPage';
 
 export default function TripListArea() {
+  const router = useRouter();
   const queryClient = useQueryClient();
   const { currentPage, setCurrentPage } = useCurrentPage();
   const [selectScope, setSelectScope] = useState<undefined | boolean>(
     undefined
   );
   const [date, setDate] = useState<DateRange | undefined>(undefined);
+  const openAlertModal = useAlertModalStore((state) => state.openAlertModal);
 
-  const tripListFilter = {
-    currentPage,
-    is_domestic: selectScope,
-    start_date: date?.from ? formatTripDate(date.from) : undefined,
-    end_date: date?.to ? formatTripDate(date.to) : undefined,
+  const { data: tripsData, isLoading } = useQuery(
+    TRIPS_QUERIES.list.queryOptions({
+      currentPage,
+      is_domestic: selectScope,
+      start_date: date?.from ? formatTripDate(date.from) : undefined,
+      end_date: date?.to ? formatTripDate(date.to) : undefined,
+    })
+  );
+  const { mutate: deleteMutate } = useTripDelete();
+
+  // 여행 아이템 수정 페이지 이동
+  const handleEditPageMove = (tripId: string) => {
+    if (tripId === '') {
+      return;
+    }
+    router.push(`${PATH.global.trips.edit(tripId)}`);
+  };
+  // 여행 아이템 삭제
+  const handleDeleteTrip = (tripId: string) => {
+    if (tripId === '') {
+      return;
+    }
+    openAlertModal({
+      title: '여행 삭제',
+      desc: '정말로 삭제하시겠습니까?',
+      onAction: () => deleteMutate(tripId),
+    });
   };
 
-  const { data: tripsData } = useQuery(
-    TRIPS_QUERIES.list.queryOptions(tripListFilter)
-  );
-
+  // Empty 분기 처리용 초기 데이터 저장
   const initData = queryClient.getQueryData<GetTripsResponse>(
     TRIPS_QUERIES.list.queryKey({
       currentPage: 1,
@@ -46,6 +71,13 @@ export default function TripListArea() {
       end_date: undefined,
     })
   );
+
+  if (isLoading)
+    return (
+      <div className='flex items-center justify-center py-10 md:py-20'>
+        <Loading />
+      </div>
+    );
 
   if (!initData || initData.data?.length === 0)
     return (
@@ -117,7 +149,11 @@ export default function TripListArea() {
             <ul className='grid grid-cols-1 items-stretch gap-3 md:grid-cols-3 md:gap-5 lg:grid-cols-4'>
               {tripsData!.data.map((trip) => (
                 <li key={trip.id}>
-                  <TripItem trip={trip} />
+                  <TripItem
+                    trip={trip}
+                    onEdit={handleEditPageMove}
+                    onDelete={handleDeleteTrip}
+                  />
                 </li>
               ))}
             </ul>

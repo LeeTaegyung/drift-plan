@@ -61,3 +61,14 @@ export const createTrip = async (formValues: TripValuesType) => {
 
   return data;
 };
+
+export const deleteTrip = async (tripId: string) => {
+  const { data, error } = await supabase
+    .from('trips')
+    .delete()
+    .eq('id', tripId);
+
+  if (error) throw error;
+
+  return data;
+};
