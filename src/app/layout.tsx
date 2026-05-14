@@ -4,6 +4,7 @@ import QueryProvider from '@/app/_provider/QueryProvider';
 import UserProvider from '@/app/_provider/UserProvider';
 import { sCoreDream } from '@/app/fonts';
 import { Toaster } from '@/shared/shadcn/components/ui/sonner';
+import AlertModalContainer from '@/shared/ui/AlertModalContainer';
 
 import '@/shared/styles/globals.css';
 
@@ -24,6 +25,7 @@ export default function RootLayout({
           <UserProvider>
             {children}
             <Toaster />
+            <AlertModalContainer />
           </UserProvider>
         </QueryProvider>
       </body>
