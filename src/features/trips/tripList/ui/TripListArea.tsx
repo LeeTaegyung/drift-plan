@@ -9,9 +9,9 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ArrowRight, PlusIcon } from 'lucide-react';
 
 import { TRIPS_QUERIES } from '@/entities/trips/api/trips.queries';
+import { useTripDelete } from '@/entities/trips/hook/useTripDelete';
 import { formatTripDate } from '@/entities/trips/lib/dateFormatter';
 import { GetTripsResponse } from '@/entities/trips/type';
-import { useTripDelete } from '@/features/trips/tripList/hook/useTripDelete';
 import ScopFilter from '@/features/trips/tripList/ui/ScopFilter';
 import TripItem from '@/features/trips/tripList/ui/TripItem';
 import { PATH } from '@/shared/constants/path';
