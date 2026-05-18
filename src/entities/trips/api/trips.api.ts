@@ -50,6 +50,18 @@ export const getTrips = async ({
   };
 };
 
+export const getTrip = async (id: string) => {
+  const { data, error } = await supabase
+    .from('trips')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) throw error;
+
+  return data;
+};
+
 export const createTrip = async (formValues: TripValuesType) => {
   const { data, error } = await supabase
     .from('trips')
@@ -66,6 +78,23 @@ export const deleteTrip = async (tripId: string) => {
   const { data, error } = await supabase
     .from('trips')
     .delete()
+    .eq('id', tripId);
+
+  if (error) throw error;
+
+  return data;
+};
+
+export const updateTrip = async ({
+  tripId,
+  tripData,
+}: {
+  tripId: string;
+  tripData: Partial<TripValuesType>;
+}) => {
+  const { data, error } = await supabase
+    .from('trips')
+    .update(tripData)
     .eq('id', tripId);
 
   if (error) throw error;
