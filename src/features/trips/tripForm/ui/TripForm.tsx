@@ -5,8 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { formatTripDate } from '@/entities/trips/lib/dateFormatter';
-import { TripValuesType } from '@/entities/trips/type';
+import { TripsType, TripValuesType } from '@/entities/trips/type';
 import {
   tripFormSchema,
   TripFormValues,
@@ -15,6 +14,10 @@ import CountriesSearch from '@/features/trips/tripForm/ui/CountriesSearch';
 import CountriesSelects from '@/features/trips/tripForm/ui/CountriesSelects';
 import DomesticTabs from '@/features/trips/tripForm/ui/DomesticTabs';
 import KoreaRegionSearch from '@/features/trips/tripForm/ui/KoreaRegionSearch';
+import {
+  getDefaultValues,
+  transformTripFormData,
+} from '@/features/trips/tripForm/utils';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { Input } from '@/shared/shadcn/components/ui/input';
 import { cn } from '@/shared/shadcn/lib/utils';
@@ -22,8 +25,8 @@ import { FormWrapper, LabelInputField } from '@/shared/ui/form';
 import RangeDate from '@/shared/ui/form/RangeDate';
 
 interface Props {
-  onSubmit: (formData: TripValuesType) => void;
-  initValues?: TripFormValues;
+  onSubmit: (formData: Partial<TripValuesType>) => Promise<void> | void;
+  initValues?: TripsType;
 }
 
 export default function TripForm({ onSubmit, initValues }: Props) {
@@ -34,45 +37,51 @@ export default function TripForm({ onSubmit, initValues }: Props) {
     control,
     watch,
     setValue,
-    formState: { errors },
+    formState: { errors, isSubmitting, isValid, isDirty, dirtyFields },
   } = useForm<TripFormValues>({
     resolver: zodResolver(tripFormSchema),
-    defaultValues: initValues ?? {
-      title: null,
-      date: undefined,
-      participants_count: 1,
-      is_domestic: true,
-      region: '',
-      countries: null,
-      background_image_url: null, // 추후 추가 예정
-      background_color: null, // 추후 추가 예정
-    },
+    defaultValues: getDefaultValues(initValues),
     mode: 'onSubmit',
   });
   const is_domestic = watch('is_domestic');
+  const isEditMode = !!initValues;
+  const submitText = isEditMode
+    ? isSubmitting
+      ? '수정중...'
+      : '수정'
+    : isSubmitting
+      ? '등록중...'
+      : '등록';
 
   const onSubmitForm = handleSubmit(async (formData) => {
-    const { date, countries, ...formValues } = formData;
+    const originData: Partial<TripFormValues> = isEditMode
+      ? Object.fromEntries(
+          Object.keys(dirtyFields).map((key) => [
+            key,
+            formData[key as keyof TripFormValues],
+          ])
+        )
+      : formData;
 
-    if (date === undefined) return;
+    console.log(originData);
 
-    const start_date = formatTripDate(date.from);
-    const end_date = formatTripDate(date.to || date.from);
+    const { date, is_domestic, region, countries, ...data } = originData;
 
-    const newCountries =
-      countries === null ? null : countries.map((country) => country.name);
-    const continent =
-      countries === null
-        ? null
-        : Array.from(new Set(countries.map((country) => country.continent)));
-
-    await onSubmit({
-      ...formValues,
-      countries: newCountries,
-      continent,
-      start_date,
-      end_date,
+    const transformData = transformTripFormData({
+      date,
+      is_domestic,
+      region,
+      countries,
     });
+
+    console.log(transformData);
+
+    const submitData: Partial<TripValuesType> = {
+      ...transformData,
+      ...data,
+    };
+
+    await onSubmit(submitData);
   });
 
   return (
@@ -240,12 +249,18 @@ export default function TripForm({ onSubmit, initValues }: Props) {
         />
 
         <div className='mt-5 flex gap-2 md:mt-10'>
-          <Button className='flex-1'>등록</Button>
+          <Button
+            className='flex-1'
+            disabled={!isValid || isSubmitting || !isDirty}
+          >
+            {submitText}
+          </Button>
           <Button
             type='button'
             className='flex-1'
             variant={'outline'}
             onClick={() => router.back()}
+            disabled={!isValid || isSubmitting}
           >
             취소
           </Button>
