@@ -63,8 +63,6 @@ export default function TripForm({ onSubmit, initValues }: Props) {
         )
       : formData;
 
-    console.log(originData);
-
     const { date, is_domestic, region, countries, ...data } = originData;
 
     const transformData = transformTripFormData({
@@ -73,8 +71,6 @@ export default function TripForm({ onSubmit, initValues }: Props) {
       region,
       countries,
     });
-
-    console.log(transformData);
 
     const submitData: Partial<TripValuesType> = {
       ...transformData,
