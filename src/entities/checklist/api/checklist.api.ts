@@ -30,14 +30,7 @@ export const createDefaultChecklist = async (
 };
 
 export const deleteDefaultChecklist = async (tripId: string) => {
-  const { data, error } = await supabase
-    .from('trip_checklist')
-    .delete()
-    .eq('trip_id', tripId);
-
-  if (error) throw error;
-
-  return data;
+  return await supabase.from('trip_checklist').delete().eq('trip_id', tripId);
 };
 
 export const createCheckItem = async (

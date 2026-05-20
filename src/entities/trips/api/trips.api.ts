@@ -79,17 +79,10 @@ export const deleteTrip = async (tripId: string) => {
 
 export const updateTrip = async ({
   tripId,
-  tripData,
+  formData,
 }: {
   tripId: string;
-  tripData: Partial<TripValuesType>;
+  formData: Partial<TripValuesType>;
 }) => {
-  const { data, error } = await supabase
-    .from('trips')
-    .update(tripData)
-    .eq('id', tripId);
-
-  if (error) throw error;
-
-  return data;
+  return await supabase.from('trips').update(formData).eq('id', tripId);
 };
