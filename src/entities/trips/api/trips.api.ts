@@ -63,15 +63,7 @@ export const getTrip = async (id: string) => {
 };
 
 export const createTrip = async (formValues: TripValuesType) => {
-  const { data, error } = await supabase
-    .from('trips')
-    .insert(formValues)
-    .select()
-    .single();
-
-  if (error) throw error;
-
-  return data;
+  return await supabase.from('trips').insert(formValues).select().single();
 };
 
 export const deleteTrip = async (tripId: string) => {
