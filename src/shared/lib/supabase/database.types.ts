@@ -14,6 +14,54 @@ export type Database = {
   };
   public: {
     Tables: {
+      trip_checklist: {
+        Row: {
+          category: string;
+          created_at: string;
+          id: string;
+          memo: string | null;
+          name: string;
+          quantity: number;
+          trip_id: string;
+          user_id: string;
+        };
+        Insert: {
+          category?: string;
+          created_at?: string;
+          id?: string;
+          memo?: string | null;
+          name?: string;
+          quantity: number;
+          trip_id: string;
+          user_id?: string;
+        };
+        Update: {
+          category?: string;
+          created_at?: string;
+          id?: string;
+          memo?: string | null;
+          name?: string;
+          quantity?: number;
+          trip_id?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'trip_checklist_trip_id_fkey';
+            columns: ['trip_id'];
+            isOneToOne: false;
+            referencedRelation: 'trips';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'trip_checklist_trip_id_fkey';
+            columns: ['trip_id'];
+            isOneToOne: false;
+            referencedRelation: 'trips_with_status';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       trips: {
         Row: {
           background_color: string | null;
