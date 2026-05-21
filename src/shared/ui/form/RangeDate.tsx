@@ -6,7 +6,6 @@ import { DateRange } from 'react-day-picker';
 import { ko } from 'date-fns/locale';
 import { CalendarIcon } from 'lucide-react';
 
-import { formatTripDate } from '@/entities/trips/lib/dateFormatter';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { Calendar } from '@/shared/shadcn/components/ui/calendar';
 import {
@@ -15,6 +14,7 @@ import {
   PopoverTrigger,
 } from '@/shared/shadcn/components/ui/popover';
 import { cn } from '@/shared/shadcn/lib/utils';
+import { formatTripDate } from '@/shared/utils/dateUtils';
 
 interface Props {
   selectDate: DateRange | undefined;

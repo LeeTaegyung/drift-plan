@@ -1,6 +1,6 @@
-import { formatTripDate } from '@/entities/trips/lib/dateFormatter';
 import { TripValuesType } from '@/entities/trips/type';
 import { TripFormValues } from '@/features/trips/tripForm/model/tripForm.schema';
+import { formatTripDate } from '@/shared/utils/dateUtils';
 
 export const transformTripFormData = (
   data: Partial<

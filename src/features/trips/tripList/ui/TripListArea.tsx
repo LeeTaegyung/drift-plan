@@ -10,7 +10,6 @@ import { ArrowRight, PlusIcon } from 'lucide-react';
 
 import { TRIPS_QUERIES } from '@/entities/trips/api/trips.queries';
 import { useTripDelete } from '@/entities/trips/hook/useTripDelete';
-import { formatTripDate } from '@/entities/trips/lib/dateFormatter';
 import { GetTripsResponse } from '@/entities/trips/type';
 import ScopFilter from '@/features/trips/tripList/ui/ScopFilter';
 import TripItem from '@/features/trips/tripList/ui/TripItem';
@@ -21,6 +20,7 @@ import { NoData } from '@/shared/ui/empty';
 import RangeDate from '@/shared/ui/form/RangeDate';
 import Loading from '@/shared/ui/Loading';
 import Pagination from '@/shared/ui/Pagination';
+import { formatTripDate } from '@/shared/utils/dateUtils';
 import { useCurrentPage } from '@/shared/utils/hooks/useCurrentPage';
 
 export default function TripListArea() {
