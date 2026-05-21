@@ -33,16 +33,17 @@ export default function TripEditForm({ tripId, initData }: Props) {
   });
 
   const onSubmit = async (formData: Partial<TripValuesType>) => {
-    const isDomesticChanged =
-      'is_domestic' in formData &&
-      formData.is_domestic !== initData.is_domestic;
+    const isDomesticChanged = 'is_domestic' in formData;
+    const isDateChanged = 'start_date' in formData || 'end_date' in formData;
+    const isRegionChanged = 'region' in formData;
+    const isCountriesChanged = 'countries' in formData;
 
-    const isDateChanged =
-      ('start_date' in formData &&
-        formData.start_date !== initData.start_date) ||
-      ('end_date' in formData && formData.end_date !== initData.end_date);
-
-    if (isDomesticChanged || isDateChanged) {
+    if (
+      isDomesticChanged ||
+      isDateChanged ||
+      isRegionChanged ||
+      isCountriesChanged
+    ) {
       const changedText: string[] = [];
 
       if (isDomesticChanged) {
@@ -51,6 +52,14 @@ export default function TripEditForm({ tripId, initData }: Props) {
 
       if (isDateChanged) {
         changedText.push('여행 기간 변경 : 기간 외 일정 유지');
+      }
+
+      if (!isDomesticChanged && isRegionChanged) {
+        changedText.push('여행지 변경 : 기존 일정 초기화');
+      }
+
+      if (!isDomesticChanged && isCountriesChanged) {
+        changedText.push('나라 변경 : 기존 일정 초기화');
       }
 
       const desc = `일부 데이터가 손상될 수 있습니다.\n\n${changedText.join('\n')}\n\n계속하시겠습니까?`;

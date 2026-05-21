@@ -34,7 +34,9 @@ export const editTripWithDefaultChecklist = async ({
     );
 
     if (checklistError) throw checklistError;
+
+    // 기존 상제 일정 초기화
   }
 
-  // 일정이 변경되었다면, 기존 상세 일정 삭제 되도록 추후 추가
+  // 여행지나 나라가 변경되었다면 기존 상제 일정 초기화
 };
