@@ -44,25 +44,20 @@ export default function TripEditForm({ tripId, initData }: Props) {
       isRegionChanged ||
       isCountriesChanged
     ) {
-      const changedText: string[] = [];
+      let desc = '일부 데이터가 손상될 수 있습니다.\n\n';
 
       if (isDomesticChanged) {
-        changedText.push('국내/해외 변경 : 기존 일정과 체크리스트 초기화');
+        // 국내/해외 변경 => 일정 + 체크리스트 초기화
+        desc += '국내/해외 변경 : 기존 일정과 체크리스트 초기화';
+      } else if (isRegionChanged || isCountriesChanged) {
+        // 여행지/나라만 변경 => 일정만 초기화
+        desc += '여행지 변경 : 기존 일정 초기화';
+      } else if (isDateChanged) {
+        // 날짜만 변경 => 유지
+        desc += '여행 기간 변경 : 기간 외 일정 유지';
       }
 
-      if (isDateChanged) {
-        changedText.push('여행 기간 변경 : 기간 외 일정 유지');
-      }
-
-      if (!isDomesticChanged && isRegionChanged) {
-        changedText.push('여행지 변경 : 기존 일정 초기화');
-      }
-
-      if (!isDomesticChanged && isCountriesChanged) {
-        changedText.push('나라 변경 : 기존 일정 초기화');
-      }
-
-      const desc = `일부 데이터가 손상될 수 있습니다.\n\n${changedText.join('\n')}\n\n계속하시겠습니까?`;
+      desc += '\n\n계속하시겠습니까?';
 
       const isConfirm = await new Promise<boolean>((resolve) => {
         openAlertModal({
