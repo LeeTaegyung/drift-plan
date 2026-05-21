@@ -25,6 +25,9 @@ export default function TripEditForm({ tripId, initData }: Props) {
     mutationFn: editTripWithDefaultChecklist,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: TRIPS_QUERIES.lists() });
+      queryClient.invalidateQueries({
+        queryKey: TRIPS_QUERIES.detail.queryKey(tripId),
+      });
       router.push(PATH.global.trips.list);
     },
     onError: () => {

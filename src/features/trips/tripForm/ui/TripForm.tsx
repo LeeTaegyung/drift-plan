@@ -103,11 +103,19 @@ export default function TripForm({ onSubmit, initValues }: Props) {
                 onChange={(value: boolean) => {
                   // 값에 따라 초기화
                   if (value) {
-                    setValue('region', '');
-                    setValue('countries', null);
+                    setValue('region', '', {
+                      shouldDirty: true,
+                    });
+                    setValue('countries', null, {
+                      shouldDirty: true,
+                    });
                   } else {
-                    setValue('region', null);
-                    setValue('countries', []);
+                    setValue('region', null, {
+                      shouldDirty: true,
+                    });
+                    setValue('countries', [], {
+                      shouldDirty: true,
+                    });
                   }
                   field.onChange(value);
                 }}
