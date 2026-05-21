@@ -5,6 +5,7 @@ interface AlertModalState {
   desc?: string;
   isOpen: boolean;
   onAction: () => void;
+  onCancel?: () => void;
 }
 
 interface AlertModalStore {

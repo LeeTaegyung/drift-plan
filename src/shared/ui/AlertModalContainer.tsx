@@ -16,21 +16,23 @@ export default function AlertModalContainer() {
   const alertModal = useAlertModalStore((state) => state.alertModal);
   const closeAlertModal = useAlertModalStore((state) => state.closeAlertModal);
 
-  const { title, desc, onAction, isOpen } = alertModal;
+  const { title, desc, onAction, onCancel, isOpen } = alertModal;
 
   return (
     <AlertDialog open={isOpen} onOpenChange={closeAlertModal}>
       <AlertDialogContent className='bg-surface'>
-        <AlertDialogHeader className='place-items-center! text-center'>
+        <AlertDialogHeader className='place-items-center! gap-5 text-center'>
           <AlertDialogTitle className='text-lg'>{title}</AlertDialogTitle>
           {desc && (
-            <AlertDialogDescription className='text-base'>
+            <AlertDialogDescription className='text-center! text-sm whitespace-pre-line'>
               {desc}
             </AlertDialogDescription>
           )}
         </AlertDialogHeader>
         <AlertDialogFooter className='bg-surface border-0'>
-          <AlertDialogCancel className='flex-1'>취소</AlertDialogCancel>
+          <AlertDialogCancel className='flex-1' onClick={onCancel}>
+            취소
+          </AlertDialogCancel>
           <AlertDialogAction className='flex-1' onClick={onAction}>
             확인
           </AlertDialogAction>
