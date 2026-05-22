@@ -32,15 +32,14 @@ const nextConfig: NextConfig = {
   },
 
   images: {
-    // 외부 이미지 사용시 아래 설정 활성화
-    //   remotePatterns: [
-    //     {
-    //       protocol: 'https',
-    //       hostname: 'example.com',
-    //       port: '',
-    //       pathname: '/**', // 경로 패턴, 모든 이미지 허용
-    //     },
-    //   ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'opendata.mofa.go.kr',
+        port: '8444',
+        pathname: '/**', // 경로 패턴, 모든 이미지 허용
+      },
+    ],
   },
 };
 
