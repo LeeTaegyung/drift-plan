@@ -1,6 +1,7 @@
 import { queryOptions } from '@tanstack/react-query';
 
-import { getTrips } from '@/entities/trips/api/trips.api';
+import { getTrips, getTripWithStatus } from '@/entities/trips/api/trips.api';
+import { TripsViewType } from '@/entities/trips/type';
 
 interface TripListParams {
   currentPage: number;
@@ -21,6 +22,18 @@ export const TRIPS_QUERIES = {
         queryKey: TRIPS_QUERIES.list.queryKey(params),
         queryFn: () => getTrips(params),
         placeholderData: (previousData) => previousData,
+      }),
+  },
+
+  details: () => [...TRIPS_QUERIES.all(), 'detail'],
+
+  detail: {
+    queryKey: (tripId: string) => [...TRIPS_QUERIES.details(), tripId],
+    queryOptions: (tripId: string, tripData: TripsViewType) =>
+      queryOptions({
+        queryKey: TRIPS_QUERIES.detail.queryKey(tripId),
+        queryFn: () => getTripWithStatus(tripId),
+        initialData: tripData,
       }),
   },
 };

@@ -1,4 +1,8 @@
-import { GetTripsResponse, TripValuesType } from '@/entities/trips/type';
+import {
+  CountryResponseItemType,
+  GetTripsResponse,
+  TripValuesType,
+} from '@/entities/trips/type';
 import { createClient } from '@/shared/lib/supabase/client';
 
 const supabase = createClient();
@@ -62,6 +66,20 @@ export const getTrip = async (id: string) => {
   return data;
 };
 
+export const getTripWithStatus = async (tripId: string) => {
+  const supabase = await createClient();
+
+  const { data, error } = await supabase
+    .from('trips_with_status')
+    .select('*')
+    .eq('id', tripId)
+    .single();
+
+  if (error) throw error;
+
+  return data;
+};
+
 export const createTrip = async (formValues: TripValuesType) => {
   return await supabase.from('trips').insert(formValues).select().single();
 };
@@ -85,4 +103,14 @@ export const updateTrip = async ({
   formData: Partial<TripValuesType>;
 }) => {
   return await supabase.from('trips').update(formData).eq('id', tripId);
+};
+
+// 해외여행시 해당 나라의 정보 불러오기(공공데이터)
+export const fetchDataGoCountries = async (
+  code: string
+): Promise<{ item: CountryResponseItemType[] }> => {
+  const res = await fetch(`/api/countries?code=${code}`);
+  const { data } = await res.json();
+
+  return data;
 };
