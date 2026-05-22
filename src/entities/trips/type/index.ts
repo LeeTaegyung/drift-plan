@@ -40,3 +40,32 @@ export interface GetTripsResponse {
   total: number;
   totalPages: number;
 }
+
+// 국가/지역별 현지연락처 공공데이터 Response Data
+export interface CountryResponse {
+  response: {
+    body: {
+      dataType: string;
+      items: CountryResponseItemType[];
+      numOfRows: number;
+      pageNo: number;
+      totalCount: number;
+    };
+    header: { resultCode: string; resultMsg: string };
+  };
+}
+
+// 국가/지역별 현지연락처 공공데이터 items
+export interface CountryResponseItemType {
+  contact_remark: string;
+  continent_cd: string;
+  continent_eng_nm: string;
+  continent_nm: string;
+  country_eng_nm: string;
+  country_iso_alp2: string;
+  country_nm: string;
+  dang_map_download_url: string | null;
+  flag_download_url: string | null;
+  map_download_url: string | null;
+  wrt_dt: string | null;
+}
