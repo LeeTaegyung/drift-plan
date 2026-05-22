@@ -24,6 +24,8 @@ export default function CountryInfo({ countries }: Props) {
     queries: countriesCode.map((c) => ({
       queryKey: ['trips', 'countries', c],
       queryFn: () => fetchDataGoCountries(c),
+      staleTime: 1000 * 60 * 60 * 24, // 24시간
+      gcTime: 1000 * 60 * 60 * 24, // 안쓰면 5분후 삭제
     })),
   });
   const isLoading = queries.some((q) => q.isLoading);

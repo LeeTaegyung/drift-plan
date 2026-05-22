@@ -18,7 +18,14 @@ export async function GET(request: NextRequest) {
   newSearchParams.append('cond[country_iso_alp2::EQ]', code);
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_DATA_GO_KR_API_URL}?${newSearchParams.toString()}`
+    `${process.env.NEXT_PUBLIC_DATA_GO_KR_API_URL}?${newSearchParams.toString()}`,
+    {
+      method: 'GET',
+      next: {
+        revalidate: 3600 * 24,
+        tags: [`country-${code}`],
+      },
+    }
   );
 
   if (!res.ok)

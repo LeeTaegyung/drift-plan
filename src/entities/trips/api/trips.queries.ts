@@ -34,6 +34,7 @@ export const TRIPS_QUERIES = {
         queryKey: TRIPS_QUERIES.detail.queryKey(tripId),
         queryFn: () => getTripWithStatus(tripId),
         initialData: tripData,
+        staleTime: 1000 * 60 * 60, // 1시간
       }),
   },
 };
