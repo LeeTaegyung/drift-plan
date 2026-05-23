@@ -51,3 +51,14 @@ export const getTripWithStatusServer = async (
 
   return tripData[0];
 };
+
+export const updateTripServer = async ({
+  tripId,
+  formData,
+}: {
+  tripId: string;
+  formData: Partial<TripValuesType>;
+}) => {
+  const supabase = await createServerClient();
+  return await supabase.from('trips').update(formData).eq('id', tripId);
+};

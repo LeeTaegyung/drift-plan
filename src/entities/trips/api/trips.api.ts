@@ -95,16 +95,6 @@ export const deleteTrip = async (tripId: string) => {
   return data;
 };
 
-export const updateTrip = async ({
-  tripId,
-  formData,
-}: {
-  tripId: string;
-  formData: Partial<TripValuesType>;
-}) => {
-  return await supabase.from('trips').update(formData).eq('id', tripId);
-};
-
 // 해외여행시 해당 나라의 정보 불러오기(공공데이터)
 export const fetchDataGoCountries = async (
   code: string

@@ -7,9 +7,8 @@ import { toast } from 'sonner';
 
 import { TRIPS_QUERIES } from '@/entities/trips/api/trips.queries';
 import { TripsType, TripValuesType } from '@/entities/trips/type';
-import { editTripWithDefaultChecklist } from '@/features/trips/tripEdit/api/tripEdit.api';
+import { updateTripWithDefaultSettingAction } from '@/features/trips/tripEdit/api/tripEdit.actions';
 import TripForm from '@/features/trips/tripForm/ui/TripForm';
-import { PATH } from '@/shared/constants/path';
 import { useAlertModalStore } from '@/shared/store/alertModalStore';
 
 interface Props {
@@ -22,13 +21,13 @@ export default function TripEditForm({ tripId, initData }: Props) {
   const router = useRouter();
   const queryClient = useQueryClient();
   const { mutateAsync } = useMutation({
-    mutationFn: editTripWithDefaultChecklist,
+    mutationFn: updateTripWithDefaultSettingAction,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: TRIPS_QUERIES.lists() });
       queryClient.invalidateQueries({
         queryKey: TRIPS_QUERIES.detail.queryKey(tripId),
       });
-      router.push(PATH.global.trips.list);
+      router.back();
     },
     onError: () => {
       toast.error('여행 수정에 실패하였습니다. 다시 시도해주세요.');
@@ -74,7 +73,9 @@ export default function TripEditForm({ tripId, initData }: Props) {
       if (!isConfirm) return;
     }
 
-    await mutateAsync({ tripId, formData });
+    const { id, user_id, updated_at, created_at, ...backupData } = initData;
+
+    await mutateAsync({ tripId, formData, backupData });
   };
 
   return <TripForm onSubmit={onSubmit} initValues={initData} />;
