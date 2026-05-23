@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 import { DAY_NUMBER_MATCH } from '@/shared/constants/date';
 
 export const formatTripDate = (date: Date) => {
-  return format(date, 'yyyy.MM.dd');
+  return format(date, 'yyyy-MM-dd');
 };
 
 export const getDayByStringDate = (date: string) => {
