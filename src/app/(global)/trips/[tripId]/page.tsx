@@ -10,6 +10,7 @@ export default async function TripDetailPage({
   params: Promise<{ tripId: string }>;
 }) {
   const { tripId } = await params;
+
   const tripData = await getTripWithStatusServer(tripId);
 
   if (!tripData) throw new Error('데이터를 가져올 수 없습니다.');
