@@ -9,6 +9,7 @@ import { TRIPS_QUERIES } from '@/entities/trips/api/trips.queries';
 import { getTripTitleLabel } from '@/entities/trips/lib/format';
 import { TripsViewType } from '@/entities/trips/type';
 import CountryInfo from '@/features/trips/tripDetail/ui/CountryInfo';
+import ScheduleCalendar from '@/features/trips/tripDetail/ui/ScheduleCalendar';
 import { PATH } from '@/shared/constants/path';
 import { Button } from '@/shared/shadcn/components/ui/button';
 import { formatTripDate, getDayByStringDate } from '@/shared/utils/dateUtils';
@@ -61,7 +62,11 @@ export default function TripDetailArea({ tripId, tripData }: Props) {
           )}
           <div className='flex flex-wrap items-center justify-center gap-1'>
             {data.is_domestic
-              ? data.region && <span>{data.region}</span>
+              ? data.region && (
+                  <span className='bg-info-bg border-info-border text-info-text rounded-[4px] border px-1 text-sm'>
+                    {data.region}
+                  </span>
+                )
               : data.countries &&
                 data.countries.map((country) => (
                   <span
@@ -90,247 +95,11 @@ export default function TripDetailArea({ tripId, tripData }: Props) {
           </span>
           {/* 달력 */}
           <div className='w-full'>
-            <div className='mb-2 text-center text-sm md:text-[15px]'>10월</div>
-            <div className='bg-surface border-dp-accent border text-xs md:text-sm'>
-              <div className='border-dp-accent grid grid-cols-7 border-b text-center text-xs last-of-type:border-b-0'>
-                <div className='last-of-type:text-ocean-500 border-dp-accent border-r py-0.5 first-of-type:text-red-500 last-of-type:border-r-0'>
-                  일
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent border-r py-0.5 first-of-type:text-red-500 last-of-type:border-r-0'>
-                  월
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent border-r py-0.5 first-of-type:text-red-500 last-of-type:border-r-0'>
-                  화
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent border-r py-0.5 first-of-type:text-red-500 last-of-type:border-r-0'>
-                  수
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent border-r py-0.5 first-of-type:text-red-500 last-of-type:border-r-0'>
-                  목
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent border-r py-0.5 first-of-type:text-red-500 last-of-type:border-r-0'>
-                  금
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent border-r py-0.5 first-of-type:text-red-500 last-of-type:border-r-0'>
-                  토
-                </div>
-              </div>
-              <div className='border-dp-accent grid grid-cols-7 border-b last-of-type:border-b-0'>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <div className='mt-1 h-5 px-1 text-right'></div>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <div className='mt-1 h-5 px-1 text-right'></div>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <div className='mt-1 h-5 px-1 text-right'>1</div>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <div className='mt-1 h-5 px-1 text-right'>2</div>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <div className='mt-1 h-5 px-1 text-right'>3</div>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <div className='mt-1 h-5 px-1 text-right'>4</div>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <div className='mt-1 h-5 px-1 text-right'>5</div>
-                </div>
-              </div>
-              <div className='border-dp-accent grid grid-cols-7 border-b last-of-type:border-b-0'>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <div className='mt-1 h-5 px-1 text-right'>6</div>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <div className='mt-1 h-5 px-1 text-right'>7</div>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <div className='mt-1 h-5 px-1 text-right'>8</div>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-09')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>9</div>
-                  </Link>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-10')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>10</div>
-                  </Link>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-11')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>11</div>
-                  </Link>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-12')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>12</div>
-                  </Link>
-                </div>
-              </div>
-              <div className='border-dp-accent grid grid-cols-7 border-b last-of-type:border-b-0'>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-13')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>13</div>
-                  </Link>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-14')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>14</div>
-                  </Link>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-15')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>15</div>
-                  </Link>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-16')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>16</div>
-                  </Link>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-17')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>17</div>
-                  </Link>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-18')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>18</div>
-                  </Link>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-19')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>19</div>
-                  </Link>
-                </div>
-              </div>
-              <div className='border-dp-accent grid grid-cols-7 border-b last-of-type:border-b-0'>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-20')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>20</div>
-                  </Link>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-21')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>21</div>
-                  </Link>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-22')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>22</div>
-                  </Link>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-23')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>23</div>
-                  </Link>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-24')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>24</div>
-                  </Link>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-25')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>25</div>
-                  </Link>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-26')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>26</div>
-                  </Link>
-                </div>
-              </div>
-              <div className='border-dp-accent grid grid-cols-7 border-b last-of-type:border-b-0'>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-27')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>27</div>
-                  </Link>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <Link
-                    href={PATH.global.trips.schedule(tripId, '2026-10-28')}
-                    className='bg-wind-soft hover:bg-wind/80 block h-full transition-colors'
-                  >
-                    <div className='h-5 px-1 pt-1 text-right'>28</div>
-                  </Link>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <div className='mt-1 h-5 px-1 text-right'>29</div>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <div className='mt-1 h-5 px-1 text-right'>30</div>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <div className='mt-1 h-5 px-1 text-right'>31</div>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <div className='mt-1 h-5 px-1 text-right'></div>
-                </div>
-                <div className='last-of-type:text-ocean-500 border-dp-accent min-h-10 border-r first-of-type:text-red-500 last-of-type:border-r-0 md:min-h-13'>
-                  <div className='mt-1 h-5 px-1 text-right'></div>
-                </div>
-              </div>
-            </div>
+            <ScheduleCalendar
+              start_date={data.start_date || ''}
+              end_date={data.end_date || ''}
+              tripId={tripId}
+            />
           </div>
         </div>
         {/* 하단 - 해외의 경우 나라와 비상연락처 정보 */}
