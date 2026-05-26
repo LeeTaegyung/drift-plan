@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { ArrowRight, ListCheck, SquarePen } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ListCheck, SquarePen } from 'lucide-react';
 
 import { TRIPS_QUERIES } from '@/entities/trips/api/trips.queries';
 import { getTripTitleLabel } from '@/entities/trips/lib/format';
@@ -20,6 +21,7 @@ interface Props {
 }
 
 export default function TripDetailArea({ tripId, tripData }: Props) {
+  const router = useRouter();
   const { data } = useSuspenseQuery(
     TRIPS_QUERIES.detail.queryOptions(tripId, tripData)
   );
@@ -35,7 +37,15 @@ export default function TripDetailArea({ tripId, tripData }: Props) {
 
   return (
     <div className='inner flex flex-col items-center gap-3 py-5 md:gap-5 md:py-10'>
-      <div className='flex w-full justify-end'>
+      <div className='bg-bg sticky top-12 flex w-full justify-between py-1.5 md:top-14'>
+        <Button
+          onClick={() => router.back()}
+          size={'sm'}
+          variant={'ghost'}
+          className='px-0 hover:bg-transparent'
+        >
+          <ArrowLeft /> 돌아가기
+        </Button>
         <Button
           asChild
           size={'sm'}
