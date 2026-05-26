@@ -1,10 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { ArrowLeft, ArrowRight, ListCheck, SquarePen } from 'lucide-react';
+import { ArrowRight, ListCheck, SquarePen } from 'lucide-react';
 
 import { TRIPS_QUERIES } from '@/entities/trips/api/trips.queries';
 import { getTripTitleLabel } from '@/entities/trips/lib/format';
@@ -13,6 +12,7 @@ import CountryInfo from '@/features/trips/tripDetail/ui/CountryInfo';
 import ScheduleCalendar from '@/features/trips/tripDetail/ui/ScheduleCalendar';
 import { PATH } from '@/shared/constants/path';
 import { Button } from '@/shared/shadcn/components/ui/button';
+import BackBtn from '@/shared/ui/BackBtn';
 import { formatTripDate, getDayByStringDate } from '@/shared/utils/dateUtils';
 
 interface Props {
@@ -21,7 +21,6 @@ interface Props {
 }
 
 export default function TripDetailArea({ tripId, tripData }: Props) {
-  const router = useRouter();
   const { data } = useSuspenseQuery(
     TRIPS_QUERIES.detail.queryOptions(tripId, tripData)
   );
@@ -38,14 +37,7 @@ export default function TripDetailArea({ tripId, tripData }: Props) {
   return (
     <div className='inner flex flex-col items-center gap-3 py-5 md:gap-5 md:py-10'>
       <div className='bg-bg sticky top-12 flex w-full justify-between py-1.5 md:top-14'>
-        <Button
-          onClick={() => router.back()}
-          size={'sm'}
-          variant={'ghost'}
-          className='px-0 hover:bg-transparent'
-        >
-          <ArrowLeft /> 돌아가기
-        </Button>
+        <BackBtn text='돌아가기' />
         <Button
           asChild
           size={'sm'}
