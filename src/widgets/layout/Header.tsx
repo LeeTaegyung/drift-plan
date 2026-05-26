@@ -11,7 +11,7 @@ export function Header() {
   const { data: isLogged } = useCurrentUser();
 
   return (
-    <header className='bg-surface/10 sticky top-0 w-full shrink-0 backdrop-blur-lg'>
+    <header className='bg-surface/10 sticky top-0 z-100 w-full shrink-0 backdrop-blur-lg'>
       <div className='inner flex h-12 items-center justify-between md:h-14'>
         <h1>
           <Link href='/' className='flex items-center gap-1 md:gap-2'>

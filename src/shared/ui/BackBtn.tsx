@@ -18,11 +18,10 @@ export default function BackBtn({ text, className }: Props) {
   return (
     <Button
       onClick={() => router.back()}
-      size={'sm'}
       variant={'ghost'}
       className={cn('px-0 hover:bg-transparent', className)}
     >
-      <ArrowLeft /> {text && text}
+      <ArrowLeft className='size-4.5 md:size-6' /> {text && text}
     </Button>
   );
 }

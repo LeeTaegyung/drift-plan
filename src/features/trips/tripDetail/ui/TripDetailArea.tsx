@@ -36,8 +36,8 @@ export default function TripDetailArea({ tripId, tripData }: Props) {
 
   return (
     <div className='inner flex flex-col items-center gap-3 py-5 md:gap-5 md:py-10'>
-      <div className='bg-bg sticky top-12 flex w-full justify-between py-1.5 md:top-14'>
-        <BackBtn text='돌아가기' />
+      <div className='bg-bg sticky top-12 z-1 flex w-full items-center justify-between py-1.5 md:top-14'>
+        <BackBtn text='돌아가기' className='text-xs md:text-sm' />
         <Button
           asChild
           size={'sm'}
@@ -53,7 +53,7 @@ export default function TripDetailArea({ tripId, tripData }: Props) {
       <div className='mx-auto flex w-full max-w-100 flex-col gap-5 md:gap-10'>
         {/* 상단 - title, date, 여행 나라 */}
         <div className='flex w-full flex-col items-center gap-2'>
-          <h2 className='text-text-primary text-xl font-semibold md:text-2xl'>
+          <h2 className='text-text-primary text-center text-base font-semibold md:text-2xl'>
             {title}
           </h2>
           {data.start_date && data.end_date && (
