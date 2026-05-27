@@ -264,7 +264,7 @@ export default function TripForm({ onSubmit, initValues }: Props) {
             className='flex-1'
             variant={'outline'}
             onClick={() => router.back()}
-            disabled={!isValid || isSubmitting}
+            disabled={isSubmitting}
           >
             취소
           </Button>
