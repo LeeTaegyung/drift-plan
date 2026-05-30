@@ -50,7 +50,7 @@ export default function CheckListArea({ initData, tripId }: Props) {
         <h2 className='text-base font-semibold md:text-xl'>체크리스트</h2>
       </div>
 
-      <div className='flex w-full flex-wrap items-center justify-between gap-2'>
+      <div className='bg-bg sticky top-12 z-1 flex w-full flex-wrap items-center justify-between gap-2 py-2 md:top-14'>
         {isEdit && (
           <div className='flex items-center gap-1 md:gap-2'>
             <CheckListUtilButton
