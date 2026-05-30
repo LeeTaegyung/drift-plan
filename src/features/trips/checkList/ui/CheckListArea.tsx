@@ -3,14 +3,17 @@
 import { useMemo, useState } from 'react';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Eye, Pen, PlusCircle, SquarePen, Trash2, XIcon } from 'lucide-react';
+import { Eye, PlusCircle, SquarePen, Trash2, XIcon } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { CHECKLIST_QUERIES } from '@/entities/checklist/api/checklist.queries';
 import {
   CheckListCategoryType,
+  CheckListType,
   TripCheckListType,
 } from '@/entities/checklist/type';
+import { CHECKLIST_MUTATION } from '@/features/trips/checkList/api/checkItem.mutation';
+import { deleteCheckItemAction } from '@/features/trips/checkList/api/checkItemDelete.actions';
 import { updateCheckItemAction } from '@/features/trips/checkList/api/checkItemEdit.actions';
 import { CheckListFormValues } from '@/features/trips/checkList/model/checklistForm.schema';
 import CheckItemCreateForm from '@/features/trips/checkList/ui/CheckItemCreateForm';
@@ -18,7 +21,7 @@ import CheckListItem from '@/features/trips/checkList/ui/CheckListItem';
 import CheckListUtilButton from '@/features/trips/checkList/ui/CheckListUtilButton';
 import CheckListWrap from '@/features/trips/checkList/ui/CheckListWrap';
 import { CHECKLIST_CATEGORY } from '@/shared/config/checklists';
-import { Button } from '@/shared/shadcn/components/ui/button';
+import { useAlertModalStore } from '@/shared/store/alertModalStore';
 import { useModalStore } from '@/shared/store/modalStore';
 import BackBtn from '@/shared/ui/BackBtn';
 
@@ -29,17 +32,21 @@ interface Props {
 
 export default function CheckListArea({ initData, tripId }: Props) {
   const [isEdit, setIsEdit] = useState(false);
+  const [deleteList, setDeleteList] = useState<string[]>([]);
+
   const openModal = useModalStore((state) => state.openModal);
+  const openAlertModal = useAlertModalStore((state) => state.openAlertModal);
+
   const queryClient = useQueryClient();
   const { data: checkList } = useQuery(
     CHECKLIST_QUERIES.detail.queryOptions(tripId, initData)
   );
-  const { mutateAsync: updateCheckItemMutate } = useMutation({
-    mutationFn: updateCheckItemAction,
-    onError: () => {
-      toast.error('체크리스트 수정에 실패하였습니다.');
-    },
-  });
+  const { mutateAsync: updateCheckItemMutate } = useMutation(
+    CHECKLIST_MUTATION.updateAll()
+  );
+  const { mutateAsync: deleteCheckItemMutate } = useMutation(
+    CHECKLIST_MUTATION.delete(tripId, queryClient)
+  );
 
   const processChecklist = useMemo(() => {
     const newChecklist: Record<CheckListCategoryType, TripCheckListType[]> = {
@@ -91,6 +98,48 @@ export default function CheckListArea({ initData, tripId }: Props) {
     );
   };
 
+  const handleToggleMode = () => {
+    setIsEdit((e) => !e);
+    setDeleteList([]);
+  };
+  const handleAddDeleteItem = (id: string) => {
+    setDeleteList((prev) => {
+      const findItem = prev.includes(id);
+
+      return findItem ? prev.filter((d) => d !== id) : [...prev, id];
+    });
+  };
+  const handleCheckDeleteItem = (id: string) => {
+    const findItem = deleteList.includes(id);
+    return !!findItem;
+  };
+  const handleResetCheckDeleteItem = () => {
+    setDeleteList([]);
+  };
+  const handleSubmitDelete = async () => {
+    if (deleteList.length === 0) return;
+
+    const isConfirm = await new Promise<boolean>((resolve) => {
+      openAlertModal({
+        title: '체크리스트 삭제',
+        desc: '정말 삭제하시겠습니까?',
+        onAction: () => resolve(true),
+        onCancel: () => resolve(false),
+      });
+    });
+
+    if (!isConfirm) return;
+
+    await deleteCheckItemMutate(
+      { ids: deleteList, tripId },
+      {
+        onSuccess: () => {
+          setDeleteList([]);
+        },
+      }
+    );
+  };
+
   return (
     <div className='inner flex flex-col items-center gap-3 py-5 md:gap-5 md:py-10'>
       <div className='relative flex w-full items-center justify-start gap-1 md:justify-center'>
@@ -105,11 +154,13 @@ export default function CheckListArea({ initData, tripId }: Props) {
               text='선택 항목 삭제'
               icon={Trash2}
               className='bg-error-bg border-error-border text-error-text hover:bg-error-bg/50 hover:text-error-text'
+              onClick={handleSubmitDelete}
             />
             <CheckListUtilButton
-              text='취소'
+              text='선택 해제'
               icon={XIcon}
               className='bg-inactive-bg border-inactive-border text-inactive-text hover:bg-inactive-bg/50 hover:text-inactive-text'
+              onClick={handleResetCheckDeleteItem}
             />
           </div>
         )}
@@ -117,7 +168,7 @@ export default function CheckListArea({ initData, tripId }: Props) {
           <CheckListUtilButton
             text={isEdit ? '보기 모드' : '편집 하기'}
             icon={isEdit ? Eye : SquarePen}
-            onClick={() => setIsEdit((e) => !e)}
+            onClick={handleToggleMode}
           />
           <CheckListUtilButton
             text='항목 추가'
@@ -140,11 +191,9 @@ export default function CheckListArea({ initData, tripId }: Props) {
                     key={`${c.id}-${isEdit}`}
                     checkItem={c}
                     onChangeDone={() => {}}
-                    onChangeDelete={() => {}}
+                    onChangeDelete={handleAddDeleteItem}
                     isEdit={isEdit}
-                    isSelected={() => {
-                      return false;
-                    }}
+                    isSelected={handleCheckDeleteItem}
                     onSubmitEdit={handleSubmitEdit}
                   />
                 ))}
