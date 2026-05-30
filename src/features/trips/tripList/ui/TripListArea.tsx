@@ -5,7 +5,7 @@ import { type DateRange } from 'react-day-picker';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { ArrowRight, PlusIcon } from 'lucide-react';
 
 import { TRIPS_QUERIES } from '@/entities/trips/api/trips.queries';
@@ -23,9 +23,12 @@ import Pagination from '@/shared/ui/Pagination';
 import { formatTripDate } from '@/shared/utils/dateUtils';
 import { useCurrentPage } from '@/shared/utils/hooks/useCurrentPage';
 
-export default function TripListArea() {
+interface Props {
+  initData: GetTripsResponse;
+}
+
+export default function TripListArea({ initData }: Props) {
   const router = useRouter();
-  const queryClient = useQueryClient();
   const { currentPage, setCurrentPage } = useCurrentPage();
   const [selectScope, setSelectScope] = useState<undefined | boolean>(
     undefined
@@ -34,12 +37,15 @@ export default function TripListArea() {
   const openAlertModal = useAlertModalStore((state) => state.openAlertModal);
 
   const { data: tripsData, isLoading } = useQuery(
-    TRIPS_QUERIES.list.queryOptions({
-      currentPage,
-      is_domestic: selectScope,
-      start_date: date?.from ? formatTripDate(date.from) : undefined,
-      end_date: date?.to ? formatTripDate(date.to) : undefined,
-    })
+    TRIPS_QUERIES.list.queryOptions(
+      {
+        currentPage,
+        is_domestic: selectScope,
+        start_date: date?.from ? formatTripDate(date.from) : undefined,
+        end_date: date?.to ? formatTripDate(date.to) : undefined,
+      },
+      initData
+    )
   );
   const { mutate: deleteMutate } = useTripDelete();
 
@@ -62,16 +68,6 @@ export default function TripListArea() {
     });
   };
 
-  // Empty 분기 처리용 초기 데이터 저장
-  const initData = queryClient.getQueryData<GetTripsResponse>(
-    TRIPS_QUERIES.list.queryKey({
-      currentPage: 1,
-      is_domestic: undefined,
-      start_date: undefined,
-      end_date: undefined,
-    })
-  );
-
   if (isLoading)
     return (
       <div className='flex items-center justify-center py-10 md:py-20'>
@@ -79,7 +75,7 @@ export default function TripListArea() {
       </div>
     );
 
-  if (!initData || initData.data?.length === 0)
+  if (!initData || initData.data.length === 0)
     return (
       <NoData title='아직 계획한 여행이 없어요.' className='py-10 md:py-15'>
         <Button

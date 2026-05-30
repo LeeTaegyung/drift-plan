@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 
 import { TRIPS_QUERIES } from '@/entities/trips/api/trips.queries';
 import { TripValuesType } from '@/entities/trips/type';
-import { createTripWithDefaultChecklist } from '@/features/trips/tripCreate/api/tripCreate.api';
+import { createTripWithDefaultChecklistAction } from '@/features/trips/tripCreate/api/tripCreate.actions';
 import TripForm from '@/features/trips/tripForm/ui/TripForm';
 import { PATH } from '@/shared/constants/path';
 
@@ -15,7 +15,7 @@ export default function TripCreateForm() {
   const router = useRouter();
   const queryClient = useQueryClient();
   const { mutateAsync } = useMutation({
-    mutationFn: createTripWithDefaultChecklist,
+    mutationFn: createTripWithDefaultChecklistAction,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: TRIPS_QUERIES.lists() });
       router.push(PATH.global.trips.list);

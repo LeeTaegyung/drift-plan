@@ -75,4 +75,5 @@ export const updateTripWithDefaultSettingAction = async ({
 
   // next cache 초기화
   revalidateTag(`trip-${tripId}`, 'max');
+  revalidateTag('trip-list', 'max');
 };
