@@ -13,6 +13,7 @@ import {
 } from '@/entities/checklist/type';
 import { updateCheckItemAction } from '@/features/trips/checkList/api/checkItemEdit.actions';
 import { CheckListFormValues } from '@/features/trips/checkList/model/checklistForm.schema';
+import CheckItemCreateForm from '@/features/trips/checkList/ui/CheckItemCreateForm';
 import CheckListItem from '@/features/trips/checkList/ui/CheckListItem';
 import CheckListUtilButton from '@/features/trips/checkList/ui/CheckListUtilButton';
 import CheckListWrap from '@/features/trips/checkList/ui/CheckListWrap';
@@ -84,7 +85,10 @@ export default function CheckListArea({ initData, tripId }: Props) {
   };
 
   const handleClickOpenModal = () => {
-    openModal('체크리스트 항목 추가', <></>);
+    openModal(
+      '체크리스트 항목 추가',
+      <CheckItemCreateForm tripId={tripId} total={checkList.length} />
+    );
   };
 
   return (

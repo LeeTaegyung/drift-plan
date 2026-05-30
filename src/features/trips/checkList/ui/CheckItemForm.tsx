@@ -1,4 +1,4 @@
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, useForm, UseFormReset } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -20,7 +20,10 @@ import Select from '@/shared/ui/form/Select';
 
 interface Props {
   initData?: TripCheckListType;
-  onSubmit: (formData: Partial<CheckListFormValues>) => void;
+  onSubmit: (
+    formData: Partial<CheckListFormValues>,
+    reset: UseFormReset<CheckListFormValues>
+  ) => void;
   onCancel: () => void;
 }
 
@@ -28,6 +31,7 @@ export default function CheckItemForm({ initData, onSubmit, onCancel }: Props) {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { isValid, errors, isSubmitting, isDirty, dirtyFields },
   } = useForm<CheckListFormValues>({
     resolver: zodResolver(checklistFormSchema),
@@ -58,7 +62,11 @@ export default function CheckItemForm({ initData, onSubmit, onCancel }: Props) {
         )
       : formData;
 
-    await onSubmit(submitData);
+    if ('memo' in submitData) {
+      submitData.memo = submitData.memo === '' ? null : submitData.memo;
+    }
+
+    await onSubmit(submitData, reset);
   });
 
   return (
@@ -76,6 +84,7 @@ export default function CheckItemForm({ initData, onSubmit, onCancel }: Props) {
               value={field.value}
               onChange={field.onChange}
             >
+              <option value={''}>카테고리를 선택해주세요.</option>
               {Object.keys(CHECKLIST_CATEGORY).map((key) => (
                 <option value={key} key={key}>
                   {CHECKLIST_CATEGORY[key as CheckListCategoryType]}
