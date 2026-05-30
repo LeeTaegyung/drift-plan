@@ -3,12 +3,13 @@ import {
   GetTripsResponse,
   TripValuesType,
 } from '@/entities/trips/type';
+import {
+  DEFAULT_CURRENT_PAGE,
+  DEFAULT_PAGE_SIZE,
+} from '@/shared/constants/pagination';
 import { createClient } from '@/shared/lib/supabase/client';
 
 const supabase = createClient();
-
-const DEFAULT_CURRENT_PAGE = 1;
-const DEFAULT_PAGE_SIZE = 12;
 
 export const getTrips = async ({
   is_domestic,
