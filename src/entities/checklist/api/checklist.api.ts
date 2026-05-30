@@ -1,8 +1,5 @@
 import { TripCheckListType } from '@/entities/checklist/type';
-import {
-  DOMESTIC_CHECKLIST,
-  INTERNATIONAL_CHECKLIST,
-} from '@/shared/config/checklists';
+import { createDefaultChecklistRow } from '@/entities/checklist/utils/createDefaultChecklistRow';
 import { createClient } from '@/shared/lib/supabase/client';
 
 const supabase = createClient();
@@ -11,20 +8,7 @@ export const createDefaultChecklist = async (
   tripId: string,
   isDomestic: boolean
 ) => {
-  const defaultChecklist = isDomestic
-    ? DOMESTIC_CHECKLIST
-    : INTERNATIONAL_CHECKLIST;
-
-  const checklistRows = defaultChecklist.flatMap((category) =>
-    category.items.map((item) => ({
-      trip_id: tripId,
-      category: category.category,
-      name: item.name,
-      quantity: item.quantity,
-      memo: item.memo,
-      done: false,
-    }))
-  );
+  const checklistRows = createDefaultChecklistRow(tripId, isDomestic);
 
   return await supabase.from('trip_checklist').insert(checklistRows);
 };
@@ -52,6 +36,18 @@ export const deleteCheckItem = async (id: string) => {
     .from('trip_checklist')
     .delete()
     .eq('id', id);
+
+  if (error) throw error;
+
+  return data;
+};
+
+export const getDefaultChecklistByTripId = async (tripId: string) => {
+  const { data, error } = await supabase
+    .from('trip_checklist')
+    .select('*')
+    .order('order', { ascending: true })
+    .eq('trip_id', tripId);
 
   if (error) throw error;
 
