@@ -11,9 +11,11 @@ export default async function TripDetailPage({
 }) {
   const { tripId } = await params;
 
-  const tripData = await getTripWithStatusServer(tripId);
+  const data = await getTripWithStatusServer(tripId);
 
-  if (!tripData) throw new Error('데이터를 가져올 수 없습니다.');
+  if (!data) throw new Error('데이터를 가져올 수 없습니다.');
+
+  const tripData = data[0];
 
   return (
     <Suspense
