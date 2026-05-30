@@ -2,7 +2,7 @@
 
 import { revalidateTag } from 'next/cache';
 
-import { CheckListFormValues } from '@/features/trips/checkList/model/checklistForm.schema';
+import { TripCheckListType } from '@/entities/checklist/type';
 import { createClient } from '@/shared/lib/supabase/server';
 
 export const updateCheckItemAction = async ({
@@ -10,7 +10,7 @@ export const updateCheckItemAction = async ({
   id,
   tripId,
 }: {
-  formData: Partial<CheckListFormValues>;
+  formData: Partial<TripCheckListType>;
   id: string;
   tripId: string;
 }) => {

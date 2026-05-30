@@ -14,7 +14,7 @@ import { cn } from '@/shared/shadcn/lib/utils';
 
 interface Props {
   checkItem: TripCheckListType;
-  onChangeDone: (id: string) => void;
+  onChangeDone: (id: string, done: boolean) => void;
   onChangeDelete: (id: string) => void;
   isEdit: boolean;
   isSelected: (id: string) => boolean;
@@ -40,7 +40,7 @@ export default function CheckListItem({
     if (isEdit) {
       onChangeDelete(id);
     } else {
-      onChangeDone(id);
+      onChangeDone(id, done);
     }
   };
 
@@ -52,7 +52,7 @@ export default function CheckListItem({
   };
 
   return (
-    <div
+    <li
       className={cn(
         'rounded-sm border px-3 py-2',
         'bg-inactive-bg/50 border-inactive-border text-inactive-text',
@@ -113,6 +113,6 @@ export default function CheckListItem({
           )}
         </>
       )}
-    </div>
+    </li>
   );
 }

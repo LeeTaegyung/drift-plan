@@ -14,6 +14,48 @@ export const CHECKLIST_MUTATION = {
         toast.error('체크리스트 수정에 실패하였습니다.');
       },
     }),
+  updateCheck: (tripId: string, queryClient: QueryClient) =>
+    mutationOptions({
+      mutationKey: ['checklist', 'update', tripId],
+      mutationFn: updateCheckItemAction,
+      onMutate: async (variables) => {
+        await queryClient.cancelQueries({
+          queryKey: CHECKLIST_QUERIES.detail.queryKey(tripId),
+        });
+
+        const prevSnapshot = queryClient.getQueryData(
+          CHECKLIST_QUERIES.detail.queryKey(tripId)
+        );
+
+        queryClient.setQueryData(
+          CHECKLIST_QUERIES.detail.queryKey(tripId),
+          (prev: TripCheckListType[]) => {
+            const id = variables.id;
+            return prev.map((c) => (c.id === id ? { ...c, done: !c.done } : c));
+          }
+        );
+
+        return { prevSnapshot };
+      },
+      onError: (error, variables, context) => {
+        queryClient.setQueryData(
+          CHECKLIST_QUERIES.detail.queryKey(tripId),
+          context?.prevSnapshot
+        );
+        toast.error('체크리스트 수정에 실패하였습니다.');
+      },
+      onSettled: () => {
+        if (
+          queryClient.isMutating({
+            mutationKey: ['checklist', 'update', tripId],
+          }) === 0
+        ) {
+          queryClient.invalidateQueries({
+            queryKey: CHECKLIST_QUERIES.detail.queryKey(tripId),
+          });
+        }
+      },
+    }),
   delete: (tripId: string, queryClient: QueryClient) =>
     mutationOptions({
       mutationFn: deleteCheckItemAction,
