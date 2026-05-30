@@ -35,27 +35,29 @@ export function LabelInputField({
         {required && <span className='text-error-text'>*</span>}
       </FieldLabel>
 
-      {children ? (
-        children
-      ) : (
-        <Input
-          className={cn(
-            'bg-surface text-sm',
-            errorMsg && 'border-error-border'
-          )}
-          {...props}
-        />
-      )}
-      {desc && (
-        <FieldDescription className='text-[13px]'>{desc}</FieldDescription>
-      )}
+      <div className='field-body flex flex-col gap-2'>
+        {children ? (
+          children
+        ) : (
+          <Input
+            className={cn(
+              'bg-surface text-sm',
+              errorMsg && 'border-error-border'
+            )}
+            {...props}
+          />
+        )}
+        {desc && (
+          <FieldDescription className='text-[13px]'>{desc}</FieldDescription>
+        )}
 
-      {errorMsg && (
-        <p className='text-error-text flex items-center gap-1 text-sm'>
-          <TriangleAlert className='size-5' />
-          {errorMsg}
-        </p>
-      )}
+        {errorMsg && (
+          <p className='text-error-text flex items-start gap-1 text-sm'>
+            <TriangleAlert className='size-5 shrink-0' />
+            {errorMsg}
+          </p>
+        )}
+      </div>
     </Field>
   );
 }
