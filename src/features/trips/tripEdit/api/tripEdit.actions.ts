@@ -30,8 +30,7 @@ export const updateTripWithDefaultSettingAction = async ({
   // 국내/해외 변경되었다면,
   if ('is_domestic' in formData && formData.is_domestic !== undefined) {
     // 기존 체크 리스트 백업
-    const { data: previousChecklist } =
-      await getDefaultChecklistByTripIdServer(tripId);
+    const previousChecklist = await getDefaultChecklistByTripIdServer(tripId);
 
     // 기존 기본 체크리스트 삭제
     const { error: deleteChecklistError } =
