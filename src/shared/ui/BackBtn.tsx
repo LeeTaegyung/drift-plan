@@ -16,8 +16,6 @@ interface Props {
 export default function BackBtn({ text, className, href }: Props) {
   const router = useRouter();
 
-  console.log(href);
-
   const handleClickBack = () => {
     if (href) {
       router.push(href);
