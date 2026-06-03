@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import { logout } from '@/entities/user/api/user.api';
-import { USER_QUERIES } from '@/entities/user/query/user.query';
+import { USER_QUERIES } from '@/entities/user/query/user.queries';
 
 export const useLogout = () => {
   const queryClient = useQueryClient();

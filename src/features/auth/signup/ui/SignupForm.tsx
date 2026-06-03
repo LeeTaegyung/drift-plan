@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { USER_QUERIES } from '@/entities/user/query/user.query';
+import { USER_QUERIES } from '@/entities/user/query/user.queries';
 import { createNickname, signUp } from '@/features/auth/signup/api/signup.api';
 import {
   SignUpFormValues,
