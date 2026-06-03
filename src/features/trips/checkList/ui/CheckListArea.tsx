@@ -2,8 +2,8 @@
 
 import { Eye, PlusCircle, SquarePen, Trash2, XIcon } from 'lucide-react';
 
-import { useCheckListArea } from '@/entities/checklist/hooks/useCheckListArea';
 import { CheckListCategoryType } from '@/entities/checklist/type';
+import { useCheckListArea } from '@/features/trips/checkList/hooks/useCheckListArea';
 import CheckItemCreateForm from '@/features/trips/checkList/ui/CheckItemCreateForm';
 import CheckListItem from '@/features/trips/checkList/ui/CheckListItem';
 import CheckListUtilButton from '@/features/trips/checkList/ui/CheckListUtilButton';
