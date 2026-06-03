@@ -212,6 +212,7 @@ export type Database = {
           continent: string[] | null;
           countries: string[] | null;
           created_at: string | null;
+          currency: string[] | null;
           end_date: string | null;
           id: string | null;
           is_domestic: boolean | null;
@@ -229,6 +230,7 @@ export type Database = {
           continent?: string[] | null;
           countries?: string[] | null;
           created_at?: string | null;
+          currency?: string[] | null;
           end_date?: string | null;
           id?: string | null;
           is_domestic?: boolean | null;
@@ -246,6 +248,7 @@ export type Database = {
           continent?: string[] | null;
           countries?: string[] | null;
           created_at?: string | null;
+          currency?: string[] | null;
           end_date?: string | null;
           id?: string | null;
           is_domestic?: boolean | null;
