@@ -135,6 +135,7 @@ export type Database = {
           continent: string[] | null;
           countries: string[] | null;
           created_at: string;
+          currency: string[] | null;
           end_date: string;
           id: string;
           is_domestic: boolean;
@@ -151,6 +152,7 @@ export type Database = {
           continent?: string[] | null;
           countries?: string[] | null;
           created_at?: string;
+          currency?: string[] | null;
           end_date: string;
           id?: string;
           is_domestic?: boolean;
@@ -167,6 +169,7 @@ export type Database = {
           continent?: string[] | null;
           countries?: string[] | null;
           created_at?: string;
+          currency?: string[] | null;
           end_date?: string;
           id?: string;
           is_domestic?: boolean;
