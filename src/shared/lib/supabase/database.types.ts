@@ -68,6 +68,66 @@ export type Database = {
           },
         ];
       };
+      trip_schedule_cards: {
+        Row: {
+          card_type: string;
+          created_at: string | null;
+          date: string;
+          detail: Json | null;
+          id: string;
+          memo: string | null;
+          order_index: number;
+          time: string | null;
+          time_taken: number | null;
+          title: string;
+          trip_id: string;
+          updated_at: string | null;
+        };
+        Insert: {
+          card_type: string;
+          created_at?: string | null;
+          date: string;
+          detail?: Json | null;
+          id?: string;
+          memo?: string | null;
+          order_index?: number;
+          time?: string | null;
+          time_taken?: number | null;
+          title: string;
+          trip_id: string;
+          updated_at?: string | null;
+        };
+        Update: {
+          card_type?: string;
+          created_at?: string | null;
+          date?: string;
+          detail?: Json | null;
+          id?: string;
+          memo?: string | null;
+          order_index?: number;
+          time?: string | null;
+          time_taken?: number | null;
+          title?: string;
+          trip_id?: string;
+          updated_at?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'trip_schedule_cards_trip_id_fkey';
+            columns: ['trip_id'];
+            isOneToOne: false;
+            referencedRelation: 'trips';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'trip_schedule_cards_trip_id_fkey';
+            columns: ['trip_id'];
+            isOneToOne: false;
+            referencedRelation: 'trips_with_status';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       trips: {
         Row: {
           background_color: string | null;
