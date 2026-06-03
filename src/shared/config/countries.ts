@@ -1,12 +1,27 @@
 export const COUNTRIES = [
-  { id: 288, alpha2: 'gh', alpha3: 'gha', name: '가나', continent: '아프리카' },
-  { id: 266, alpha2: 'ga', alpha3: 'gab', name: '가봉', continent: '아프리카' },
+  {
+    id: 288,
+    alpha2: 'gh',
+    alpha3: 'gha',
+    name: '가나',
+    continent: '아프리카',
+    currency: { code: 'GHS', name: '가나 세디', symbol: '₵' },
+  },
+  {
+    id: 266,
+    alpha2: 'ga',
+    alpha3: 'gab',
+    name: '가봉',
+    continent: '아프리카',
+    currency: { code: 'XAF', name: 'CFA 프랑', symbol: 'Fr' },
+  },
   {
     id: 328,
     alpha2: 'gy',
     alpha3: 'guy',
     name: '가이아나',
     continent: '남아메리카',
+    currency: { code: 'GYD', name: '가이아나 달러', symbol: '$' },
   },
   {
     id: 270,
@@ -14,6 +29,7 @@ export const COUNTRIES = [
     alpha3: 'gmb',
     name: '감비아',
     continent: '아프리카',
+    currency: { code: 'GMD', name: '달라시', symbol: 'D' },
   },
   {
     id: 831,
@@ -21,6 +37,7 @@ export const COUNTRIES = [
     alpha3: 'ggy',
     name: '건지섬',
     continent: '기타',
+    currency: { code: 'GBP', name: '파운드 스털링', symbol: '£' },
   },
   {
     id: 312,
@@ -28,6 +45,7 @@ export const COUNTRIES = [
     alpha3: 'glp',
     name: '과들루프',
     continent: '북아메리카',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 320,
@@ -35,6 +53,7 @@ export const COUNTRIES = [
     alpha3: 'gtm',
     name: '과테말라',
     continent: '기타',
+    currency: { code: 'GTQ', name: '케찰', symbol: 'Q' },
   },
   {
     id: 316,
@@ -42,6 +61,7 @@ export const COUNTRIES = [
     alpha3: 'gum',
     name: '괌',
     continent: '북아메리카',
+    currency: { code: 'USD', name: '미국 달러', symbol: '$' },
   },
   {
     id: 308,
@@ -49,22 +69,39 @@ export const COUNTRIES = [
     alpha3: 'grd',
     name: '그레나다',
     continent: '북아메리카',
+    currency: { code: 'XCD', name: '동카리브 달러', symbol: '$' },
   },
-  { id: 300, alpha2: 'gr', alpha3: 'grc', name: '그리스', continent: '유럽' },
+  {
+    id: 300,
+    alpha2: 'gr',
+    alpha3: 'grc',
+    name: '그리스',
+    continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
+  },
   {
     id: 304,
     alpha2: 'gl',
     alpha3: 'grl',
     name: '그린란드',
     continent: '북아메리카',
+    currency: { code: 'DKK', name: '덴마크 크로네', symbol: 'kr' },
   },
-  { id: 324, alpha2: 'gn', alpha3: 'gin', name: '기니', continent: '아프리카' },
+  {
+    id: 324,
+    alpha2: 'gn',
+    alpha3: 'gin',
+    name: '기니',
+    continent: '아프리카',
+    currency: { code: 'GNF', name: '기니 프랑', symbol: 'Fr' },
+  },
   {
     id: 624,
     alpha2: 'gw',
     alpha3: 'gnb',
     name: '기니비사우',
     continent: '아프리카',
+    currency: { code: 'XOF', name: 'CFA 프랑', symbol: 'Fr' },
   },
   {
     id: 516,
@@ -72,6 +109,7 @@ export const COUNTRIES = [
     alpha3: 'nam',
     name: '나미비아',
     continent: '아프리카',
+    currency: { code: 'NAD', name: '나미비아 달러', symbol: '$' },
   },
   {
     id: 520,
@@ -79,6 +117,7 @@ export const COUNTRIES = [
     alpha3: 'nru',
     name: '나우루',
     continent: '오세아니아',
+    currency: { code: 'AUD', name: '호주 달러', symbol: 'A$' },
   },
   {
     id: 566,
@@ -86,6 +125,7 @@ export const COUNTRIES = [
     alpha3: 'nga',
     name: '나이지리아',
     continent: '아프리카',
+    currency: { code: 'NGN', name: '나이라', symbol: '₦' },
   },
   {
     id: 10,
@@ -93,6 +133,7 @@ export const COUNTRIES = [
     alpha3: 'ata',
     name: '남극',
     continent: '남극',
+    currency: { code: '-', name: '해당없음', symbol: '-' },
   },
   {
     id: 728,
@@ -100,6 +141,7 @@ export const COUNTRIES = [
     alpha3: 'ssd',
     name: '남수단',
     continent: '기타',
+    currency: { code: 'SSP', name: '남수단 파운드', symbol: '£' },
   },
   {
     id: 710,
@@ -107,6 +149,7 @@ export const COUNTRIES = [
     alpha3: 'zaf',
     name: '남아프리카 공화국',
     continent: '아프리카',
+    currency: { code: 'ZAR', name: '랜드', symbol: 'R' },
   },
   {
     id: 528,
@@ -114,14 +157,23 @@ export const COUNTRIES = [
     alpha3: 'nld',
     name: '네덜란드',
     continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
-  { id: 524, alpha2: 'np', alpha3: 'npl', name: '네팔', continent: '아시아' },
+  {
+    id: 524,
+    alpha2: 'np',
+    alpha3: 'npl',
+    name: '네팔',
+    continent: '아시아',
+    currency: { code: 'NPR', name: '네팔 루피', symbol: '₨' },
+  },
   {
     id: 578,
     alpha2: 'no',
     alpha3: 'nor',
     name: '노르웨이',
     continent: '유럽',
+    currency: { code: 'NOK', name: '노르웨이 크로네', symbol: 'kr' },
   },
   {
     id: 574,
@@ -129,6 +181,7 @@ export const COUNTRIES = [
     alpha3: 'nfk',
     name: '노퍽섬',
     continent: '기타',
+    currency: { code: 'AUD', name: '호주 달러', symbol: 'A$' },
   },
   {
     id: 540,
@@ -136,6 +189,7 @@ export const COUNTRIES = [
     alpha3: 'ncl',
     name: '누벨칼레도니',
     continent: '기타',
+    currency: { code: 'XPF', name: 'CFP 프랑', symbol: 'Fr' },
   },
   {
     id: 554,
@@ -143,6 +197,7 @@ export const COUNTRIES = [
     alpha3: 'nzl',
     name: '뉴질랜드',
     continent: '오세아니아',
+    currency: { code: 'NZD', name: '뉴질랜드 달러', symbol: 'NZ$' },
   },
   {
     id: 570,
@@ -150,6 +205,7 @@ export const COUNTRIES = [
     alpha3: 'niu',
     name: '니우에',
     continent: '오세아니아',
+    currency: { code: 'NZD', name: '뉴질랜드 달러', symbol: 'NZ$' },
   },
   {
     id: 562,
@@ -157,6 +213,7 @@ export const COUNTRIES = [
     alpha3: 'ner',
     name: '니제르',
     continent: '아프리카',
+    currency: { code: 'XOF', name: 'CFA 프랑', symbol: 'Fr' },
   },
   {
     id: 558,
@@ -164,6 +221,7 @@ export const COUNTRIES = [
     alpha3: 'nic',
     name: '니카라과',
     continent: '기타',
+    currency: { code: 'NIO', name: '코르도바', symbol: 'C$' },
   },
   {
     id: 410,
@@ -171,14 +229,23 @@ export const COUNTRIES = [
     alpha3: 'kor',
     name: '대한민국',
     continent: '아시아',
+    currency: { code: 'KRW', name: '대한민국 원', symbol: '₩' },
   },
-  { id: 208, alpha2: 'dk', alpha3: 'dnk', name: '덴마크', continent: '유럽' },
+  {
+    id: 208,
+    alpha2: 'dk',
+    alpha3: 'dnk',
+    name: '덴마크',
+    continent: '유럽',
+    currency: { code: 'DKK', name: '덴마크 크로네', symbol: 'kr' },
+  },
   {
     id: 214,
     alpha2: 'do',
     alpha3: 'dom',
     name: '도미니카 공화국',
     continent: '북아메리카',
+    currency: { code: 'DOP', name: '도미니카 페소', symbol: '$' },
   },
   {
     id: 212,
@@ -186,22 +253,39 @@ export const COUNTRIES = [
     alpha3: 'dma',
     name: '도미니카 연방',
     continent: '북아메리카',
+    currency: { code: 'XCD', name: '동카리브 달러', symbol: '$' },
   },
-  { id: 276, alpha2: 'de', alpha3: 'deu', name: '독일', continent: '유럽' },
+  {
+    id: 276,
+    alpha2: 'de',
+    alpha3: 'deu',
+    name: '독일',
+    continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
+  },
   {
     id: 626,
     alpha2: 'tl',
     alpha3: 'tls',
     name: '동티모르',
     continent: '아시아',
+    currency: { code: 'USD', name: '미국 달러', symbol: '$' },
   },
-  { id: 418, alpha2: 'la', alpha3: 'lao', name: '라오스', continent: '아시아' },
+  {
+    id: 418,
+    alpha2: 'la',
+    alpha3: 'lao',
+    name: '라오스',
+    continent: '아시아',
+    currency: { code: 'LAK', name: '킵', symbol: '₭' },
+  },
   {
     id: 430,
     alpha2: 'lr',
     alpha3: 'lbr',
     name: '라이베리아',
     continent: '아프리카',
+    currency: { code: 'LRD', name: '라이베리아 달러', symbol: '$' },
   },
   {
     id: 428,
@@ -209,15 +293,31 @@ export const COUNTRIES = [
     alpha3: 'lva',
     name: '라트비아',
     continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
-  { id: 643, alpha2: 'ru', alpha3: 'rus', name: '러시아', continent: '유럽' },
-  { id: 422, alpha2: 'lb', alpha3: 'lbn', name: '레바논', continent: '아시아' },
+  {
+    id: 643,
+    alpha2: 'ru',
+    alpha3: 'rus',
+    name: '러시아',
+    continent: '유럽',
+    currency: { code: 'RUB', name: '루블', symbol: '₽' },
+  },
+  {
+    id: 422,
+    alpha2: 'lb',
+    alpha3: 'lbn',
+    name: '레바논',
+    continent: '아시아',
+    currency: { code: 'LBP', name: '레바논 파운드', symbol: 'ل.ل' },
+  },
   {
     id: 426,
     alpha2: 'ls',
     alpha3: 'lso',
     name: '레소토',
     continent: '아프리카',
+    currency: { code: 'LSL', name: '로티', symbol: 'L' },
   },
   {
     id: 638,
@@ -225,6 +325,7 @@ export const COUNTRIES = [
     alpha3: 'reu',
     name: '레위니옹',
     continent: '기타',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 642,
@@ -232,6 +333,7 @@ export const COUNTRIES = [
     alpha3: 'rou',
     name: '루마니아',
     continent: '유럽',
+    currency: { code: 'RON', name: '루마니아 레우', symbol: 'lei' },
   },
   {
     id: 442,
@@ -239,6 +341,7 @@ export const COUNTRIES = [
     alpha3: 'lux',
     name: '룩셈부르크',
     continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 646,
@@ -246,6 +349,7 @@ export const COUNTRIES = [
     alpha3: 'rwa',
     name: '르완다',
     continent: '아프리카',
+    currency: { code: 'RWF', name: '르완다 프랑', symbol: 'Fr' },
   },
   {
     id: 434,
@@ -253,6 +357,7 @@ export const COUNTRIES = [
     alpha3: 'lby',
     name: '리비아',
     continent: '아프리카',
+    currency: { code: 'LYD', name: '리비아 디나르', symbol: 'ل.د' },
   },
   {
     id: 440,
@@ -260,6 +365,7 @@ export const COUNTRIES = [
     alpha3: 'ltu',
     name: '리투아니아',
     continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 438,
@@ -267,6 +373,7 @@ export const COUNTRIES = [
     alpha3: 'lie',
     name: '리히텐슈타인',
     continent: '유럽',
+    currency: { code: 'CHF', name: '스위스 프랑', symbol: 'Fr' },
   },
   {
     id: 450,
@@ -274,6 +381,7 @@ export const COUNTRIES = [
     alpha3: 'mdg',
     name: '마다가스카르',
     continent: '아프리카',
+    currency: { code: 'MGA', name: '아리아리', symbol: 'Ar' },
   },
   {
     id: 474,
@@ -281,6 +389,7 @@ export const COUNTRIES = [
     alpha3: 'mtq',
     name: '마르티니크',
     continent: '북아메리카',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 584,
@@ -288,6 +397,7 @@ export const COUNTRIES = [
     alpha3: 'mhl',
     name: '마셜 제도',
     continent: '오세아니아',
+    currency: { code: 'USD', name: '미국 달러', symbol: '$' },
   },
   {
     id: 175,
@@ -295,14 +405,23 @@ export const COUNTRIES = [
     alpha3: 'myt',
     name: '마요트',
     continent: '기타',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
-  { id: 446, alpha2: 'mo', alpha3: 'mac', name: '마카오', continent: '아시아' },
+  {
+    id: 446,
+    alpha2: 'mo',
+    alpha3: 'mac',
+    name: '마카오',
+    continent: '아시아',
+    currency: { code: 'MOP', name: '파타카', symbol: 'P' },
+  },
   {
     id: 807,
     alpha2: 'mk',
     alpha3: 'mkd',
     name: '북마케도니아',
     continent: '유럽',
+    currency: { code: 'MKD', name: '마케도니아 데나르', symbol: 'ден' },
   },
   {
     id: 454,
@@ -310,6 +429,7 @@ export const COUNTRIES = [
     alpha3: 'mwi',
     name: '말라위',
     continent: '아프리카',
+    currency: { code: 'MWK', name: '말라위 콰차', symbol: 'MK' },
   },
   {
     id: 458,
@@ -317,14 +437,23 @@ export const COUNTRIES = [
     alpha3: 'mys',
     name: '말레이시아',
     continent: '아시아',
+    currency: { code: 'MYR', name: '링깃', symbol: 'RM' },
   },
-  { id: 466, alpha2: 'ml', alpha3: 'mli', name: '말리', continent: '아프리카' },
+  {
+    id: 466,
+    alpha2: 'ml',
+    alpha3: 'mli',
+    name: '말리',
+    continent: '아프리카',
+    currency: { code: 'XOF', name: 'CFA 프랑', symbol: 'Fr' },
+  },
   {
     id: 833,
     alpha2: 'im',
     alpha3: 'imn',
     name: '맨섬',
     continent: '기타',
+    currency: { code: 'GBP', name: '파운드 스털링', symbol: '£' },
   },
   {
     id: 484,
@@ -332,14 +461,23 @@ export const COUNTRIES = [
     alpha3: 'mex',
     name: '멕시코',
     continent: '북아메리카',
+    currency: { code: 'MXN', name: '멕시코 페소', symbol: '$' },
   },
-  { id: 492, alpha2: 'mc', alpha3: 'mco', name: '모나코', continent: '유럽' },
+  {
+    id: 492,
+    alpha2: 'mc',
+    alpha3: 'mco',
+    name: '모나코',
+    continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
+  },
   {
     id: 504,
     alpha2: 'ma',
     alpha3: 'mar',
     name: '모로코',
     continent: '아프리카',
+    currency: { code: 'MAD', name: '모로코 디르함', symbol: 'د.م.' },
   },
   {
     id: 480,
@@ -347,6 +485,7 @@ export const COUNTRIES = [
     alpha3: 'mus',
     name: '모리셔스',
     continent: '아프리카',
+    currency: { code: 'MUR', name: '모리셔스 루피', symbol: '₨' },
   },
   {
     id: 478,
@@ -354,6 +493,7 @@ export const COUNTRIES = [
     alpha3: 'mrt',
     name: '모리타니',
     continent: '아프리카',
+    currency: { code: 'MRU', name: '우기야', symbol: 'UM' },
   },
   {
     id: 508,
@@ -361,6 +501,7 @@ export const COUNTRIES = [
     alpha3: 'moz',
     name: '모잠비크',
     continent: '아프리카',
+    currency: { code: 'MZN', name: '메티칼', symbol: 'MT' },
   },
   {
     id: 499,
@@ -368,6 +509,7 @@ export const COUNTRIES = [
     alpha3: 'mne',
     name: '몬테네그로',
     continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 500,
@@ -375,17 +517,47 @@ export const COUNTRIES = [
     alpha3: 'msr',
     name: '몬트세랫',
     continent: '기타',
+    currency: { code: 'XCD', name: '동카리브 달러', symbol: '$' },
   },
-  { id: 498, alpha2: 'md', alpha3: 'mda', name: '몰도바', continent: '유럽' },
-  { id: 462, alpha2: 'mv', alpha3: 'mdv', name: '몰디브', continent: '아시아' },
-  { id: 470, alpha2: 'mt', alpha3: 'mlt', name: '몰타', continent: '유럽' },
-  { id: 496, alpha2: 'mn', alpha3: 'mng', name: '몽골', continent: '아시아' },
+  {
+    id: 498,
+    alpha2: 'md',
+    alpha3: 'mda',
+    name: '몰도바',
+    continent: '유럽',
+    currency: { code: 'MDL', name: '몰도바 레우', symbol: 'L' },
+  },
+  {
+    id: 462,
+    alpha2: 'mv',
+    alpha3: 'mdv',
+    name: '몰디브',
+    continent: '아시아',
+    currency: { code: 'MVR', name: '루피야', symbol: 'Rf' },
+  },
+  {
+    id: 470,
+    alpha2: 'mt',
+    alpha3: 'mlt',
+    name: '몰타',
+    continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
+  },
+  {
+    id: 496,
+    alpha2: 'mn',
+    alpha3: 'mng',
+    name: '몽골',
+    continent: '아시아',
+    currency: { code: 'MNT', name: '투그릭', symbol: '₮' },
+  },
   {
     id: 840,
     alpha2: 'us',
     alpha3: 'usa',
     name: '미국',
     continent: '북아메리카',
+    currency: { code: 'USD', name: '미국 달러', symbol: '$' },
   },
   {
     id: 581,
@@ -393,6 +565,7 @@ export const COUNTRIES = [
     alpha3: 'umi',
     name: '미국령 군소 제도',
     continent: '기타',
+    currency: { code: 'USD', name: '미국 달러', symbol: '$' },
   },
   {
     id: 850,
@@ -400,14 +573,23 @@ export const COUNTRIES = [
     alpha3: 'vir',
     name: '미국령 버진아일랜드',
     continent: '북아메리카',
+    currency: { code: 'USD', name: '미국 달러', symbol: '$' },
   },
-  { id: 104, alpha2: 'mm', alpha3: 'mmr', name: '미얀마', continent: '아시아' },
+  {
+    id: 104,
+    alpha2: 'mm',
+    alpha3: 'mmr',
+    name: '미얀마',
+    continent: '아시아',
+    currency: { code: 'MMK', name: '짯', symbol: 'K' },
+  },
   {
     id: 583,
     alpha2: 'fm',
     alpha3: 'fsm',
     name: '미크로네시아 연방',
     continent: '오세아니아',
+    currency: { code: 'USD', name: '미국 달러', symbol: '$' },
   },
   {
     id: 548,
@@ -415,14 +597,23 @@ export const COUNTRIES = [
     alpha3: 'vut',
     name: '바누아투',
     continent: '오세아니아',
+    currency: { code: 'VUV', name: '바투', symbol: 'Vt' },
   },
-  { id: 48, alpha2: 'bh', alpha3: 'bhr', name: '바레인', continent: '아시아' },
+  {
+    id: 48,
+    alpha2: 'bh',
+    alpha3: 'bhr',
+    name: '바레인',
+    continent: '아시아',
+    currency: { code: 'BHD', name: '바레인 디나르', symbol: '.د.ب' },
+  },
   {
     id: 52,
     alpha2: 'bb',
     alpha3: 'brb',
     name: '바베이도스',
     continent: '북아메리카',
+    currency: { code: 'BBD', name: '바베이도스 달러', symbol: '$' },
   },
   {
     id: 336,
@@ -430,6 +621,7 @@ export const COUNTRIES = [
     alpha3: 'vat',
     name: '바티칸 시국',
     continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 44,
@@ -437,6 +629,7 @@ export const COUNTRIES = [
     alpha3: 'bhs',
     name: '바하마',
     continent: '북아메리카',
+    currency: { code: 'BSD', name: '바하마 달러', symbol: '$' },
   },
   {
     id: 50,
@@ -444,6 +637,7 @@ export const COUNTRIES = [
     alpha3: 'bgd',
     name: '방글라데시',
     continent: '아시아',
+    currency: { code: 'BDT', name: '타카', symbol: '৳' },
   },
   {
     id: 60,
@@ -451,23 +645,47 @@ export const COUNTRIES = [
     alpha3: 'bmu',
     name: '버뮤다',
     continent: '기타',
+    currency: { code: 'BMD', name: '버뮤다 달러', symbol: '$' },
   },
-  { id: 204, alpha2: 'bj', alpha3: 'ben', name: '베냉', continent: '아프리카' },
+  {
+    id: 204,
+    alpha2: 'bj',
+    alpha3: 'ben',
+    name: '베냉',
+    continent: '아프리카',
+    currency: { code: 'XOF', name: 'CFA 프랑', symbol: 'Fr' },
+  },
   {
     id: 862,
     alpha2: 've',
     alpha3: 'ven',
     name: '베네수엘라',
     continent: '남아메리카',
+    currency: { code: 'VES', name: '볼리바르 소베라노', symbol: 'Bs.' },
   },
-  { id: 704, alpha2: 'vn', alpha3: 'vnm', name: '베트남', continent: '아시아' },
-  { id: 56, alpha2: 'be', alpha3: 'bel', name: '벨기에', continent: '유럽' },
+  {
+    id: 704,
+    alpha2: 'vn',
+    alpha3: 'vnm',
+    name: '베트남',
+    continent: '아시아',
+    currency: { code: 'VND', name: '동', symbol: '₫' },
+  },
+  {
+    id: 56,
+    alpha2: 'be',
+    alpha3: 'bel',
+    name: '벨기에',
+    continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
+  },
   {
     id: 112,
     alpha2: 'by',
     alpha3: 'blr',
     name: '벨라루스',
     continent: '유럽',
+    currency: { code: 'BYN', name: '벨라루스 루블', symbol: 'Br' },
   },
   {
     id: 84,
@@ -475,6 +693,7 @@ export const COUNTRIES = [
     alpha3: 'blz',
     name: '벨리즈',
     continent: '북아메리카',
+    currency: { code: 'BZD', name: '벨리즈 달러', symbol: '$' },
   },
   {
     id: 535,
@@ -482,6 +701,7 @@ export const COUNTRIES = [
     alpha3: 'bes',
     name: '보네르섬',
     continent: '기타',
+    currency: { code: 'USD', name: '미국 달러', symbol: '$' },
   },
   {
     id: 70,
@@ -489,6 +709,7 @@ export const COUNTRIES = [
     alpha3: 'bih',
     name: '보스니아 헤르체고비나',
     continent: '유럽',
+    currency: { code: 'BAM', name: '태환 마르크', symbol: 'KM' },
   },
   {
     id: 72,
@@ -496,6 +717,7 @@ export const COUNTRIES = [
     alpha3: 'bwa',
     name: '보츠와나',
     continent: '아프리카',
+    currency: { code: 'BWP', name: '풀라', symbol: 'P' },
   },
   {
     id: 68,
@@ -503,6 +725,7 @@ export const COUNTRIES = [
     alpha3: 'bol',
     name: '볼리비아',
     continent: '남아메리카',
+    currency: { code: 'BOB', name: '볼리비아노', symbol: 'Bs.' },
   },
   {
     id: 108,
@@ -510,6 +733,7 @@ export const COUNTRIES = [
     alpha3: 'bdi',
     name: '부룬디',
     continent: '아프리카',
+    currency: { code: 'BIF', name: '부룬디 프랑', symbol: 'Fr' },
   },
   {
     id: 854,
@@ -517,6 +741,7 @@ export const COUNTRIES = [
     alpha3: 'bfa',
     name: '부르키나파소',
     continent: '아프리카',
+    currency: { code: 'XOF', name: 'CFA 프랑', symbol: 'Fr' },
   },
   {
     id: 74,
@@ -524,14 +749,23 @@ export const COUNTRIES = [
     alpha3: 'bvt',
     name: '부베섬',
     continent: '기타',
+    currency: { code: 'NOK', name: '노르웨이 크로네', symbol: 'kr' },
   },
-  { id: 64, alpha2: 'bt', alpha3: 'btn', name: '부탄', continent: '아시아' },
+  {
+    id: 64,
+    alpha2: 'bt',
+    alpha3: 'btn',
+    name: '부탄',
+    continent: '아시아',
+    currency: { code: 'BTN', name: '눌트럼', symbol: 'Nu' },
+  },
   {
     id: 580,
     alpha2: 'mp',
     alpha3: 'mnp',
     name: '북마리아나 제도',
     continent: '북아메리카',
+    currency: { code: 'USD', name: '미국 달러', symbol: '$' },
   },
   {
     id: 100,
@@ -539,6 +773,7 @@ export const COUNTRIES = [
     alpha3: 'bgr',
     name: '불가리아',
     continent: '유럽',
+    currency: { code: 'BGN', name: '불가리아 레프', symbol: 'лв' },
   },
   {
     id: 76,
@@ -546,6 +781,7 @@ export const COUNTRIES = [
     alpha3: 'bra',
     name: '브라질',
     continent: '남아메리카',
+    currency: { code: 'BRL', name: '브라질 레알', symbol: 'R$' },
   },
   {
     id: 96,
@@ -553,6 +789,7 @@ export const COUNTRIES = [
     alpha3: 'brn',
     name: '브루나이',
     continent: '아시아',
+    currency: { code: 'BND', name: '브루나이 달러', symbol: '$' },
   },
   {
     id: 882,
@@ -560,6 +797,7 @@ export const COUNTRIES = [
     alpha3: 'wsm',
     name: '사모아',
     continent: '오세아니아',
+    currency: { code: 'WST', name: '탈라', symbol: 'T' },
   },
   {
     id: 682,
@@ -567,6 +805,7 @@ export const COUNTRIES = [
     alpha3: 'sau',
     name: '사우디아라비아',
     continent: '아시아',
+    currency: { code: 'SAR', name: '사우디 리얄', symbol: '﷼' },
   },
   {
     id: 239,
@@ -574,6 +813,7 @@ export const COUNTRIES = [
     alpha3: 'sgs',
     name: '사우스조지아 사우스샌드위치 제도',
     continent: '기타',
+    currency: { code: 'GBP', name: '파운드 스털링', symbol: '£' },
   },
   {
     id: 674,
@@ -581,6 +821,7 @@ export const COUNTRIES = [
     alpha3: 'smr',
     name: '산마리노',
     continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 678,
@@ -588,6 +829,7 @@ export const COUNTRIES = [
     alpha3: 'stp',
     name: '상투메 프린시페',
     continent: '아프리카',
+    currency: { code: 'STN', name: '도브라', symbol: 'Db' },
   },
   {
     id: 663,
@@ -595,6 +837,7 @@ export const COUNTRIES = [
     alpha3: 'maf',
     name: '생마르탱',
     continent: '북아메리카',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 652,
@@ -602,6 +845,7 @@ export const COUNTRIES = [
     alpha3: 'blm',
     name: '생바르텔레미',
     continent: '북아메리카',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 666,
@@ -609,6 +853,7 @@ export const COUNTRIES = [
     alpha3: 'spm',
     name: '생피에르 미클롱',
     continent: '북아메리카',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 732,
@@ -616,6 +861,7 @@ export const COUNTRIES = [
     alpha3: 'esh',
     name: '서사하라',
     continent: '기타',
+    currency: { code: 'MAD', name: '모로코 디르함', symbol: 'د.م.' },
   },
   {
     id: 686,
@@ -623,6 +869,7 @@ export const COUNTRIES = [
     alpha3: 'sen',
     name: '세네갈',
     continent: '아프리카',
+    currency: { code: 'XOF', name: 'CFA 프랑', symbol: 'Fr' },
   },
   {
     id: 688,
@@ -630,6 +877,7 @@ export const COUNTRIES = [
     alpha3: 'srb',
     name: '세르비아',
     continent: '유럽',
+    currency: { code: 'RSD', name: '세르비아 디나르', symbol: 'дин' },
   },
   {
     id: 690,
@@ -637,6 +885,7 @@ export const COUNTRIES = [
     alpha3: 'syc',
     name: '세이셸',
     continent: '아프리카',
+    currency: { code: 'SCR', name: '세이셸 루피', symbol: '₨' },
   },
   {
     id: 662,
@@ -644,6 +893,7 @@ export const COUNTRIES = [
     alpha3: 'lca',
     name: '세인트루시아',
     continent: '북아메리카',
+    currency: { code: 'XCD', name: '동카리브 달러', symbol: '$' },
   },
   {
     id: 670,
@@ -651,6 +901,7 @@ export const COUNTRIES = [
     alpha3: 'vct',
     name: '세인트빈센트 그레나딘',
     continent: '북아메리카',
+    currency: { code: 'XCD', name: '동카리브 달러', symbol: '$' },
   },
   {
     id: 659,
@@ -658,6 +909,7 @@ export const COUNTRIES = [
     alpha3: 'kna',
     name: '세인트키츠 네비스',
     continent: '북아메리카',
+    currency: { code: 'XCD', name: '동카리브 달러', symbol: '$' },
   },
   {
     id: 654,
@@ -665,6 +917,7 @@ export const COUNTRIES = [
     alpha3: 'shn',
     name: '세인트헬레나',
     continent: '기타',
+    currency: { code: 'SHP', name: '세인트헬레나 파운드', symbol: '£' },
   },
   {
     id: 706,
@@ -672,6 +925,7 @@ export const COUNTRIES = [
     alpha3: 'som',
     name: '소말리아',
     continent: '아프리카',
+    currency: { code: 'SOS', name: '소말리아 실링', symbol: 'Sh' },
   },
   {
     id: 90,
@@ -679,14 +933,23 @@ export const COUNTRIES = [
     alpha3: 'slb',
     name: '솔로몬 제도',
     continent: '오세아니아',
+    currency: { code: 'SBD', name: '솔로몬 제도 달러', symbol: '$' },
   },
-  { id: 729, alpha2: 'sd', alpha3: 'sdn', name: '수단', continent: '아프리카' },
+  {
+    id: 729,
+    alpha2: 'sd',
+    alpha3: 'sdn',
+    name: '수단',
+    continent: '아프리카',
+    currency: { code: 'SDG', name: '수단 파운드', symbol: '£' },
+  },
   {
     id: 740,
     alpha2: 'sr',
     alpha3: 'sur',
     name: '수리남',
     continent: '남아메리카',
+    currency: { code: 'SRD', name: '수리남 달러', symbol: '$' },
   },
   {
     id: 144,
@@ -694,6 +957,7 @@ export const COUNTRIES = [
     alpha3: 'lka',
     name: '스리랑카',
     continent: '아시아',
+    currency: { code: 'LKR', name: '스리랑카 루피', symbol: '₨' },
   },
   {
     id: 744,
@@ -701,16 +965,39 @@ export const COUNTRIES = [
     alpha3: 'sjm',
     name: '스발바르 얀마옌',
     continent: '기타',
+    currency: { code: 'NOK', name: '노르웨이 크로네', symbol: 'kr' },
   },
-  { id: 752, alpha2: 'se', alpha3: 'swe', name: '스웨덴', continent: '유럽' },
-  { id: 756, alpha2: 'ch', alpha3: 'che', name: '스위스', continent: '유럽' },
-  { id: 724, alpha2: 'es', alpha3: 'esp', name: '스페인', continent: '유럽' },
+  {
+    id: 752,
+    alpha2: 'se',
+    alpha3: 'swe',
+    name: '스웨덴',
+    continent: '유럽',
+    currency: { code: 'SEK', name: '스웨덴 크로나', symbol: 'kr' },
+  },
+  {
+    id: 756,
+    alpha2: 'ch',
+    alpha3: 'che',
+    name: '스위스',
+    continent: '유럽',
+    currency: { code: 'CHF', name: '스위스 프랑', symbol: 'Fr' },
+  },
+  {
+    id: 724,
+    alpha2: 'es',
+    alpha3: 'esp',
+    name: '스페인',
+    continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
+  },
   {
     id: 703,
     alpha2: 'sk',
     alpha3: 'svk',
     name: '슬로바키아',
     continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 705,
@@ -718,14 +1005,23 @@ export const COUNTRIES = [
     alpha3: 'svn',
     name: '슬로베니아',
     continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
-  { id: 760, alpha2: 'sy', alpha3: 'syr', name: '시리아', continent: '아시아' },
+  {
+    id: 760,
+    alpha2: 'sy',
+    alpha3: 'syr',
+    name: '시리아',
+    continent: '아시아',
+    currency: { code: 'SYP', name: '시리아 파운드', symbol: '£' },
+  },
   {
     id: 694,
     alpha2: 'sl',
     alpha3: 'sle',
     name: '시에라리온',
     continent: '아프리카',
+    currency: { code: 'SLL', name: '레온', symbol: 'Le' },
   },
   {
     id: 534,
@@ -733,6 +1029,7 @@ export const COUNTRIES = [
     alpha3: 'sxm',
     name: '신트마르턴',
     continent: '기타',
+    currency: { code: 'ANG', name: '네덜란드령 안틸레스 길더', symbol: 'ƒ' },
   },
   {
     id: 702,
@@ -740,6 +1037,7 @@ export const COUNTRIES = [
     alpha3: 'sgp',
     name: '싱가포르',
     continent: '아시아',
+    currency: { code: 'SGD', name: '싱가포르 달러', symbol: 'S$' },
   },
   {
     id: 784,
@@ -747,6 +1045,7 @@ export const COUNTRIES = [
     alpha3: 'are',
     name: '아랍에미리트',
     continent: '아시아',
+    currency: { code: 'AED', name: '디르함', symbol: 'د.إ' },
   },
   {
     id: 533,
@@ -754,6 +1053,7 @@ export const COUNTRIES = [
     alpha3: 'abw',
     name: '아루바',
     continent: '기타',
+    currency: { code: 'AWG', name: '아루바 플로린', symbol: 'ƒ' },
   },
   {
     id: 51,
@@ -761,6 +1061,7 @@ export const COUNTRIES = [
     alpha3: 'arm',
     name: '아르메니아',
     continent: '아시아',
+    currency: { code: 'AMD', name: '드람', symbol: '֏' },
   },
   {
     id: 32,
@@ -768,6 +1069,7 @@ export const COUNTRIES = [
     alpha3: 'arg',
     name: '아르헨티나',
     continent: '남아메리카',
+    currency: { code: 'ARS', name: '아르헨티나 페소', symbol: '$' },
   },
   {
     id: 16,
@@ -775,6 +1077,7 @@ export const COUNTRIES = [
     alpha3: 'asm',
     name: '아메리칸사모아',
     continent: '기타',
+    currency: { code: 'USD', name: '미국 달러', symbol: '$' },
   },
   {
     id: 352,
@@ -782,6 +1085,7 @@ export const COUNTRIES = [
     alpha3: 'isl',
     name: '아이슬란드',
     continent: '유럽',
+    currency: { code: 'ISK', name: '아이슬란드 크로나', symbol: 'kr' },
   },
   {
     id: 332,
@@ -789,6 +1093,7 @@ export const COUNTRIES = [
     alpha3: 'hti',
     name: '아이티',
     continent: '북아메리카',
+    currency: { code: 'HTG', name: '구르드', symbol: 'G' },
   },
   {
     id: 372,
@@ -796,6 +1101,7 @@ export const COUNTRIES = [
     alpha3: 'irl',
     name: '아일랜드',
     continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 31,
@@ -803,6 +1109,7 @@ export const COUNTRIES = [
     alpha3: 'aze',
     name: '아제르바이잔',
     continent: '아시아',
+    currency: { code: 'AZN', name: '마나트', symbol: '₼' },
   },
   {
     id: 4,
@@ -810,15 +1117,31 @@ export const COUNTRIES = [
     alpha3: 'afg',
     name: '아프가니스탄',
     continent: '아시아',
+    currency: { code: 'AFN', name: '아프가니', symbol: '؋' },
   },
-  { id: 20, alpha2: 'ad', alpha3: 'and', name: '안도라', continent: '유럽' },
-  { id: 8, alpha2: 'al', alpha3: 'alb', name: '알바니아', continent: '유럽' },
+  {
+    id: 20,
+    alpha2: 'ad',
+    alpha3: 'and',
+    name: '안도라',
+    continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
+  },
+  {
+    id: 8,
+    alpha2: 'al',
+    alpha3: 'alb',
+    name: '알바니아',
+    continent: '유럽',
+    currency: { code: 'ALL', name: '레크', symbol: 'L' },
+  },
   {
     id: 12,
     alpha2: 'dz',
     alpha3: 'dza',
     name: '알제리',
     continent: '아프리카',
+    currency: { code: 'DZD', name: '알제리 디나르', symbol: 'د.ج' },
   },
   {
     id: 24,
@@ -826,6 +1149,7 @@ export const COUNTRIES = [
     alpha3: 'ago',
     name: '앙골라',
     continent: '아프리카',
+    currency: { code: 'AOA', name: '콴자', symbol: 'Kz' },
   },
   {
     id: 28,
@@ -833,6 +1157,7 @@ export const COUNTRIES = [
     alpha3: 'atg',
     name: '앤티가 바부다',
     continent: '북아메리카',
+    currency: { code: 'XCD', name: '동카리브 달러', symbol: '$' },
   },
   {
     id: 660,
@@ -840,6 +1165,7 @@ export const COUNTRIES = [
     alpha3: 'aia',
     name: '앵귈라',
     continent: '북아메리카',
+    currency: { code: 'XCD', name: '동카리브 달러', symbol: '$' },
   },
   {
     id: 232,
@@ -847,6 +1173,7 @@ export const COUNTRIES = [
     alpha3: 'eri',
     name: '에리트레아',
     continent: '아프리카',
+    currency: { code: 'ERN', name: '낙파', symbol: 'Nfk' },
   },
   {
     id: 748,
@@ -854,6 +1181,7 @@ export const COUNTRIES = [
     alpha3: 'swz',
     name: '에스와티니',
     continent: '아프리카',
+    currency: { code: 'SZL', name: '릴랑게니', symbol: 'L' },
   },
   {
     id: 233,
@@ -861,6 +1189,7 @@ export const COUNTRIES = [
     alpha3: 'est',
     name: '에스토니아',
     continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 218,
@@ -868,6 +1197,7 @@ export const COUNTRIES = [
     alpha3: 'ecu',
     name: '에콰도르',
     continent: '남아메리카',
+    currency: { code: 'USD', name: '미국 달러', symbol: '$' },
   },
   {
     id: 231,
@@ -875,6 +1205,7 @@ export const COUNTRIES = [
     alpha3: 'eth',
     name: '에티오피아',
     continent: '아프리카',
+    currency: { code: 'ETB', name: '비르', symbol: 'Br' },
   },
   {
     id: 222,
@@ -882,14 +1213,23 @@ export const COUNTRIES = [
     alpha3: 'slv',
     name: '엘살바도르',
     continent: '북아메리카',
+    currency: { code: 'USD', name: '미국 달러', symbol: '$' },
   },
-  { id: 826, alpha2: 'gb', alpha3: 'gbr', name: '영국', continent: '유럽' },
+  {
+    id: 826,
+    alpha2: 'gb',
+    alpha3: 'gbr',
+    name: '영국',
+    continent: '유럽',
+    currency: { code: 'GBP', name: '파운드 스털링', symbol: '£' },
+  },
   {
     id: 92,
     alpha2: 'vg',
     alpha3: 'vgb',
     name: '영국령 버진아일랜드',
     continent: '북아메리카',
+    currency: { code: 'USD', name: '미국 달러', symbol: '$' },
   },
   {
     id: 86,
@@ -897,15 +1237,31 @@ export const COUNTRIES = [
     alpha3: 'iot',
     name: '영국령 인도양 지역',
     continent: '기타',
+    currency: { code: 'USD', name: '미국 달러', symbol: '$' },
   },
-  { id: 887, alpha2: 'ye', alpha3: 'yem', name: '예멘', continent: '아시아' },
-  { id: 512, alpha2: 'om', alpha3: 'omn', name: '오만', continent: '아시아' },
+  {
+    id: 887,
+    alpha2: 'ye',
+    alpha3: 'yem',
+    name: '예멘',
+    continent: '아시아',
+    currency: { code: 'YER', name: '예멘 리알', symbol: '﷼' },
+  },
+  {
+    id: 512,
+    alpha2: 'om',
+    alpha3: 'omn',
+    name: '오만',
+    continent: '아시아',
+    currency: { code: 'OMR', name: '오만 리알', symbol: '﷼' },
+  },
   {
     id: 36,
     alpha2: 'au',
     alpha3: 'aus',
     name: '오스트레일리아',
     continent: '오세아니아',
+    currency: { code: 'AUD', name: '호주 달러', symbol: 'A$' },
   },
   {
     id: 40,
@@ -913,6 +1269,7 @@ export const COUNTRIES = [
     alpha3: 'aut',
     name: '오스트리아',
     continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 340,
@@ -920,6 +1277,7 @@ export const COUNTRIES = [
     alpha3: 'hnd',
     name: '온두라스',
     continent: '북아메리카',
+    currency: { code: 'HNL', name: '렘피라', symbol: 'L' },
   },
   {
     id: 248,
@@ -927,14 +1285,23 @@ export const COUNTRIES = [
     alpha3: 'ala',
     name: '올란드 제도',
     continent: '기타',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
-  { id: 400, alpha2: 'jo', alpha3: 'jor', name: '요르단', continent: '아시아' },
+  {
+    id: 400,
+    alpha2: 'jo',
+    alpha3: 'jor',
+    name: '요르단',
+    continent: '아시아',
+    currency: { code: 'JOD', name: '요르단 디나르', symbol: 'د.ا' },
+  },
   {
     id: 800,
     alpha2: 'ug',
     alpha3: 'uga',
     name: '우간다',
     continent: '아프리카',
+    currency: { code: 'UGX', name: '우간다 실링', symbol: 'Sh' },
   },
   {
     id: 858,
@@ -942,6 +1309,7 @@ export const COUNTRIES = [
     alpha3: 'ury',
     name: '우루과이',
     continent: '남아메리카',
+    currency: { code: 'UYU', name: '우루과이 페소', symbol: '$' },
   },
   {
     id: 860,
@@ -949,6 +1317,7 @@ export const COUNTRIES = [
     alpha3: 'uzb',
     name: '우즈베키스탄',
     continent: '아시아',
+    currency: { code: 'UZS', name: '숨', symbol: 'сўм' },
   },
   {
     id: 804,
@@ -956,6 +1325,7 @@ export const COUNTRIES = [
     alpha3: 'ukr',
     name: '우크라이나',
     continent: '유럽',
+    currency: { code: 'UAH', name: '흐리우냐', symbol: '₴' },
   },
   {
     id: 876,
@@ -963,15 +1333,31 @@ export const COUNTRIES = [
     alpha3: 'wlf',
     name: '왈리스 푸투나',
     continent: '기타',
+    currency: { code: 'XPF', name: 'CFP 프랑', symbol: 'Fr' },
   },
-  { id: 368, alpha2: 'iq', alpha3: 'irq', name: '이라크', continent: '아시아' },
-  { id: 364, alpha2: 'ir', alpha3: 'irn', name: '이란', continent: '아시아' },
+  {
+    id: 368,
+    alpha2: 'iq',
+    alpha3: 'irq',
+    name: '이라크',
+    continent: '아시아',
+    currency: { code: 'IQD', name: '이라크 디나르', symbol: 'ع.د' },
+  },
+  {
+    id: 364,
+    alpha2: 'ir',
+    alpha3: 'irn',
+    name: '이란',
+    continent: '아시아',
+    currency: { code: 'IRR', name: '이란 리알', symbol: '﷼' },
+  },
   {
     id: 376,
     alpha2: 'il',
     alpha3: 'isr',
     name: '이스라엘',
     continent: '아시아',
+    currency: { code: 'ILS', name: '새 셰켈', symbol: '₪' },
   },
   {
     id: 818,
@@ -979,6 +1365,7 @@ export const COUNTRIES = [
     alpha3: 'egy',
     name: '이집트',
     continent: '아프리카',
+    currency: { code: 'EGP', name: '이집트 파운드', symbol: '£' },
   },
   {
     id: 380,
@@ -986,22 +1373,39 @@ export const COUNTRIES = [
     alpha3: 'ita',
     name: '이탈리아',
     continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
-  { id: 356, alpha2: 'in', alpha3: 'ind', name: '인도', continent: '아시아' },
+  {
+    id: 356,
+    alpha2: 'in',
+    alpha3: 'ind',
+    name: '인도',
+    continent: '아시아',
+    currency: { code: 'INR', name: '인도 루피', symbol: '₹' },
+  },
   {
     id: 360,
     alpha2: 'id',
     alpha3: 'idn',
     name: '인도네시아',
     continent: '아시아',
+    currency: { code: 'IDR', name: '루피아', symbol: 'Rp' },
   },
-  { id: 392, alpha2: 'jp', alpha3: 'jpn', name: '일본', continent: '아시아' },
+  {
+    id: 392,
+    alpha2: 'jp',
+    alpha3: 'jpn',
+    name: '일본',
+    continent: '아시아',
+    currency: { code: 'JPY', name: '엔', symbol: '¥' },
+  },
   {
     id: 388,
     alpha2: 'jm',
     alpha3: 'jam',
     name: '자메이카',
     continent: '북아메리카',
+    currency: { code: 'JMD', name: '자메이카 달러', symbol: '$' },
   },
   {
     id: 894,
@@ -1009,6 +1413,7 @@ export const COUNTRIES = [
     alpha3: 'zmb',
     name: '잠비아',
     continent: '아프리카',
+    currency: { code: 'ZMW', name: '잠비아 콰차', symbol: 'ZK' },
   },
   {
     id: 832,
@@ -1016,6 +1421,7 @@ export const COUNTRIES = [
     alpha3: 'jey',
     name: '저지섬',
     continent: '기타',
+    currency: { code: 'GBP', name: '파운드 스털링', symbol: '£' },
   },
   {
     id: 226,
@@ -1023,6 +1429,7 @@ export const COUNTRIES = [
     alpha3: 'gnq',
     name: '적도 기니',
     continent: '아프리카',
+    currency: { code: 'XAF', name: 'CFA 프랑', symbol: 'Fr' },
   },
   {
     id: 408,
@@ -1030,15 +1437,31 @@ export const COUNTRIES = [
     alpha3: 'prk',
     name: '조선민주주의인민공화국',
     continent: '아시아',
+    currency: { code: 'KPW', name: '북한 원', symbol: '₩' },
   },
-  { id: 268, alpha2: 'ge', alpha3: 'geo', name: '조지아', continent: '아시아' },
-  { id: 156, alpha2: 'cn', alpha3: 'chn', name: '중국', continent: '아시아' },
+  {
+    id: 268,
+    alpha2: 'ge',
+    alpha3: 'geo',
+    name: '조지아',
+    continent: '아시아',
+    currency: { code: 'GEL', name: '라리', symbol: '₾' },
+  },
+  {
+    id: 156,
+    alpha2: 'cn',
+    alpha3: 'chn',
+    name: '중국',
+    continent: '아시아',
+    currency: { code: 'CNY', name: '위안', symbol: '¥' },
+  },
   {
     id: 140,
     alpha2: 'cf',
     alpha3: 'caf',
     name: '중앙아프리카 공화국',
     continent: '아프리카',
+    currency: { code: 'XAF', name: 'CFA 프랑', symbol: 'Fr' },
   },
   {
     id: 262,
@@ -1046,6 +1469,7 @@ export const COUNTRIES = [
     alpha3: 'dji',
     name: '지부티',
     continent: '아프리카',
+    currency: { code: 'DJF', name: '지부티 프랑', symbol: 'Fr' },
   },
   {
     id: 292,
@@ -1053,6 +1477,7 @@ export const COUNTRIES = [
     alpha3: 'gib',
     name: '지브롤터',
     continent: '기타',
+    currency: { code: 'GIP', name: '지브롤터 파운드', symbol: '£' },
   },
   {
     id: 716,
@@ -1060,15 +1485,31 @@ export const COUNTRIES = [
     alpha3: 'zwe',
     name: '짐바브웨',
     continent: '아프리카',
+    currency: { code: 'ZWL', name: '짐바브웨 달러', symbol: '$' },
   },
-  { id: 148, alpha2: 'td', alpha3: 'tcd', name: '차드', continent: '아프리카' },
-  { id: 203, alpha2: 'cz', alpha3: 'cze', name: '체코', continent: '유럽' },
+  {
+    id: 148,
+    alpha2: 'td',
+    alpha3: 'tcd',
+    name: '차드',
+    continent: '아프리카',
+    currency: { code: 'XAF', name: 'CFA 프랑', symbol: 'Fr' },
+  },
+  {
+    id: 203,
+    alpha2: 'cz',
+    alpha3: 'cze',
+    name: '체코',
+    continent: '유럽',
+    currency: { code: 'CZK', name: '체코 코루나', symbol: 'Kč' },
+  },
   {
     id: 152,
     alpha2: 'cl',
     alpha3: 'chl',
     name: '칠레',
     continent: '남아메리카',
+    currency: { code: 'CLP', name: '칠레 페소', symbol: '$' },
   },
   {
     id: 120,
@@ -1076,6 +1517,7 @@ export const COUNTRIES = [
     alpha3: 'cmr',
     name: '카메룬',
     continent: '아프리카',
+    currency: { code: 'XAF', name: 'CFA 프랑', symbol: 'Fr' },
   },
   {
     id: 132,
@@ -1083,6 +1525,7 @@ export const COUNTRIES = [
     alpha3: 'cpv',
     name: '카보베르데',
     continent: '아프리카',
+    currency: { code: 'CVE', name: '카보베르데 에스쿠도', symbol: '$' },
   },
   {
     id: 398,
@@ -1090,14 +1533,23 @@ export const COUNTRIES = [
     alpha3: 'kaz',
     name: '카자흐스탄',
     continent: '아시아',
+    currency: { code: 'KZT', name: '텡게', symbol: '₸' },
   },
-  { id: 634, alpha2: 'qa', alpha3: 'qat', name: '카타르', continent: '아시아' },
+  {
+    id: 634,
+    alpha2: 'qa',
+    alpha3: 'qat',
+    name: '카타르',
+    continent: '아시아',
+    currency: { code: 'QAR', name: '카타르 리얄', symbol: '﷼' },
+  },
   {
     id: 116,
     alpha2: 'kh',
     alpha3: 'khm',
     name: '캄보디아',
     continent: '아시아',
+    currency: { code: 'KHR', name: '리엘', symbol: '៛' },
   },
   {
     id: 124,
@@ -1105,14 +1557,23 @@ export const COUNTRIES = [
     alpha3: 'can',
     name: '캐나다',
     continent: '북아메리카',
+    currency: { code: 'CAD', name: '캐나다 달러', symbol: 'C$' },
   },
-  { id: 404, alpha2: 'ke', alpha3: 'ken', name: '케냐', continent: '아프리카' },
+  {
+    id: 404,
+    alpha2: 'ke',
+    alpha3: 'ken',
+    name: '케냐',
+    continent: '아프리카',
+    currency: { code: 'KES', name: '케냐 실링', symbol: 'KSh' },
+  },
   {
     id: 136,
     alpha2: 'ky',
     alpha3: 'cym',
     name: '케이맨 제도',
     continent: '북아메리카',
+    currency: { code: 'KYD', name: '케이맨 제도 달러', symbol: '$' },
   },
   {
     id: 174,
@@ -1120,6 +1581,7 @@ export const COUNTRIES = [
     alpha3: 'com',
     name: '코모로',
     continent: '아프리카',
+    currency: { code: 'KMF', name: '코모로 프랑', symbol: 'Fr' },
   },
   {
     id: 188,
@@ -1127,6 +1589,7 @@ export const COUNTRIES = [
     alpha3: 'cri',
     name: '코스타리카',
     continent: '북아메리카',
+    currency: { code: 'CRC', name: '콜론', symbol: '₡' },
   },
   {
     id: 166,
@@ -1134,6 +1597,7 @@ export const COUNTRIES = [
     alpha3: 'cck',
     name: '코코스 제도',
     continent: '기타',
+    currency: { code: 'AUD', name: '호주 달러', symbol: 'A$' },
   },
   {
     id: 384,
@@ -1141,6 +1605,7 @@ export const COUNTRIES = [
     alpha3: 'civ',
     name: '코트디부아르',
     continent: '아프리카',
+    currency: { code: 'XOF', name: 'CFA 프랑', symbol: 'Fr' },
   },
   {
     id: 170,
@@ -1148,6 +1613,7 @@ export const COUNTRIES = [
     alpha3: 'col',
     name: '콜롬비아',
     continent: '남아메리카',
+    currency: { code: 'COP', name: '콜롬비아 페소', symbol: '$' },
   },
   {
     id: 178,
@@ -1155,6 +1621,7 @@ export const COUNTRIES = [
     alpha3: 'cog',
     name: '콩고 공화국',
     continent: '아프리카',
+    currency: { code: 'XAF', name: 'CFA 프랑', symbol: 'Fr' },
   },
   {
     id: 180,
@@ -1162,6 +1629,7 @@ export const COUNTRIES = [
     alpha3: 'cod',
     name: '콩고 민주 공화국',
     continent: '아프리카',
+    currency: { code: 'CDF', name: '콩고 프랑', symbol: 'Fr' },
   },
   {
     id: 192,
@@ -1169,6 +1637,7 @@ export const COUNTRIES = [
     alpha3: 'cub',
     name: '쿠바',
     continent: '북아메리카',
+    currency: { code: 'CUP', name: '쿠바 페소', symbol: '$' },
   },
   {
     id: 414,
@@ -1176,6 +1645,7 @@ export const COUNTRIES = [
     alpha3: 'kwt',
     name: '쿠웨이트',
     continent: '아시아',
+    currency: { code: 'KWD', name: '쿠웨이트 디나르', symbol: 'د.ك' },
   },
   {
     id: 184,
@@ -1183,6 +1653,7 @@ export const COUNTRIES = [
     alpha3: 'cok',
     name: '쿡 제도',
     continent: '오세아니아',
+    currency: { code: 'NZD', name: '뉴질랜드 달러', symbol: 'NZ$' },
   },
   {
     id: 531,
@@ -1190,6 +1661,7 @@ export const COUNTRIES = [
     alpha3: 'cuw',
     name: '퀴라소',
     continent: '기타',
+    currency: { code: 'ANG', name: '네덜란드령 안틸레스 길더', symbol: 'ƒ' },
   },
   {
     id: 191,
@@ -1197,6 +1669,7 @@ export const COUNTRIES = [
     alpha3: 'hrv',
     name: '크로아티아',
     continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 162,
@@ -1204,6 +1677,7 @@ export const COUNTRIES = [
     alpha3: 'cxr',
     name: '크리스마스섬',
     continent: '기타',
+    currency: { code: 'AUD', name: '호주 달러', symbol: 'A$' },
   },
   {
     id: 417,
@@ -1211,6 +1685,7 @@ export const COUNTRIES = [
     alpha3: 'kgz',
     name: '키르기스스탄',
     continent: '아시아',
+    currency: { code: 'KGS', name: '솜', symbol: 'с' },
   },
   {
     id: 296,
@@ -1218,6 +1693,7 @@ export const COUNTRIES = [
     alpha3: 'kir',
     name: '키리바시',
     continent: '오세아니아',
+    currency: { code: 'AUD', name: '호주 달러', symbol: 'A$' },
   },
   {
     id: 196,
@@ -1225,14 +1701,23 @@ export const COUNTRIES = [
     alpha3: 'cyp',
     name: '키프로스',
     continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
-  { id: 158, alpha2: 'tw', alpha3: 'twn', name: '대만', continent: '아시아' },
+  {
+    id: 158,
+    alpha2: 'tw',
+    alpha3: 'twn',
+    name: '대만',
+    continent: '아시아',
+    currency: { code: 'TWD', name: '신 대만 달러', symbol: 'NT$' },
+  },
   {
     id: 762,
     alpha2: 'tj',
     alpha3: 'tjk',
     name: '타지키스탄',
     continent: '아시아',
+    currency: { code: 'TJS', name: '소모니', symbol: 'SM' },
   },
   {
     id: 834,
@@ -1240,14 +1725,23 @@ export const COUNTRIES = [
     alpha3: 'tza',
     name: '탄자니아',
     continent: '아프리카',
+    currency: { code: 'TZS', name: '탄자니아 실링', symbol: 'Sh' },
   },
-  { id: 764, alpha2: 'th', alpha3: 'tha', name: '태국', continent: '아시아' },
+  {
+    id: 764,
+    alpha2: 'th',
+    alpha3: 'tha',
+    name: '태국',
+    continent: '아시아',
+    currency: { code: 'THB', name: '바트', symbol: '฿' },
+  },
   {
     id: 796,
     alpha2: 'tc',
     alpha3: 'tca',
     name: '터크스 케이커스 제도',
     continent: '북아메리카',
+    currency: { code: 'USD', name: '미국 달러', symbol: '$' },
   },
   {
     id: 792,
@@ -1255,14 +1749,23 @@ export const COUNTRIES = [
     alpha3: 'tur',
     name: '튀르키예',
     continent: '아시아',
+    currency: { code: 'TRY', name: '튀르키예 리라', symbol: '₺' },
   },
-  { id: 768, alpha2: 'tg', alpha3: 'tgo', name: '토고', continent: '아프리카' },
+  {
+    id: 768,
+    alpha2: 'tg',
+    alpha3: 'tgo',
+    name: '토고',
+    continent: '아프리카',
+    currency: { code: 'XOF', name: 'CFA 프랑', symbol: 'Fr' },
+  },
   {
     id: 772,
     alpha2: 'tk',
     alpha3: 'tkl',
     name: '토켈라우',
     continent: '기타',
+    currency: { code: 'NZD', name: '뉴질랜드 달러', symbol: 'NZ$' },
   },
   {
     id: 776,
@@ -1270,6 +1773,7 @@ export const COUNTRIES = [
     alpha3: 'ton',
     name: '통가',
     continent: '오세아니아',
+    currency: { code: 'TOP', name: '파앙가', symbol: 'T$' },
   },
   {
     id: 795,
@@ -1277,6 +1781,7 @@ export const COUNTRIES = [
     alpha3: 'tkm',
     name: '투르크메니스탄',
     continent: '아시아',
+    currency: { code: 'TMT', name: '마나트', symbol: 'T' },
   },
   {
     id: 798,
@@ -1284,6 +1789,7 @@ export const COUNTRIES = [
     alpha3: 'tuv',
     name: '투발루',
     continent: '오세아니아',
+    currency: { code: 'AUD', name: '호주 달러', symbol: 'A$' },
   },
   {
     id: 788,
@@ -1291,6 +1797,7 @@ export const COUNTRIES = [
     alpha3: 'tun',
     name: '튀니지',
     continent: '아프리카',
+    currency: { code: 'TND', name: '튀니지 디나르', symbol: 'د.ت' },
   },
   {
     id: 780,
@@ -1298,6 +1805,7 @@ export const COUNTRIES = [
     alpha3: 'tto',
     name: '트리니다드 토바고',
     continent: '기타',
+    currency: { code: 'TTD', name: '트리니다드 토바고 달러', symbol: '$' },
   },
   {
     id: 591,
@@ -1305,6 +1813,7 @@ export const COUNTRIES = [
     alpha3: 'pan',
     name: '파나마',
     continent: '북아메리카',
+    currency: { code: 'PAB', name: '발보아', symbol: 'B/.' },
   },
   {
     id: 600,
@@ -1312,6 +1821,7 @@ export const COUNTRIES = [
     alpha3: 'pry',
     name: '파라과이',
     continent: '남아메리카',
+    currency: { code: 'PYG', name: '과라니', symbol: '₲' },
   },
   {
     id: 586,
@@ -1319,6 +1829,7 @@ export const COUNTRIES = [
     alpha3: 'pak',
     name: '파키스탄',
     continent: '아시아',
+    currency: { code: 'PKR', name: '파키스탄 루피', symbol: '₨' },
   },
   {
     id: 598,
@@ -1326,6 +1837,7 @@ export const COUNTRIES = [
     alpha3: 'png',
     name: '파푸아뉴기니',
     continent: '오세아니아',
+    currency: { code: 'PGK', name: '키나', symbol: 'K' },
   },
   {
     id: 585,
@@ -1333,6 +1845,7 @@ export const COUNTRIES = [
     alpha3: 'plw',
     name: '팔라우',
     continent: '오세아니아',
+    currency: { code: 'USD', name: '미국 달러', symbol: '$' },
   },
   {
     id: 275,
@@ -1340,6 +1853,7 @@ export const COUNTRIES = [
     alpha3: 'pse',
     name: '팔레스타인',
     continent: '기타',
+    currency: { code: 'ILS', name: '새 셰켈', symbol: '₪' },
   },
   {
     id: 234,
@@ -1347,6 +1861,7 @@ export const COUNTRIES = [
     alpha3: 'fro',
     name: '페로 제도',
     continent: '기타',
+    currency: { code: 'DKK', name: '덴마크 크로네', symbol: 'kr' },
   },
   {
     id: 604,
@@ -1354,6 +1869,7 @@ export const COUNTRIES = [
     alpha3: 'per',
     name: '페루',
     continent: '남아메리카',
+    currency: { code: 'PEN', name: '솔', symbol: 'S/.' },
   },
   {
     id: 620,
@@ -1361,6 +1877,7 @@ export const COUNTRIES = [
     alpha3: 'prt',
     name: '포르투갈',
     continent: '기타',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 238,
@@ -1368,22 +1885,39 @@ export const COUNTRIES = [
     alpha3: 'flk',
     name: '포클랜드 제도',
     continent: '기타',
+    currency: { code: 'FKP', name: '포클랜드 파운드', symbol: '£' },
   },
-  { id: 616, alpha2: 'pl', alpha3: 'pol', name: '폴란드', continent: '유럽' },
+  {
+    id: 616,
+    alpha2: 'pl',
+    alpha3: 'pol',
+    name: '폴란드',
+    continent: '유럽',
+    currency: { code: 'PLN', name: '즈워티', symbol: 'zł' },
+  },
   {
     id: 630,
     alpha2: 'pr',
     alpha3: 'pri',
     name: '푸에르토리코',
     continent: '북아메리카',
+    currency: { code: 'USD', name: '미국 달러', symbol: '$' },
   },
-  { id: 250, alpha2: 'fr', alpha3: 'fra', name: '프랑스', continent: '유럽' },
+  {
+    id: 250,
+    alpha2: 'fr',
+    alpha3: 'fra',
+    name: '프랑스',
+    continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
+  },
   {
     id: 254,
     alpha2: 'gf',
     alpha3: 'guf',
     name: '프랑스령 기아나',
     continent: '남아메리카',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 260,
@@ -1391,6 +1925,7 @@ export const COUNTRIES = [
     alpha3: 'atf',
     name: '프랑스령 남방 및 남극 지역',
     continent: '기타',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
   },
   {
     id: 258,
@@ -1398,6 +1933,7 @@ export const COUNTRIES = [
     alpha3: 'pyf',
     name: '프랑스령 폴리네시아',
     continent: '기타',
+    currency: { code: 'XPF', name: 'CFP 프랑', symbol: 'Fr' },
   },
   {
     id: 242,
@@ -1405,15 +1941,31 @@ export const COUNTRIES = [
     alpha3: 'fji',
     name: '피지',
     continent: '오세아니아',
+    currency: { code: 'FJD', name: '피지 달러', symbol: '$' },
   },
-  { id: 246, alpha2: 'fi', alpha3: 'fin', name: '핀란드', continent: '유럽' },
-  { id: 608, alpha2: 'ph', alpha3: 'phl', name: '필리핀', continent: '아시아' },
+  {
+    id: 246,
+    alpha2: 'fi',
+    alpha3: 'fin',
+    name: '핀란드',
+    continent: '유럽',
+    currency: { code: 'EUR', name: '유로', symbol: '€' },
+  },
+  {
+    id: 608,
+    alpha2: 'ph',
+    alpha3: 'phl',
+    name: '필리핀',
+    continent: '아시아',
+    currency: { code: 'PHP', name: '필리핀 페소', symbol: '₱' },
+  },
   {
     id: 612,
     alpha2: 'pn',
     alpha3: 'pcn',
     name: '핏케언 제도',
     continent: '기타',
+    currency: { code: 'NZD', name: '뉴질랜드 달러', symbol: 'NZ$' },
   },
   {
     id: 334,
@@ -1421,7 +1973,26 @@ export const COUNTRIES = [
     alpha3: 'hmd',
     name: '허드 맥도널드 제도',
     continent: '기타',
+    currency: { code: 'AUD', name: '호주 달러', symbol: 'A$' },
   },
-  { id: 348, alpha2: 'hu', alpha3: 'hun', name: '헝가리', continent: '유럽' },
-  { id: 344, alpha2: 'hk', alpha3: 'hkg', name: '홍콩', continent: '아시아' },
+  {
+    id: 348,
+    alpha2: 'hu',
+    alpha3: 'hun',
+    name: '헝가리',
+    continent: '유럽',
+    currency: { code: 'HUF', name: '포린트', symbol: 'Ft' },
+  },
+  {
+    id: 344,
+    alpha2: 'hk',
+    alpha3: 'hkg',
+    name: '홍콩',
+    continent: '아시아',
+    currency: { code: 'HKD', name: '홍콩 달러', symbol: 'HK$' },
+  },
 ];
+
+// 타입
+export type Country = (typeof COUNTRIES)[number];
+export type Currency = Country['currency'];
