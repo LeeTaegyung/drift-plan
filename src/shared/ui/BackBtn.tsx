@@ -10,14 +10,25 @@ import { cn } from '@/shared/shadcn/lib/utils';
 interface Props {
   text?: string;
   className?: string;
+  href?: string;
 }
 
-export default function BackBtn({ text, className }: Props) {
+export default function BackBtn({ text, className, href }: Props) {
   const router = useRouter();
+
+  console.log(href);
+
+  const handleClickBack = () => {
+    if (href) {
+      router.push(href);
+      return;
+    }
+    router.back();
+  };
 
   return (
     <Button
-      onClick={() => router.back()}
+      onClick={handleClickBack}
       variant={'ghost'}
       className={cn('px-0 hover:bg-transparent', className)}
     >
