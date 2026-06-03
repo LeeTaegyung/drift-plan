@@ -1,5 +1,7 @@
-import { getDefaultChecklistByTripIdServer } from '@/entities/checklist/api/checklist.server';
+import { Suspense } from 'react';
+
 import CheckListArea from '@/features/trips/checkList/ui/CheckListArea';
+import LoadingArea from '@/shared/ui/loading/LoadingArea';
 
 export default async function TripChecklistPage({
   params,
@@ -7,9 +9,10 @@ export default async function TripChecklistPage({
   params: Promise<{ tripId: string }>;
 }) {
   const { tripId } = await params;
-  const checkListData = await getDefaultChecklistByTripIdServer(tripId);
 
-  if (!checkListData) throw new Error('체크리스트를 가져오지 못하였습니다.');
-
-  return <CheckListArea initData={checkListData} tripId={tripId} />;
+  return (
+    <Suspense fallback={<LoadingArea />}>
+      <CheckListArea tripId={tripId} />
+    </Suspense>
+  );
 }

@@ -2,11 +2,8 @@
 
 import { Eye, PlusCircle, SquarePen, Trash2, XIcon } from 'lucide-react';
 
-import {
-  CheckListCategoryType,
-  TripCheckListType,
-} from '@/entities/checklist/type';
-import { useCheckListArea } from '@/features/trips/checkList/model/useCheckListArea';
+import { useCheckListArea } from '@/entities/checklist/hooks/useCheckListArea';
+import { CheckListCategoryType } from '@/entities/checklist/type';
 import CheckItemCreateForm from '@/features/trips/checkList/ui/CheckItemCreateForm';
 import CheckListItem from '@/features/trips/checkList/ui/CheckListItem';
 import CheckListUtilButton from '@/features/trips/checkList/ui/CheckListUtilButton';
@@ -16,11 +13,10 @@ import { useModalStore } from '@/shared/store/modalStore';
 import BackBtn from '@/shared/ui/BackBtn';
 
 interface Props {
-  initData: TripCheckListType[];
   tripId: string;
 }
 
-export default function CheckListArea({ initData, tripId }: Props) {
+export default function CheckListArea({ tripId }: Props) {
   const {
     isEdit,
     checkList,
@@ -32,7 +28,7 @@ export default function CheckListArea({ initData, tripId }: Props) {
     handleResetCheckDeleteItem,
     handleSubmitDelete,
     handleSubmitUpdateCheck,
-  } = useCheckListArea(tripId, initData);
+  } = useCheckListArea(tripId);
 
   const openModal = useModalStore((state) => state.openModal);
 

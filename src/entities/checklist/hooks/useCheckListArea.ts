@@ -1,38 +1,34 @@
 import { useMemo, useState } from 'react';
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 
-import { CHECKLIST_QUERIES } from '@/entities/checklist/api/checklist.queries';
+import { CHECKLIST_QUERIES } from '@/entities/checklist/query/checklist.queries';
 import {
   CheckListCategoryType,
   TripCheckListType,
 } from '@/entities/checklist/type';
-import { CHECKLIST_MUTATION } from '@/features/trips/checkList/api/checkItem.mutation';
 import { CheckListFormValues } from '@/features/trips/checkList/model/checklistForm.schema';
+import { useCheckListDelete } from '@/features/trips/checkList/mutation/useCheckListDelete';
+import {
+  useCheckListUpdateAll,
+  useCheckListUpdateCheck,
+} from '@/features/trips/checkList/mutation/useCheckListUpdate';
 import { useAlertModalStore } from '@/shared/store/alertModalStore';
 
-export const useCheckListArea = (
-  tripId: string,
-  initData: TripCheckListType[]
-) => {
+export const useCheckListArea = (tripId: string) => {
   const [isEdit, setIsEdit] = useState(false);
   const [deleteList, setDeleteList] = useState<string[]>([]);
   const queryClient = useQueryClient();
 
   const openAlertModal = useAlertModalStore((state) => state.openAlertModal);
 
-  const { data: checkList } = useQuery(
-    CHECKLIST_QUERIES.detail.queryOptions(tripId, initData)
+  const { data: checkList } = useSuspenseQuery(
+    CHECKLIST_QUERIES.detail.queryOptions(tripId)
   );
-  const { mutateAsync: updateCheckItemMutate } = useMutation(
-    CHECKLIST_MUTATION.updateAll()
-  );
-  const { mutate: updateCheckItemOnlyCheckMutate } = useMutation(
-    CHECKLIST_MUTATION.updateCheck(tripId, queryClient)
-  );
-  const { mutateAsync: deleteCheckItemMutate } = useMutation(
-    CHECKLIST_MUTATION.delete(tripId, queryClient)
-  );
+  const { mutateAsync: updateCheckItemMutate } = useCheckListUpdateAll();
+  const { mutate: updateCheckItemOnlyCheckMutate } =
+    useCheckListUpdateCheck(tripId);
+  const { mutateAsync: deleteCheckItemMutate } = useCheckListDelete(tripId);
 
   const processChecklist = useMemo(() => {
     const newChecklist: Record<CheckListCategoryType, TripCheckListType[]> = {
@@ -65,7 +61,7 @@ export const useCheckListArea = (
   ) => {
     // 업데이트 서버액션
     await updateCheckItemMutate(
-      { formData, tripId, id },
+      { formData, id },
       {
         onSuccess: () => {
           onSuccessFormClose();
@@ -105,17 +101,14 @@ export const useCheckListArea = (
 
     if (!isConfirm) return;
 
-    await deleteCheckItemMutate(
-      { ids: deleteList, tripId },
-      {
-        onSuccess: () => {
-          setDeleteList([]);
-        },
-      }
-    );
+    await deleteCheckItemMutate(deleteList, {
+      onSuccess: () => {
+        setDeleteList([]);
+      },
+    });
   };
   const handleSubmitUpdateCheck = (id: string, done: boolean) => {
-    updateCheckItemOnlyCheckMutate({ formData: { done: !done }, id, tripId });
+    updateCheckItemOnlyCheckMutate({ formData: { done: !done }, id });
   };
 
   return {

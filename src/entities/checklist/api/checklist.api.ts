@@ -17,6 +17,18 @@ export const deleteDefaultChecklist = async (tripId: string) => {
   return await supabase.from('trip_checklist').delete().eq('trip_id', tripId);
 };
 
+export const getDefaultChecklistByTripId = async (tripId: string) => {
+  const { data, error } = await supabase
+    .from('trip_checklist')
+    .select('*')
+    .order('order', { ascending: true })
+    .eq('trip_id', tripId);
+
+  if (error) throw error;
+
+  return data;
+};
+
 export const createCheckItem = async (
   checkItem: Omit<TripCheckListType, 'id' | 'user_id' | 'created_at'>
 ) => {
@@ -31,25 +43,34 @@ export const createCheckItem = async (
   return data;
 };
 
-export const deleteCheckItem = async (id: string) => {
-  const { data, error } = await supabase
+export const updateCheckItem = async ({
+  formData,
+  id,
+}: {
+  formData: Partial<TripCheckListType>;
+  id: string;
+}) => {
+  const supabase = await createClient();
+
+  const { error } = await supabase
     .from('trip_checklist')
-    .delete()
+    .update(formData)
     .eq('id', id);
 
   if (error) throw error;
-
-  return data;
 };
 
-export const getDefaultChecklistByTripId = async (tripId: string) => {
-  const { data, error } = await supabase
+export const deleteCheckItem = async (ids: string[]) => {
+  const { error } = await supabase
     .from('trip_checklist')
-    .select('*')
-    .order('order', { ascending: true })
-    .eq('trip_id', tripId);
+    .delete()
+    .in('id', ids);
 
   if (error) throw error;
+};
 
-  return data;
+export const createDefaultChecklistWithData = async (
+  previousChecklist: TripCheckListType[]
+) => {
+  return await supabase.from('trip_checklist').insert(previousChecklist);
 };
