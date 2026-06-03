@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import { logout } from '@/entities/user/api/user.api';
-import { userQueries } from '@/entities/user/api/user.query';
+import { USER_QUERIES } from '@/entities/user/query/user.query';
 
 export const useLogout = () => {
   const queryClient = useQueryClient();
@@ -10,7 +10,7 @@ export const useLogout = () => {
   return useMutation({
     mutationFn: logout,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: userQueries.all });
+      queryClient.invalidateQueries({ queryKey: USER_QUERIES.all });
     },
     onError: () => {
       toast.error('로그아웃 실패. 다시 시도해주세요.');

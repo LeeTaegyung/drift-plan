@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { userQueries } from '@/entities/user/api/user.query';
+import { USER_QUERIES } from '@/entities/user/query/user.query';
 import { signIn } from '@/features/auth/signin/api/signin.api';
 import {
   SignInFormValues,
@@ -43,7 +43,7 @@ export default function SigninForm() {
     onSuccess: () => {
       toast.success('로그인에 성공하였습니다.');
       const nextUrl = getSafeRedirect(redirect);
-      queryClient.invalidateQueries({ queryKey: userQueries.all });
+      queryClient.invalidateQueries({ queryKey: USER_QUERIES.all });
       router.push(nextUrl);
     },
     onError: (error) => {

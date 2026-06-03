@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import { UserRound } from 'lucide-react';
 
-import { useLogout } from '@/entities/user/model/useLogout';
+import { useLogout } from '@/entities/user/mutation/useLogout';
 import { CurrentUserDataType } from '@/entities/user/type';
 import { PATH } from '@/shared/constants/path';
 import { Button } from '@/shared/shadcn/components/ui/button';

@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { useCurrentUser } from '@/entities/user/model/useCurrentUser';
+import { useCurrentUser } from '@/entities/user/query/useCurrentUser';
 import LoginAfter from '@/widgets/layout/LoginAfter';
 import LoginBefore from '@/widgets/layout/LoginBefore';
 

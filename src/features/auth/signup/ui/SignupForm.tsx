@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { userQueries } from '@/entities/user/api/user.query';
+import { USER_QUERIES } from '@/entities/user/query/user.query';
 import { createNickname, signUp } from '@/features/auth/signup/api/signup.api';
 import {
   SignUpFormValues,
@@ -47,7 +47,7 @@ export default function SignupForm() {
   const { mutateAsync: signupMutate } = useMutation({
     mutationFn: signUp,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: userQueries.all });
+      queryClient.invalidateQueries({ queryKey: USER_QUERIES.all });
       toast.success('회원가입에 성공하였습니다.');
       router.push(PATH.global.main);
     },

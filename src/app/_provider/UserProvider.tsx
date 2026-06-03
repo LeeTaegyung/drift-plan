@@ -2,8 +2,8 @@
 
 import { ReactNode } from 'react';
 
-import { useCurrentUser } from '@/entities/user/model/useCurrentUser';
-import Loading from '@/shared/ui/Loading';
+import { useCurrentUser } from '@/entities/user/query/useCurrentUser';
+import Loading from '@/shared/ui/loading/Loading';
 
 interface Props {
   children: ReactNode;
