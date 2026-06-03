@@ -1,6 +1,7 @@
 import {
   CountryResponseItemType,
   GetTripsResponse,
+  TripScheduleCardType,
   TripValuesType,
 } from '@/entities/trips/type';
 import {
@@ -11,7 +12,27 @@ import { createClient } from '@/shared/lib/supabase/client';
 
 const supabase = createClient();
 
-export const getTrips = async ({
+export const getTrips = async (id: string) => {
+  const { data, error } = await supabase.from('trips').select('*').eq('id', id);
+
+  if (error) throw error;
+
+  return data;
+};
+
+export const getTrip = async (id: string) => {
+  const { data, error } = await supabase
+    .from('trips')
+    .select('*')
+    .eq('id', id)
+    .single();
+
+  if (error) throw error;
+
+  return data;
+};
+
+export const getTripsWithStatus = async ({
   is_domestic,
   start_date,
   end_date,
@@ -55,21 +76,7 @@ export const getTrips = async ({
   };
 };
 
-export const getTrip = async (id: string) => {
-  const { data, error } = await supabase
-    .from('trips')
-    .select('*')
-    .eq('id', id)
-    .single();
-
-  if (error) throw error;
-
-  return data;
-};
-
 export const getTripWithStatus = async (tripId: string) => {
-  const supabase = await createClient();
-
   const { data, error } = await supabase
     .from('trips_with_status')
     .select('*')
@@ -83,6 +90,16 @@ export const getTripWithStatus = async (tripId: string) => {
 
 export const createTrip = async (formValues: TripValuesType) => {
   return await supabase.from('trips').insert(formValues).select().single();
+};
+
+export const updateTrip = async ({
+  tripId,
+  formData,
+}: {
+  tripId: string;
+  formData: Partial<TripValuesType>;
+}) => {
+  return await supabase.from('trips').update(formData).eq('id', tripId);
 };
 
 export const deleteTrip = async (tripId: string) => {
@@ -102,6 +119,23 @@ export const fetchDataGoCountries = async (
 ): Promise<{ item: CountryResponseItemType[] }> => {
   const res = await fetch(`/api/countries?code=${code}`);
   const { data } = await res.json();
+
+  return data;
+};
+
+export const getTripSchedulesByDateId = async (
+  tripId: string,
+  dateId: string
+): Promise<TripScheduleCardType[]> => {
+  const { data, error } = await supabase
+    .from('trip_schedule_cards')
+    .select('*')
+    .eq('trip_id', tripId)
+    .eq('date', dateId)
+    .order('order_index', { ascending: true })
+    .select();
+
+  if (error) throw error;
 
   return data;
 };

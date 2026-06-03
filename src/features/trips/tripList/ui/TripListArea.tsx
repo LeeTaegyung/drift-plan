@@ -5,12 +5,12 @@ import { type DateRange } from 'react-day-picker';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { useQuery } from '@tanstack/react-query';
+import { useQueryClient, useSuspenseQuery } from '@tanstack/react-query';
 import { ArrowRight, PlusIcon } from 'lucide-react';
 
-import { TRIPS_QUERIES } from '@/entities/trips/api/trips.queries';
-import { useTripDelete } from '@/entities/trips/hook/useTripDelete';
+import { TRIPS_QUERIES } from '@/entities/trips/query/trips.queries';
 import { GetTripsResponse } from '@/entities/trips/type';
+import { useTripDelete } from '@/features/trips/tripList/mutation/useTripDelete';
 import ScopFilter from '@/features/trips/tripList/ui/ScopFilter';
 import TripItem from '@/features/trips/tripList/ui/TripItem';
 import { PATH } from '@/shared/constants/path';
@@ -18,17 +18,14 @@ import { Button } from '@/shared/shadcn/components/ui/button';
 import { useAlertModalStore } from '@/shared/store/alertModalStore';
 import { NoData } from '@/shared/ui/empty';
 import RangeDate from '@/shared/ui/form/RangeDate';
-import Loading from '@/shared/ui/Loading';
 import Pagination from '@/shared/ui/Pagination';
 import { formatTripDate } from '@/shared/utils/dateUtils';
 import { useCurrentPage } from '@/shared/utils/hooks/useCurrentPage';
 
-interface Props {
-  initData: GetTripsResponse;
-}
-
-export default function TripListArea({ initData }: Props) {
+export default function TripListArea() {
   const router = useRouter();
+  const queryClient = useQueryClient();
+
   const { currentPage, setCurrentPage } = useCurrentPage();
   const [selectScope, setSelectScope] = useState<undefined | boolean>(
     undefined
@@ -36,16 +33,13 @@ export default function TripListArea({ initData }: Props) {
   const [date, setDate] = useState<DateRange | undefined>(undefined);
   const openAlertModal = useAlertModalStore((state) => state.openAlertModal);
 
-  const { data: tripsData, isLoading } = useQuery(
-    TRIPS_QUERIES.list.queryOptions(
-      {
-        currentPage,
-        is_domestic: selectScope,
-        start_date: date?.from ? formatTripDate(date.from) : undefined,
-        end_date: date?.to ? formatTripDate(date.to) : undefined,
-      },
-      initData
-    )
+  const { data: tripsData } = useSuspenseQuery(
+    TRIPS_QUERIES.list.queryOptions({
+      currentPage,
+      is_domestic: selectScope,
+      start_date: date?.from ? formatTripDate(date.from) : undefined,
+      end_date: date?.to ? formatTripDate(date.to) : undefined,
+    })
   );
   const { mutate: deleteMutate } = useTripDelete();
 
@@ -68,12 +62,14 @@ export default function TripListArea({ initData }: Props) {
     });
   };
 
-  if (isLoading)
-    return (
-      <div className='flex items-center justify-center py-10 md:py-20'>
-        <Loading />
-      </div>
-    );
+  const initData = queryClient.getQueryData<GetTripsResponse>(
+    TRIPS_QUERIES.list.queryKey({
+      currentPage: 1,
+      is_domestic: undefined,
+      start_date: undefined,
+      end_date: undefined,
+    })
+  );
 
   if (!initData || initData.data.length === 0)
     return (

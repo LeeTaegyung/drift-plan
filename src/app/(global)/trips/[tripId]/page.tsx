@@ -1,8 +1,7 @@
 import { Suspense } from 'react';
 
-import { getTripWithStatusServer } from '@/entities/trips/api/trips.server';
 import TripDetailArea from '@/features/trips/tripDetail/ui/TripDetailArea';
-import Loading from '@/shared/ui/Loading';
+import LoadingArea from '@/shared/ui/loading/LoadingArea';
 
 export default async function TripDetailPage({
   params,
@@ -11,21 +10,9 @@ export default async function TripDetailPage({
 }) {
   const { tripId } = await params;
 
-  const data = await getTripWithStatusServer(tripId);
-
-  if (!data) throw new Error('데이터를 가져올 수 없습니다.');
-
-  const tripData = data[0];
-
   return (
-    <Suspense
-      fallback={
-        <div className='flex-full flex flex-1 flex-col items-center'>
-          <Loading />
-        </div>
-      }
-    >
-      <TripDetailArea tripId={tripId} tripData={tripData} />
+    <Suspense fallback={<LoadingArea />}>
+      <TripDetailArea tripId={tripId} />
     </Suspense>
   );
 }

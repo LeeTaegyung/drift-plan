@@ -1,38 +1,23 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useSuspenseQuery } from '@tanstack/react-query';
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toast } from 'sonner';
-
-import { TRIPS_QUERIES } from '@/entities/trips/api/trips.queries';
-import { TripsType, TripValuesType } from '@/entities/trips/type';
-import { updateTripWithDefaultSettingAction } from '@/features/trips/tripEdit/api/tripEdit.actions';
+import { TRIPS_QUERIES } from '@/entities/trips/query/trips.queries';
+import { TripValuesType } from '@/entities/trips/type';
+import { useUpdateTrip } from '@/features/trips/tripEdit/mutation/useUpdateTrip';
 import TripForm from '@/features/trips/tripForm/ui/TripForm';
 import { useAlertModalStore } from '@/shared/store/alertModalStore';
 
 interface Props {
   tripId: string;
-  initData: TripsType;
 }
 
-export default function TripEditForm({ tripId, initData }: Props) {
+export default function TripEditForm({ tripId }: Props) {
   const openAlertModal = useAlertModalStore((state) => state.openAlertModal);
-  const router = useRouter();
-  const queryClient = useQueryClient();
-  const { mutateAsync } = useMutation({
-    mutationFn: updateTripWithDefaultSettingAction,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: TRIPS_QUERIES.lists() });
-      queryClient.invalidateQueries({
-        queryKey: TRIPS_QUERIES.detail.queryKey(tripId),
-      });
-      router.back();
-    },
-    onError: () => {
-      toast.error('여행 수정에 실패하였습니다. 다시 시도해주세요.');
-    },
-  });
+  const { data: initData } = useSuspenseQuery(
+    TRIPS_QUERIES.detail.default.queryOptions(tripId)
+  );
+  const { mutateAsync: updateTripMutate } = useUpdateTrip(tripId);
 
   const onSubmit = async (formData: Partial<TripValuesType>) => {
     const isDomesticChanged = 'is_domestic' in formData;
@@ -75,7 +60,7 @@ export default function TripEditForm({ tripId, initData }: Props) {
 
     const { id, user_id, updated_at, created_at, ...backupData } = initData;
 
-    await mutateAsync({ tripId, formData, backupData });
+    await updateTripMutate({ tripId, formData, backupData });
   };
 
   return <TripForm onSubmit={onSubmit} initValues={initData} />;

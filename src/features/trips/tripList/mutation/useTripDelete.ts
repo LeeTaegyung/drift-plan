@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { TRIPS_QUERIES } from '@/entities/trips/api/trips.queries';
-import { tripDeleteAction } from '@/features/trips/tripList/api/tripDelete.actions';
+import { deleteTrip } from '@/entities/trips/api/trips.api';
+import { TRIPS_QUERIES } from '@/entities/trips/query/trips.queries';
 
 export const useTripDelete = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: tripDeleteAction,
+    mutationFn: deleteTrip,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: TRIPS_QUERIES.lists() });
     },

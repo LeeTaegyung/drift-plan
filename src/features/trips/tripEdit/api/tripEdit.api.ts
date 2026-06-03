@@ -1,17 +1,13 @@
-'use server';
-
-import { revalidateTag } from 'next/cache';
-
 import {
-  createDefaultChecklistServer,
-  createDefaultChecklistWithDataServer,
-  deleteDefaultChecklistServer,
-  getDefaultChecklistByTripIdServer,
-} from '@/entities/checklist/api/checklist.server';
-import { updateTripServer } from '@/entities/trips/api/trips.server';
+  createDefaultChecklist,
+  createDefaultChecklistWithData,
+  deleteDefaultChecklist,
+  getDefaultChecklistByTripId,
+} from '@/entities/checklist/api/checklist.api';
+import { updateTrip } from '@/entities/trips/api/trips.api';
 import { TripValuesType } from '@/entities/trips/type';
 
-export const updateTripWithDefaultSettingAction = async ({
+export const updateTripWithDefaultSetting = async ({
   tripId,
   formData,
   backupData,
@@ -20,7 +16,7 @@ export const updateTripWithDefaultSettingAction = async ({
   formData: Partial<TripValuesType>;
   backupData: TripValuesType;
 }) => {
-  const { error: tripError } = await updateTripServer({
+  const { error: tripError } = await updateTrip({
     tripId,
     formData,
   });
@@ -30,16 +26,16 @@ export const updateTripWithDefaultSettingAction = async ({
   // 국내/해외 변경되었다면,
   if ('is_domestic' in formData && formData.is_domestic !== undefined) {
     // 기존 체크 리스트 백업
-    const previousChecklist = await getDefaultChecklistByTripIdServer(tripId);
+    const previousChecklist = await getDefaultChecklistByTripId(tripId);
 
     // 기존 기본 체크리스트 삭제
     const { error: deleteChecklistError } =
-      await deleteDefaultChecklistServer(tripId);
+      await deleteDefaultChecklist(tripId);
 
     // 체크리스트 삭제 실패시
     if (deleteChecklistError) {
       // 여행 데이터 원복
-      await updateTripServer({
+      await updateTrip({
         tripId,
         formData: backupData,
       });
@@ -47,7 +43,7 @@ export const updateTripWithDefaultSettingAction = async ({
     }
 
     // 변경된 데이터를 기반으로 새로 생성
-    const { error: checklistError } = await createDefaultChecklistServer(
+    const { error: checklistError } = await createDefaultChecklist(
       tripId,
       formData.is_domestic
     );
@@ -56,11 +52,11 @@ export const updateTripWithDefaultSettingAction = async ({
     if (checklistError) {
       // 기존 체크리스트로 원복
       if (previousChecklist) {
-        await createDefaultChecklistWithDataServer(previousChecklist);
+        await createDefaultChecklistWithData(previousChecklist);
       }
 
       // 여행 데이터 원복
-      await updateTripServer({
+      await updateTrip({
         tripId,
         formData: backupData,
       });
@@ -72,8 +68,4 @@ export const updateTripWithDefaultSettingAction = async ({
   }
 
   // 여행지나 나라가 변경되었다면 기존 상제 일정 초기화
-
-  // next cache 초기화
-  revalidateTag(`trip-${tripId}`, 'max');
-  revalidateTag('trip-list', 'max');
 };

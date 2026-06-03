@@ -69,3 +69,11 @@ export interface CountryResponseItemType {
   map_download_url: string | null;
   wrt_dt: string | null;
 }
+
+export type TripScheduleCardType =
+  Database['public']['Tables']['trip_schedule_cards']['Row'];
+
+export type TripScheduleCardFormType = Omit<
+  TripScheduleCardType,
+  'id' | 'create_at' | 'updated_at'
+>;

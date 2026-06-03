@@ -46,6 +46,11 @@ const tripFormContryItem = z.object({
   alpha3: z.string(),
   name: z.string(),
   continent: z.string(),
+  currency: z.object({
+    code: z.string(),
+    name: z.string(),
+    symbol: z.string(),
+  }),
 });
 
 const tripFormDomesticField = z

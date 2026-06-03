@@ -28,9 +28,6 @@ export default function CountryInfo({ countries }: Props) {
       gcTime: 1000 * 60 * 60 * 24, // 안쓰면 5분후 삭제
     })),
   });
-  const isLoading = queries.some((q) => q.isLoading);
-
-  if (isLoading) return null;
 
   const countryDatas = queries.flatMap((q) => q.data?.item);
 

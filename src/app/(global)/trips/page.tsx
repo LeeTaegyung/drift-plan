@@ -1,17 +1,12 @@
-import { getTripsServer } from '@/entities/trips/api/trips.server';
+import { Suspense } from 'react';
+
 import TripListArea from '@/features/trips/tripList/ui/TripListArea';
-import { DEFAULT_PAGE_SIZE } from '@/shared/constants/pagination';
+import LoadingArea from '@/shared/ui/loading/LoadingArea';
 
-export default async function TripsPage() {
-  const data = await getTripsServer();
-
+export default function TripsPage() {
   return (
-    <TripListArea
-      initData={{
-        data: data,
-        total: data.length,
-        totalPages: Math.ceil(data.length / DEFAULT_PAGE_SIZE),
-      }}
-    />
+    <Suspense fallback={<LoadingArea />}>
+      <TripListArea />
+    </Suspense>
   );
 }

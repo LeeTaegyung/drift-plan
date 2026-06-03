@@ -1,5 +1,7 @@
-import { getTrip } from '@/entities/trips/api/trips.server';
+import { Suspense } from 'react';
+
 import TripEditForm from '@/features/trips/tripEdit/ui/TripEditForm';
+import LoadingArea from '@/shared/ui/loading/LoadingArea';
 
 export default async function TripsEditPage({
   params,
@@ -8,7 +10,9 @@ export default async function TripsEditPage({
 }) {
   const { tripId } = await params;
 
-  const data = await getTrip(tripId);
-
-  return <TripEditForm tripId={tripId} initData={data} />;
+  return (
+    <Suspense fallback={<LoadingArea />}>
+      <TripEditForm tripId={tripId} />
+    </Suspense>
+  );
 }

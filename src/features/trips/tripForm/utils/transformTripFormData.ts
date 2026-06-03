@@ -31,6 +31,13 @@ export const transformTripFormData = (
         : Array.from(
             new Set(data.countries?.map((country) => country.continent))
           );
+
+    result.currency =
+      data.countries === null
+        ? null
+        : Array.from(
+            new Set(data.countries?.map((country) => country.currency.symbol))
+          );
   }
 
   return result;

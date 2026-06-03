@@ -5,9 +5,9 @@ import Link from 'next/link';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { ArrowRight, ListCheck, SquarePen } from 'lucide-react';
 
-import { TRIPS_QUERIES } from '@/entities/trips/api/trips.queries';
-import { getTripTitleLabel } from '@/entities/trips/lib/format';
-import { TripsViewType } from '@/entities/trips/type';
+import { TRIPS_QUERIES } from '@/entities/trips/query/trips.queries';
+import { getTripTitleLabel } from '@/entities/trips/utils/format';
+import AreaTag from '@/features/trips/tripDetail/ui/AreaTag';
 import CountryInfo from '@/features/trips/tripDetail/ui/CountryInfo';
 import ScheduleCalendar from '@/features/trips/tripDetail/ui/ScheduleCalendar';
 import { PATH } from '@/shared/constants/path';
@@ -17,12 +17,11 @@ import { formatTripDate, getDayByStringDate } from '@/shared/utils/dateUtils';
 
 interface Props {
   tripId: string;
-  tripData: TripsViewType;
 }
 
-export default function TripDetailArea({ tripId, tripData }: Props) {
+export default function TripDetailArea({ tripId }: Props) {
   const { data } = useSuspenseQuery(
-    TRIPS_QUERIES.detail.queryOptions(tripId, tripData)
+    TRIPS_QUERIES.detail.withStatus.queryOptions(tripId)
   );
   const today = new Date();
 
@@ -37,7 +36,7 @@ export default function TripDetailArea({ tripId, tripData }: Props) {
   return (
     <div className='content-inner flex flex-col items-center gap-3 py-5 md:gap-5 md:py-10'>
       <div className='bg-bg sticky top-12 z-1 flex w-full items-center justify-between py-1.5 md:top-14'>
-        <BackBtn text='돌아가기' className='text-xs md:text-sm' />
+        <BackBtn text='뒤로가기' className='text-xs md:text-sm' />
         <Button
           asChild
           size={'sm'}
@@ -64,22 +63,14 @@ export default function TripDetailArea({ tripId, tripData }: Props) {
           )}
           <div className='flex flex-wrap items-center justify-center gap-1'>
             {data.is_domestic
-              ? data.region && (
-                  <span className='bg-info-bg border-info-border text-info-text rounded-[4px] border px-1 text-sm'>
-                    {data.region}
-                  </span>
-                )
+              ? data.region && <AreaTag text={data.region} />
               : data.countries &&
                 data.countries.map((country) => (
-                  <span
-                    key={country}
-                    className='bg-info-bg border-info-border text-info-text rounded-[4px] border px-1 text-sm'
-                  >
-                    {country}
-                  </span>
+                  <AreaTag key={country} text={country} />
                 ))}
           </div>
         </div>
+
         <Link
           href={PATH.global.trips.checklist(tripId)}
           className='hover:bg-dp-accent border-dp-accent bg-dp-accent-soft text-dp-accent flex items-center gap-1 rounded-sm border px-2 py-1 text-sm transition-colors hover:text-white'
@@ -88,6 +79,7 @@ export default function TripDetailArea({ tripId, tripData }: Props) {
           <ListCheck className='size-4.5' /> 체크리스트
           <ArrowRight className='ml-auto size-4.5' />
         </Link>
+
         {/* 중간 - 달력 형태의 일정표 */}
         <div className='flex w-full flex-col items-center gap-5 md:gap-8'>
           {/* 오늘 날짜 표시 */}
@@ -104,6 +96,7 @@ export default function TripDetailArea({ tripId, tripData }: Props) {
             />
           </div>
         </div>
+
         {/* 하단 - 해외의 경우 나라와 비상연락처 정보 */}
         <div className='flex w-full flex-col gap-5'>
           {data.countries && <CountryInfo countries={data.countries} />}

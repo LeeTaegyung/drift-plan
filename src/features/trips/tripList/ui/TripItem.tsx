@@ -2,16 +2,16 @@ import Link from 'next/link';
 
 import { CalendarIcon, MapPin, UsersRound } from 'lucide-react';
 
+import { TripsViewType } from '@/entities/trips/type';
+import TripScopeTag from '@/entities/trips/ui/TripScopeTag';
+import TripStatusChip from '@/entities/trips/ui/TripStatusChip';
 import {
   generateTrip,
   getParticipantsLabel,
   getTripLocationLabel,
   getTripStatus,
   getTripTitleLabel,
-} from '@/entities/trips/lib/format';
-import { TripsViewType } from '@/entities/trips/type';
-import TripScopeTag from '@/entities/trips/ui/TripScopeTag';
-import TripStatusChip from '@/entities/trips/ui/TripStatusChip';
+} from '@/entities/trips/utils/format';
 import { PATH } from '@/shared/constants/path';
 import ActionMenu from '@/shared/ui/ActionMenu';
 

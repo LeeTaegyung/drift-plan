@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 
-import { COUNTRIES } from '@/shared/config/countries';
+import { COUNTRIES, Country } from '@/shared/config/countries';
 import {
   Combobox,
   ComboboxContent,
@@ -17,7 +17,7 @@ import { useDebouncedValue } from '@/shared/utils/hooks/useDebounce';
 type ContryItemType = (typeof COUNTRIES)[number];
 
 interface Props {
-  value: typeof COUNTRIES | null;
+  value: Country[] | null;
   onChange: (values: ContryItemType) => void;
   errorMsg?: string;
 }
