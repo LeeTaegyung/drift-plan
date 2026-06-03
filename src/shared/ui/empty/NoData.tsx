@@ -26,7 +26,7 @@ export function NoData({ title, className, children }: Props) {
         alt='데이터 없음 이미지'
         className='h-auto w-50 md:w-75.75'
       />
-      <p className='text-base md:text-lg'>{title}</p>
+      <p className='text-text-muted text-base md:text-lg'>{title}</p>
 
       {children}
     </div>
