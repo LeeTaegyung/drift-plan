@@ -35,7 +35,7 @@ export default function TripDetailArea({ tripId, tripData }: Props) {
   });
 
   return (
-    <div className='inner flex flex-col items-center gap-3 py-5 md:gap-5 md:py-10'>
+    <div className='content-inner flex flex-col items-center gap-3 py-5 md:gap-5 md:py-10'>
       <div className='bg-bg sticky top-12 z-1 flex w-full items-center justify-between py-1.5 md:top-14'>
         <BackBtn text='돌아가기' className='text-xs md:text-sm' />
         <Button

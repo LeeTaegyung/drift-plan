@@ -44,7 +44,7 @@ export default function CheckListArea({ initData, tripId }: Props) {
   };
 
   return (
-    <div className='inner flex flex-col items-center gap-3 py-5 md:gap-5 md:py-10'>
+    <div className='content-inner flex flex-col items-center gap-3 py-5 md:gap-5 md:py-10'>
       <div className='relative flex w-full items-center justify-start gap-1 md:justify-center'>
         <BackBtn className='md:absolute md:top-1/2 md:left-0 md:-translate-y-1/2' />
         <h2 className='text-base font-semibold md:text-xl'>체크리스트</h2>

@@ -391,6 +391,10 @@
     @apply mx-auto w-full max-w-300 px-5;
   }
 
+  .content-inner {
+    @apply mx-auto w-full max-w-250 px-5;
+  }
+
   /* 국내 */
   .badge-domestic {
     @apply bg-sand-600 text-sand-50;
