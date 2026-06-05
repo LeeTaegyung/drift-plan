@@ -95,14 +95,14 @@ export default function CheckItemForm({ initData, onSubmit, onCancel }: Props) {
         )}
       />
 
-      <div className='flex items-start gap-2'>
+      <div className='flex flex-col items-start gap-2 md:flex-row'>
         <Controller
           control={control}
           name='name'
           render={({ field }) => (
             <CheckItemLabelInputField
               title='품목'
-              className='flex-2'
+              className='flex-1 md:flex-2'
               value={field.value}
               onChange={field.onChange}
               errorMsg={errors.name?.message || ''}
@@ -114,7 +114,7 @@ export default function CheckItemForm({ initData, onSubmit, onCancel }: Props) {
           name='quantity'
           render={({ field }) => (
             <CheckItemLabelInputField
-              className='flex-1'
+              className='max-w-40 flex-1 md:max-w-none'
               title='수량'
               errorMsg={errors.quantity?.message || ''}
             >
@@ -170,7 +170,7 @@ export default function CheckItemForm({ initData, onSubmit, onCancel }: Props) {
           onClick={onCancel}
           disabled={isSubmitting}
         >
-          취소
+          닫기
         </Button>
       </div>
     </form>
