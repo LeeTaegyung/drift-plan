@@ -1,6 +1,5 @@
 import { InputHTMLAttributes, ReactNode } from 'react';
 
-import { cn } from '@/shared/shadcn/lib/utils';
 import { LabelInputField } from '@/shared/ui/form';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
