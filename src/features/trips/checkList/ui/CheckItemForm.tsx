@@ -170,7 +170,7 @@ export default function CheckItemForm({ initData, onSubmit, onCancel }: Props) {
           onClick={onCancel}
           disabled={isSubmitting}
         >
-          닫기
+          {isEditMode ? '취소' : '닫기'}
         </Button>
       </div>
     </form>

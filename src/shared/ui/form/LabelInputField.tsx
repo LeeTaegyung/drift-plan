@@ -7,8 +7,8 @@ import {
   FieldDescription,
   FieldLabel,
 } from '@/shared/shadcn/components/ui/field';
-import { Input } from '@/shared/shadcn/components/ui/input';
 import { cn } from '@/shared/shadcn/lib/utils';
+import FormCommonInput from '@/shared/ui/form/FormCommonInput';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
@@ -17,6 +17,8 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   children?: ReactNode;
   errorMsg?: string;
   className?: string;
+  inputSize?: 'default' | 'sm';
+  direct?: 'vertical' | 'horizontal';
 }
 
 export function LabelInputField({
@@ -26,34 +28,60 @@ export function LabelInputField({
   children,
   errorMsg,
   className,
+  inputSize = 'default',
+  direct = 'vertical',
   ...props
 }: Props) {
+  const isHorizontal = direct === 'horizontal';
+  const isSizeSm = inputSize === 'sm';
+
   return (
-    <Field className={className}>
-      <FieldLabel className='font-normal'>
+    <Field className={cn(isHorizontal && 'flex-row items-start', className)}>
+      <FieldLabel
+        className={cn(
+          'field-label font-normal',
+          isHorizontal && 'w-13! shrink-0 leading-8!',
+          isSizeSm && 'text-xs'
+        )}
+      >
         {title}
         {required && <span className='text-error-text'>*</span>}
       </FieldLabel>
 
-      <div className='field-body flex flex-col gap-2'>
+      <div
+        className={cn(
+          'field-body flex flex-col gap-2',
+          isHorizontal && 'flex-1',
+          isSizeSm && 'gap-1'
+        )}
+      >
         {children ? (
           children
         ) : (
-          <Input
-            className={cn(
-              'bg-surface text-sm',
-              errorMsg && 'border-error-border'
-            )}
+          <FormCommonInput
+            inputSize={inputSize}
+            errorMsg={errorMsg}
             {...props}
           />
         )}
         {desc && (
-          <FieldDescription className='text-[13px]'>{desc}</FieldDescription>
+          <FieldDescription
+            className={cn('text-[13px]', isSizeSm && 'text-xs')}
+          >
+            {desc}
+          </FieldDescription>
         )}
 
         {errorMsg && (
-          <p className='text-error-text flex items-start gap-1 text-sm'>
-            <TriangleAlert className='size-5 shrink-0' />
+          <p
+            className={cn(
+              'text-error-text flex items-start gap-1 text-sm',
+              isSizeSm && 'text-xs'
+            )}
+          >
+            <TriangleAlert
+              className={cn('size-5 shrink-0', isSizeSm && 'w-4')}
+            />
             {errorMsg}
           </p>
         )}
