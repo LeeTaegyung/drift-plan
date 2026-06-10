@@ -43,7 +43,6 @@ export default function CostInput({
 
     // 숫자와 . 허용
     const pattern = decimal ? /^\d*\.?\d*$/ : /^\d*$/;
-    console.log(pattern.test(value));
     if (!pattern.test(value)) return;
 
     setInputText(value);
