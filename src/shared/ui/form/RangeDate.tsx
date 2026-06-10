@@ -21,6 +21,7 @@ interface Props {
   setSelectDate: (date: DateRange | undefined) => void;
   btnText?: string;
   errorMsg?: string;
+  inputSize?: 'sm';
 }
 
 export default function RangeDate({
@@ -28,6 +29,7 @@ export default function RangeDate({
   setSelectDate,
   btnText = '날짜 선택',
   errorMsg,
+  inputSize,
 }: Props) {
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState<DateRange | undefined>(selectDate);
@@ -49,7 +51,8 @@ export default function RangeDate({
           id='date-picker-range'
           className={cn(
             'bg-surface! border-dp-accent-soft h-10 justify-start px-2.5 font-normal md:h-12',
-            errorMsg && 'border-error-border'
+            errorMsg && 'border-error-border',
+            inputSize === 'sm' && 'h-8 rounded-sm text-[13px] md:h-8'
           )}
         >
           <CalendarIcon />
