@@ -8,7 +8,7 @@ interface Props extends Omit<
   'onChange' | 'value'
 > {
   value: string | null;
-  onChange: (value: number | null) => void;
+  onChange: (value: string | null) => void;
   inputSize?: 'default' | 'sm';
   className?: string;
   comma?: boolean;
@@ -51,7 +51,7 @@ export default function CostInput({
     if (value === '' || value === '.') {
       onChange(null);
     } else {
-      onChange(Number(value));
+      onChange(value);
     }
   };
 
