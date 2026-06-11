@@ -31,6 +31,7 @@ export default function TripScheduleContent({ tripId, dateId }: Props) {
           isEmpty={isEmpty}
           tripId={tripId}
           dateId={dateId}
+          length={tripSchedules.length}
         />
       </div>
     </div>

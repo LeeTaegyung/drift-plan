@@ -1,6 +1,7 @@
 import {
   CountryResponseItemType,
   GetTripsResponse,
+  TripScheduleCardFormType,
   TripScheduleCardType,
   TripValuesType,
 } from '@/entities/trips/type';
@@ -138,4 +139,14 @@ export const getTripSchedulesByDateId = async (
   if (error) throw error;
 
   return data;
+};
+
+export const createTripSchedule = async (
+  formValues: TripScheduleCardFormType
+) => {
+  return await supabase
+    .from('trip_schedule_cards')
+    .insert(formValues)
+    .select()
+    .single();
 };
