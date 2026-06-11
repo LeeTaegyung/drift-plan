@@ -22,7 +22,7 @@ export default function TripScheduleHeader({
       <div className='w-full'>
         <BackBtn text='뒤로 가기' href={PATH.global.trips.detail(tripId)} />
       </div>
-      <div className='bg-bg sticky top-12 flex w-full items-center justify-between md:top-14'>
+      <div className='bg-bg sticky top-12 z-1 flex w-full items-center justify-between md:top-14'>
         <TripScheduleArrowLink
           tripId={tripId}
           currentDate={dateId}
