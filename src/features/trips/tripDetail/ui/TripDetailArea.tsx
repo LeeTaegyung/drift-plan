@@ -19,7 +19,7 @@ interface Props {
 }
 
 export default function TripDetailArea({ tripId }: Props) {
-  const { data: tripDetailData } = useGetTripDetailData(tripId);
+  const { data: tripDetailData } = useGetTripDetailData();
   const today = new Date();
 
   const title = getTripTitleLabel({

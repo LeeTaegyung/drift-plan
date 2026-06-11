@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function TripScheduleArea({ tripId, dateId }: Props) {
-  const { data: tripDetailData } = useGetTripDetailData(tripId);
+  const { data: tripDetailData } = useGetTripDetailData();
 
   if (!tripDetailData) return null;
 
