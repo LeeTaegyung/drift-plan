@@ -2,13 +2,20 @@ import { ReactNode, TdHTMLAttributes, ThHTMLAttributes } from 'react';
 
 import { cn } from '@/shared/shadcn/lib/utils';
 
-export default function SDTable({ children }: { children: ReactNode }) {
+export default function SDTable({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
     <table
       className={cn(
         'bg-surface border-divider w-full border text-[13px]',
         'block',
-        'md:table md:table-fixed'
+        'md:table md:table-fixed',
+        className
       )}
     >
       {children}

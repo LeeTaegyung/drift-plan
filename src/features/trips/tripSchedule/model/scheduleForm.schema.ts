@@ -42,12 +42,15 @@ const accommodationDetailSchema = z.object({
   term_date: z
     .union([
       z.undefined(),
+      z.string(),
       z.object({
         from: z.date(),
         to: z.date().optional(),
       }),
     ])
     .superRefine((data, ctx) => {
+      if (typeof data === 'string') return;
+
       // 한쪽만 있을 때
       if (data?.from && !data.to) {
         ctx.addIssue({
