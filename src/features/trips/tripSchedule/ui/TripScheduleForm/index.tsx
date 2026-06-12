@@ -268,13 +268,20 @@ export default function TripScheduleForm({
       )}
       {/* 기타 :: E */}
 
-      <LabelInputField inputSize='sm' title='메모(최대 200자)'>
-        <Textarea
-          className='bg-surface h-20 resize-none rounded-sm text-sm md:rounded-lg'
-          placeholder='- 로 시작하면, - 기호와 함께 줄바꿈되어 표시됩니다.'
-        />
-      </LabelInputField>
-
+      <Controller
+        name='memo'
+        control={control}
+        render={({ field }) => (
+          <LabelInputField inputSize='sm' title='메모(최대 200자)'>
+            <Textarea
+              className='bg-surface h-20 resize-none rounded-sm text-sm md:rounded-lg'
+              placeholder='메모를 입력해주세요.'
+              value={field.value ?? ''}
+              onChange={field.onChange}
+            />
+          </LabelInputField>
+        )}
+      />
       <div className='flex gap-2'>
         <Button
           className='flex-1'
