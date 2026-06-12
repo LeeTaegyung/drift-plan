@@ -1,6 +1,7 @@
 import { TripScheduleCardType } from '@/entities/trips/type';
 import { ScheduleCardFormValues } from '@/features/trips/tripSchedule/model/scheduleForm.schema';
 import TripScheduleDetail from '@/features/trips/tripSchedule/ui/TripScheduleContent/TripScheduleDetail';
+import { convertTimeTaken } from '@/features/trips/tripSchedule/utils/convertTimeTaken';
 
 interface Props {
   data: TripScheduleCardType;
@@ -13,7 +14,7 @@ export default function TripScheduleCard({ data }: Props) {
     <div className='relative pl-5'>
       {time && (
         <span className='top-px right-[calc(100%+20px)] text-sm font-medium md:absolute md:text-[18px]'>
-          {time}
+          {`${time.split(':')[0]}:${time.split(':')[1]}`}
         </span>
       )}
       <h3 className='relative font-semibold md:text-[18px]'>
@@ -21,7 +22,7 @@ export default function TripScheduleCard({ data }: Props) {
         {title}
       </h3>
       {time_taken && (
-        <span className='text-sm md:text-base'>
+        <span className='text-sm text-gray-500'>
           {convertTimeTaken(time_taken)}
         </span>
       )}
@@ -32,21 +33,10 @@ export default function TripScheduleCard({ data }: Props) {
         detail={detail as ScheduleCardFormValues['detail']}
       />
 
-      {memo && <div>{memo}</div>}
+      {memo && <div className='mt-2 whitespace-pre-line'>{memo}</div>}
     </div>
   );
 }
-
-const convertTimeTaken = (value: string | number) => {
-  if (typeof value === 'string') {
-    const [hour, min] = value.split(':').map(Number);
-    return hour * 60 + min;
-  }
-
-  const hour = Math.floor(value / 60);
-  const min = value % 60;
-  return `${hour}:${min.toString().padStart(2, '0')}`;
-};
 
 function Pin() {
   return (
