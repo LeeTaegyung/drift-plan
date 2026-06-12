@@ -12,18 +12,6 @@ export default function EtcDetailForm({ control }: Props) {
   return (
     <>
       <Controller
-        name='detail.place_name'
-        control={control}
-        render={({ field }) => (
-          <LabelInputField
-            inputSize='sm'
-            title='방문지명'
-            value={field.value ?? ''}
-            onChange={field.onChange}
-          />
-        )}
-      />
-      <Controller
         name='detail.photo_url'
         control={control}
         render={({ field }) => (

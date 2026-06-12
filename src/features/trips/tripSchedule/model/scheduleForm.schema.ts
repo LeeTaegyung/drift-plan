@@ -125,40 +125,45 @@ const tourDetailSchema = z.object({
 
 // detail 스키마 - 기타 (방문지)
 const etcDetailSchema = z.object({
-  place_name: z.string().min(1), // 방문지명
   photo_url: z.union([z.instanceof(File), z.string()]).nullable(), // 사진 URL => 서버에 submit 전에 확정된 사진 전송 예정, 폼에서는 bolb로
 });
 
-export const scheduleCardSchema = z.discriminatedUnion('card_type', [
-  scheduleFormCommonField.extend({
-    card_type: z.literal(''),
-    detail: z.null(),
-  }),
-  scheduleFormCommonField.extend({
-    card_type: z.literal('flight'),
-    detail: flightDetailSchema,
-  }),
-  scheduleFormCommonField.extend({
-    card_type: z.literal('accommodation'),
-    detail: accommodationDetailSchema,
-  }),
-  scheduleFormCommonField.extend({
-    card_type: z.literal('transport'),
-    detail: transportDetailSchema,
-  }),
-  scheduleFormCommonField.extend({
-    card_type: z.literal('attraction'),
-    detail: attractionDetailSchema,
-  }),
-  scheduleFormCommonField.extend({
-    card_type: z.literal('tour'),
-    detail: tourDetailSchema,
-  }),
-  scheduleFormCommonField.extend({
-    card_type: z.literal('etc'),
-    detail: etcDetailSchema,
-  }),
-]);
+export const scheduleCardSchema = z
+  .discriminatedUnion('card_type', [
+    scheduleFormCommonField.extend({
+      card_type: z.literal(''),
+      detail: z.null(),
+    }),
+    scheduleFormCommonField.extend({
+      card_type: z.literal('flight'),
+      detail: flightDetailSchema,
+    }),
+    scheduleFormCommonField.extend({
+      card_type: z.literal('accommodation'),
+      detail: accommodationDetailSchema,
+    }),
+    scheduleFormCommonField.extend({
+      card_type: z.literal('transport'),
+      detail: transportDetailSchema,
+    }),
+    scheduleFormCommonField.extend({
+      card_type: z.literal('attraction'),
+      detail: attractionDetailSchema,
+    }),
+    scheduleFormCommonField.extend({
+      card_type: z.literal('tour'),
+      detail: tourDetailSchema,
+    }),
+    scheduleFormCommonField.extend({
+      card_type: z.literal('etc'),
+      detail: etcDetailSchema,
+    }),
+  ])
+  .refine((data) => {
+    if (data.card_type === '') return false;
+
+    return true;
+  });
 
 export type ScheduleCardFormValues = z.infer<typeof scheduleCardSchema>;
 export type FlightCardFormValues = Extract<
