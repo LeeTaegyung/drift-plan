@@ -23,14 +23,15 @@ export const transformTripScheduleData = async (
   if ('time_hour' in formData || 'time_minute' in formData) {
     const hour = formData.time_hour ?? '00';
     const min = formData.time_minute ?? '00';
-    result.time = `${hour}:${min}`;
+    const timeText = `${hour}:${min}`;
+    result.time = timeText === '00:00' ? null : timeText;
   }
 
   if ('time_taken_hour' in formData || 'time_taken_minute' in formData) {
     const hour = formData.time_taken_hour ?? '00';
     const min = formData.time_taken_minute ?? '00';
     const timeTaken = convertTimeTaken(`${hour}:${min}`);
-    result.time_taken = timeTaken;
+    result.time_taken = timeTaken === 0 ? null : timeTaken;
   }
 
   if ('card_type' in formData) {
