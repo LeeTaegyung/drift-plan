@@ -33,7 +33,7 @@ export default function TripScheduleCard({ data }: Props) {
         detail={detail as ScheduleCardFormValues['detail']}
       />
 
-      {memo && <div className='mt-2 whitespace-pre-line'>{memo}</div>}
+      {memo && <div className='mt-2 text-sm whitespace-pre-line'>{memo}</div>}
     </div>
   );
 }
