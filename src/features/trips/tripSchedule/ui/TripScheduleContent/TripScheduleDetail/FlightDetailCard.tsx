@@ -4,7 +4,7 @@ import { ArrowRight, Plane } from 'lucide-react';
 
 import { FlightCardFormValues } from '@/features/trips/tripSchedule/model/scheduleForm.schema';
 import SDCardWrapper from '@/features/trips/tripSchedule/ui/TripScheduleContent/TripScheduleDetail/SDCardWrapper';
-import { convertTimeTaken } from '@/features/trips/tripSchedule/utils/convertTimeTaken';
+import { timeTakenToString } from '@/features/trips/tripSchedule/utils/convertTimeTaken';
 import { formatTimeToString } from '@/features/trips/tripSchedule/utils/formatTimeToString';
 
 interface Props {
@@ -45,10 +45,9 @@ export default function FlightDetailCard({ detail }: Props) {
               {segment.flight_time_taken_hour !== null &&
                 segment.flight_time_taken_minute !== null && (
                   <div className='flex items-center gap-1 text-xs text-black/70 dark:text-gray-200'>
-                    {convertTimeTaken(
-                      convertTimeTaken(
-                        `${segment.flight_time_taken_hour ?? '00'}:${segment.flight_time_taken_minute ?? '00'}`
-                      )
+                    {timeTakenToString(
+                      segment.flight_time_taken_hour,
+                      segment.flight_time_taken_minute
                     )}
                   </div>
                 )}

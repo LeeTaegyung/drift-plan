@@ -1,5 +1,5 @@
 export function convertTimeTaken(value: string): number;
-export function convertTimeTaken(value: number): string;
+export function convertTimeTaken(value: number): { hour: string; min: string };
 
 export function convertTimeTaken(value: string | number) {
   if (typeof value === 'string') {
@@ -8,11 +8,18 @@ export function convertTimeTaken(value: string | number) {
   }
 
   const hour = Math.floor(value / 60);
-  const hourText = hour === 0 ? '' : `${hour}시간`;
+  const hourText = hour === 0 ? '' : `${hour}`;
   const min = value % 60;
-  const minText = min === 0 ? '' : `${min.toString().padStart(2, '0')}분`;
+  const minText = min === 0 ? '' : `${min.toString().padStart(2, '0')}`;
 
   if (hourText === '' && minText === '') return null;
 
-  return `약 ${hourText} ${minText} 소요`;
+  return { hour: hourText, min: minText };
 }
+
+export const timeTakenToString = (hour: number, min: number) => {
+  const hourText = ` ${hour}시간`;
+  const minText = ` ${min}분`;
+
+  return `약${hour ? hourText : ''}${min ? minText : ''} 소요`;
+};
