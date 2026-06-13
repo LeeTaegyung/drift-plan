@@ -8,20 +8,29 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/shared/shadcn/components/ui/dropdown-menu';
+import { cn } from '@/shared/shadcn/lib/utils';
 
 interface Props {
+  className?: string;
   onClickEdit: () => void;
   onClickDelete: () => void;
 }
 
-export default function ActionMenu({ onClickEdit, onClickDelete }: Props) {
+export default function ActionMenu({
+  className,
+  onClickEdit,
+  onClickDelete,
+}: Props) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
           variant={'ghost'}
           size={'icon'}
-          className='border-0! text-white hover:bg-transparent hover:text-white aria-expanded:bg-transparent aria-expanded:text-white'
+          className={cn(
+            'border-0! text-white hover:bg-transparent hover:text-white aria-expanded:bg-transparent aria-expanded:text-white',
+            className
+          )}
         >
           <EllipsisVertical />
         </Button>
