@@ -39,6 +39,12 @@ const nextConfig: NextConfig = {
         port: '8444',
         pathname: '/**', // 경로 패턴, 모든 이미지 허용
       },
+      {
+        protocol: 'https',
+        hostname: 'qitcjxnblmjkvmtkqddx.supabase.co',
+        port: '',
+        pathname: '/**', // 경로 패턴, 모든 이미지 허용
+      },
     ],
   },
 };
