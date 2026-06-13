@@ -54,6 +54,8 @@ export function getScheduleDetailValuesDefault(cardType: '' | CardType) {
               departure_time_min: null,
               arrival_time_hour: null,
               arrival_time_min: null,
+              flight_time_taken_hour: null,
+              flight_time_taken_minute: null,
               airline: null,
               flight_number: null,
               booking_ref: null,

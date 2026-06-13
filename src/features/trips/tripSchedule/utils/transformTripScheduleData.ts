@@ -49,9 +49,10 @@ export const transformTripScheduleData = async (
 
           result.detail = {
             ...data,
-            term_date: term_date
-              ? `${formatTripDate(term_date.from)}~${formatTripDate(term_date.to ? term_date.to : term_date.from)}`
-              : null,
+            term_date:
+              term_date && typeof term_date === 'object'
+                ? `${formatTripDate(term_date.from)}~${formatTripDate(term_date.to ? term_date.to : term_date.from)}`
+                : null,
           };
           break;
         }

@@ -18,6 +18,8 @@ const flightSegmentSchema = z.object({
   departure_time_min: z.number().min(0).max(59).nullable(), // 출발 시간 - 분
   arrival_time_hour: z.number().min(0).max(24).nullable(), // 도착 시간 - 시
   arrival_time_min: z.number().min(0).max(59).nullable(), // 도착 시간 - 분
+  flight_time_taken_hour: z.number().min(0).max(24).nullable(), // 소요 시간 - 시
+  flight_time_taken_minute: z.number().min(0).max(59).nullable(), // 소요 시간 - 분
   airline: z.string().nullable(), // 항공사명
   flight_number: z.string().nullable(), // 항공기 편명
   booking_ref: z.string().nullable(), // 항공사 예약번호

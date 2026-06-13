@@ -107,7 +107,7 @@ export default function FlightDetailForm({ control }: Props) {
                 )}
               />
             </ScheduleInputWrapper>
-            <ScheduleInputWrapper>
+            <ScheduleInputWrapper className='grid-cols-1 md:grid-cols-3'>
               {/* 출발 시간 */}
               <LabelInputField inputSize='sm' title='출발 시간'>
                 <div className='flex max-w-40 items-center gap-1'>
@@ -155,6 +155,36 @@ export default function FlightDetailForm({ control }: Props) {
                   />
                   <span className='shrink-0'>:</span>
                   {/* 도착 시간 - 분 */}
+                  <Controller
+                    name={`detail.segments.${index}.arrival_time_min`}
+                    control={control}
+                    render={({ field }) => (
+                      <NumberOnlyInput
+                        maxLength={2}
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
+                    )}
+                  />
+                </div>
+              </LabelInputField>
+              {/* 소요 시간 */}
+              <LabelInputField inputSize='sm' title='소요 시간'>
+                <div className='flex max-w-40 items-center gap-1'>
+                  {/* 소요 시간 - 시 */}
+                  <Controller
+                    name={`detail.segments.${index}.arrival_time_hour`}
+                    control={control}
+                    render={({ field }) => (
+                      <NumberOnlyInput
+                        maxLength={2}
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
+                    )}
+                  />
+                  <span className='shrink-0'>:</span>
+                  {/* 소요 시간 - 분 */}
                   <Controller
                     name={`detail.segments.${index}.arrival_time_min`}
                     control={control}
