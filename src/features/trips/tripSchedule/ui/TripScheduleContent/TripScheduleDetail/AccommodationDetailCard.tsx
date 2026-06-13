@@ -16,11 +16,11 @@ export default function AccommodationDetailCard({ detail }: Props) {
     <SDCardWrapper>
       <SDCardWrapper.Header
         icon={Hotel}
-        className='bg-success-bg text-success-text'
+        className='bg-accommodation-bg text-accommodation-text'
       >
         <div>
           <div className='text-sm font-medium'>{detail.accommodation_name}</div>
-          <div className='flex items-center gap-1 text-xs text-black/70'>
+          <div className='flex items-center gap-1 text-xs text-black/70 dark:text-gray-200'>
             {detail.city && <span>{detail.city}</span>}
             {term_date && (
               <span className='before:pr-1 before:content-["·"] first-of-type:before:hidden'>

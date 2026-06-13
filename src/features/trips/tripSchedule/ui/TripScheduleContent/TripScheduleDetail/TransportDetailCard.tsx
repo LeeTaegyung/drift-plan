@@ -17,14 +17,14 @@ export default function TransportDetailCard({ detail }: Props) {
             ? TRANSPORT_TYPE_MAP[detail.transport_type]
             : Road
         }
-        className='bg-completed-bg text-completed-text'
+        className='bg-transport-bg text-transport-text'
       >
         <div>
           <div className='text-sm font-medium'>
             {detail.transport_type ?? '-'}
           </div>
           {detail.cost && (
-            <span className='text-xs text-black/70'>
+            <span className='text-xs text-black/70 dark:text-gray-200'>
               {detail.cost_currency ?? ''}{' '}
               {Number(detail.cost).toLocaleString()}
             </span>

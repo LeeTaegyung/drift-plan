@@ -125,6 +125,41 @@
   --completed-bg: #e1f5ee;
   --completed-border: #0f6e56;
   --completed-text: #085041;
+
+  /* DetailCard - 항공권 */
+  --flight-bg: #ebf5fb;
+  --flight-border: #7dc4e0;
+  --flight-text: #0d4f6e;
+
+  /* DetailCard - 숙소 */
+  --accommodation-bg: #edf6fb;
+  --accommodation-border: #92cde4;
+  --accommodation-text: #0a3e58;
+
+  /* DetailCard - 교통 */
+  --transport-bg: #fdf3e3;
+  --transport-border: #e8b870;
+  --transport-text: #6b3e0a;
+
+  /* DetailCard - 관광지 */
+  --attraction-bg: #f5f2ec;
+  --attraction-border: #c8bcac;
+  --attraction-text: #3c2e20;
+
+  /* DetailCard - 투어 */
+  --tour-bg: #fdf0dc;
+  --tour-border: #e4a860;
+  --tour-text: #5a2e04;
+
+  /* DetailCard - 식당 */
+  --restaurant-bg: #fdf4e4;
+  --restaurant-border: #e4b078;
+  --restaurant-text: #5c3010;
+
+  /* DetailCard - 기타 */
+  --etc-bg: #f0ede8;
+  --etc-border: #b8b0a4;
+  --etc-text: #2c2218;
 }
 
 /* 다크 모드 설정 */
@@ -217,6 +252,41 @@
   --completed-bg: #085041;
   --completed-border: #5dcaa5;
   --completed-text: #9fe1cb;
+
+  /* DetailCard - 항공권 */
+  --flight-bg: #0d2e40;
+  --flight-border: #1e5a78;
+  --flight-text: #a8d8ed;
+
+  /* DetailCard - 숙소 */
+  --accommodation-bg: #0a2030;
+  --accommodation-border: #1a4e68;
+  --accommodation-text: #8dcce3;
+
+  /* DetailCard - 교통 */
+  --transport-bg: #2e1a04;
+  --transport-border: #7a4a14;
+  --transport-text: #f0c070;
+
+  /* DetailCard - 관광지 */
+  --attraction-bg: #221a10;
+  --attraction-border: #4c3c28;
+  --attraction-text: #c8b89a;
+
+  /* DetailCard - 투어 */
+  --tour-bg: #2c1200;
+  --tour-border: #5e3408;
+  --tour-text: #e8a858;
+
+  /* DetailCard - 식당 */
+  --restaurant-bg: #2a1400;
+  --restaurant-border: #683c10;
+  --restaurant-text: #eabc78;
+
+  /* DetailCard - 기타 */
+  --etc-bg: #1c1810;
+  --etc-border: #3c3428;
+  --etc-text: #b0a898;
 }
 
 @theme {
@@ -370,6 +440,41 @@
   --color-completed-bg: var(--completed-bg);
   --color-completed-border: var(--completed-border);
   --color-completed-text: var(--completed-text);
+
+  /* DetailCard - 항공권 */
+  --color-flight-bg: var(--flight-bg);
+  --color-flight-border: var(--flight-border);
+  --color-flight-text: var(--flight-text);
+
+  /* DetailCard - 숙소 */
+  --color-accommodation-bg: var(--accommodation-bg);
+  --color-accommodation-border: var(--accommodation-border);
+  --color-accommodation-text: var(--accommodation-text);
+
+  /* DetailCard - 교통 */
+  --color-transport-bg: var(--transport-bg);
+  --color-transport-border: var(--transport-border);
+  --color-transport-text: var(--transport-text);
+
+  /* DetailCard - 관광지 */
+  --color-attraction-bg: var(--attraction-bg);
+  --color-attraction-border: var(--attraction-border);
+  --color-attraction-text: var(--attraction-text);
+
+  /* DetailCard - 투어 */
+  --color-tour-bg: var(--tour-bg);
+  --color-tour-border: var(--tour-border);
+  --color-tour-text: var(--tour-text);
+
+  /* DetailCard - 식당 */
+  --color-restaurant-bg: var(--restaurant-bg);
+  --color-restaurant-border: var(--restaurant-border);
+  --color-restaurant-text: var(--restaurant-text);
+
+  /* DetailCard - 기타 */
+  --color-etc-bg: var(--etc-bg);
+  --color-etc-border: var(--etc-border);
+  --color-etc-text: var(--etc-text);
 
   --font-s-core-dream: var(--font-s-core-dream);
 }

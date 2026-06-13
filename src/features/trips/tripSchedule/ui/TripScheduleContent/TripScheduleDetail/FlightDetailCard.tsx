@@ -34,7 +34,7 @@ export default function FlightDetailCard({ detail }: Props) {
         <Fragment key={`segment-${idx}`}>
           <SDCardWrapper.Header
             icon={Plane}
-            className='bg-info-bg text-info-text'
+            className='bg-flight-bg text-flight-text'
           >
             <div>
               <div className='flex items-center gap-1 text-sm font-medium'>
@@ -44,7 +44,7 @@ export default function FlightDetailCard({ detail }: Props) {
 
               {segment.flight_time_taken_hour !== null &&
                 segment.flight_time_taken_minute !== null && (
-                  <div className='flex items-center gap-1 text-xs text-black/70'>
+                  <div className='flex items-center gap-1 text-xs text-black/70 dark:text-gray-200'>
                     {convertTimeTaken(
                       convertTimeTaken(
                         `${segment.flight_time_taken_hour ?? '00'}:${segment.flight_time_taken_minute ?? '00'}`

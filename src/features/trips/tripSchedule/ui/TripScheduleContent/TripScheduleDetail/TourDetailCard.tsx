@@ -35,11 +35,11 @@ export default function TourDetailCard({ detail }: Props) {
       <SDCardWrapper>
         <SDCardWrapper.Header
           icon={FlagTriangleRight}
-          className='bg-warning-bg text-warning-text'
+          className='bg-tour-bg text-tour-text'
         >
           <div>
             <div className='text-sm font-medium'>{detail.tour_name}</div>
-            <div className='flex items-center gap-1 text-xs text-black/70'>
+            <div className='flex items-center gap-1 text-xs text-black/70 dark:text-gray-200'>
               {start_time === '-' ? '00:00' : start_time} ~{' '}
               {end_time === '-' ? '00:00' : end_time}
             </div>

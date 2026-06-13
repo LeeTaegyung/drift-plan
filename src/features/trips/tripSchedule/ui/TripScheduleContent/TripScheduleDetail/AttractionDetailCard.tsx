@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { Circle, FerrisWheel, XIcon } from 'lucide-react';
+import { Circle, MapPin, XIcon } from 'lucide-react';
 
 import { AttractionCardFormValues } from '@/features/trips/tripSchedule/model/scheduleForm.schema';
 import SDCardWrapper from '@/features/trips/tripSchedule/ui/TripScheduleContent/TripScheduleDetail/SDCardWrapper';
@@ -34,12 +34,12 @@ export default function AttractionDetailCard({ detail }: Props) {
       )}
       <SDCardWrapper>
         <SDCardWrapper.Header
-          icon={FerrisWheel}
-          className='bg-inactive-bg text-inactive-text'
+          icon={MapPin}
+          className='bg-attraction-bg text-attraction-text'
         >
           <div>
             <div className='text-sm font-medium'>{detail.place_name}</div>
-            <div className='flex items-center gap-1 text-xs text-black/70'>
+            <div className='flex items-center gap-1 text-xs text-black/70 dark:text-gray-200'>
               {open_time === '-' ? '00:00' : open_time} ~{' '}
               {close_time === '-' ? '00:00' : close_time}
             </div>

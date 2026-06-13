@@ -78,7 +78,9 @@ function SDCardGridItem({
 }) {
   return (
     <div className={cn('flex flex-col gap-1', className)}>
-      <div className='grid-label text-xs text-gray-600'>{label}</div>
+      <div className='grid-label text-xs text-gray-600 dark:text-gray-100'>
+        {label}
+      </div>
       <div className='text-[13px] font-medium'>{children}</div>
     </div>
   );

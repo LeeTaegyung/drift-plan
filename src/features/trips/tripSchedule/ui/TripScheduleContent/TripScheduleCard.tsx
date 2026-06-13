@@ -22,7 +22,7 @@ export default function TripScheduleCard({ data }: Props) {
         {title}
       </h3>
       {time_taken && (
-        <span className='text-sm text-gray-500'>
+        <span className='text-sm text-gray-500 dark:text-gray-200'>
           {convertTimeTaken(time_taken)}
         </span>
       )}
