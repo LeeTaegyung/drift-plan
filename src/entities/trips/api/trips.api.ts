@@ -49,7 +49,7 @@ export const getTripsWithStatus = async ({
   let query = supabase
     .from('trips_with_status')
     .select('*', { count: 'exact' })
-    .order('created_at', { ascending: false });
+    .order('start_date', { ascending: false });
 
   if (is_domestic !== undefined) {
     query = query.eq('is_domestic', is_domestic);
