@@ -1,3 +1,17 @@
+import {
+  Bike,
+  Bus,
+  Car,
+  CarFront,
+  CarTaxiFront,
+  Footprints,
+  LucideIcon,
+  Ship,
+  SquareM,
+  TrainFront,
+  TramFront,
+} from 'lucide-react';
+
 export const CARD_TYPES = [
   { value: 'flight', name: '항공권' },
   { value: 'accommodation', name: '숙소' },
@@ -9,19 +23,19 @@ export const CARD_TYPES = [
 
 export type CardType = (typeof CARD_TYPES)[number]['value'];
 
-export const TRANSPORT_TYPE = [
+export const TRANSPORT_TYPE_MAP: Record<string, LucideIcon> = {
   // 지상
-  '버스',
-  '기차',
-  '택시',
-  '지하철',
-  '트램',
-  '렌터카',
-  '자동차',
+  버스: Bus,
+  기차: TrainFront,
+  택시: CarTaxiFront,
+  지하철: SquareM,
+  트램: TramFront,
+  렌터카: Car,
+  자동차: CarFront,
   // 수상
-  '페리',
-  '크루즈',
+  페리: Ship,
+  크루즈: Ship,
   // 기타
-  '자전거',
-  '도보',
-];
+  자전거: Bike,
+  도보: Footprints,
+};

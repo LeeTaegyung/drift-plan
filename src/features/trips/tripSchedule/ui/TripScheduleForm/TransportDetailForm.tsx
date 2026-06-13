@@ -1,6 +1,6 @@
 import { Control, Controller } from 'react-hook-form';
 
-import { TRANSPORT_TYPE } from '@/features/trips/tripSchedule/constants';
+import { TRANSPORT_TYPE_MAP } from '@/features/trips/tripSchedule/constants';
 import { TransportCardFormValues } from '@/features/trips/tripSchedule/model/scheduleForm.schema';
 import CurrencySelect from '@/features/trips/tripSchedule/ui/TripScheduleForm/CurrencySelect';
 import ScheduleInputWrapper from '@/features/trips/tripSchedule/ui/TripScheduleForm/ScheduleInputWrapper';
@@ -27,7 +27,7 @@ export default function TransportDetailForm({ control }: Props) {
                 onChange={field.onChange}
               >
                 <option value=''>교통 수단 선택</option>
-                {TRANSPORT_TYPE.map((t) => (
+                {Object.keys(TRANSPORT_TYPE_MAP).map((t) => (
                   <option key={t} value={t}>
                     {t}
                   </option>
