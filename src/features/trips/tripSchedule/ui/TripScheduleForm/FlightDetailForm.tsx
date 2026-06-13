@@ -173,7 +173,7 @@ export default function FlightDetailForm({ control }: Props) {
                 <div className='flex max-w-40 items-center gap-1'>
                   {/* 소요 시간 - 시 */}
                   <Controller
-                    name={`detail.segments.${index}.arrival_time_hour`}
+                    name={`detail.segments.${index}.flight_time_taken_hour`}
                     control={control}
                     render={({ field }) => (
                       <NumberOnlyInput
@@ -186,7 +186,7 @@ export default function FlightDetailForm({ control }: Props) {
                   <span className='shrink-0'>:</span>
                   {/* 소요 시간 - 분 */}
                   <Controller
-                    name={`detail.segments.${index}.arrival_time_min`}
+                    name={`detail.segments.${index}.flight_time_taken_minute`}
                     control={control}
                     render={({ field }) => (
                       <NumberOnlyInput
