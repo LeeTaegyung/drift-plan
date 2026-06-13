@@ -15,6 +15,9 @@ export const useUpdateTrip = (tripId: string) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: TRIPS_QUERIES.lists() });
       queryClient.invalidateQueries({
+        queryKey: TRIPS_QUERIES.detail.default.queryKey(tripId),
+      });
+      queryClient.invalidateQueries({
         queryKey: TRIPS_QUERIES.detail.withStatus.queryKey(tripId),
       });
       router.back();
