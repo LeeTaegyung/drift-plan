@@ -23,46 +23,30 @@ export default function TripScheduleDetail({ card_type, detail }: Props) {
   switch (card_type) {
     case 'flight':
       return (
-        <div className='mt-2'>
-          <FlightDetailCard detail={detail as FlightCardFormValues['detail']} />
-        </div>
+        <FlightDetailCard detail={detail as FlightCardFormValues['detail']} />
       );
     case 'accommodation':
       return (
-        <div className='mt-2'>
-          <AccommodationDetailCard
-            detail={detail as AccommodationCardFormValues['detail']}
-          />
-        </div>
+        <AccommodationDetailCard
+          detail={detail as AccommodationCardFormValues['detail']}
+        />
       );
     case 'transport':
       return (
-        <div className='mt-2'>
-          <TransportDetailCard
-            detail={detail as TransportCardFormValues['detail']}
-          />
-        </div>
+        <TransportDetailCard
+          detail={detail as TransportCardFormValues['detail']}
+        />
       );
     case 'attraction':
       return (
-        <div className='mt-2'>
-          <AttractionDetailCard
-            detail={detail as AttractionCardFormValues['detail']}
-          />
-        </div>
+        <AttractionDetailCard
+          detail={detail as AttractionCardFormValues['detail']}
+        />
       );
     case 'tour':
-      return (
-        <div className='mt-2'>
-          <TourDetailCard detail={detail as TourCardFormValues['detail']} />
-        </div>
-      );
+      return <TourDetailCard detail={detail as TourCardFormValues['detail']} />;
     case 'etc':
-      return (
-        <div className='mt-2'>
-          <EtcDetailCard detail={detail as EtcCardFormValues['detail']} />
-        </div>
-      );
+      return <EtcDetailCard detail={detail as EtcCardFormValues['detail']} />;
   }
 
   return null;

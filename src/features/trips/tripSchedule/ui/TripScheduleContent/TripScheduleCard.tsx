@@ -11,7 +11,7 @@ export default function TripScheduleCard({ data }: Props) {
   const { card_type, title, time, time_taken, detail, memo } = data;
 
   return (
-    <div className='relative pl-5'>
+    <div className='relative flex flex-col items-start pl-5'>
       {time && (
         <span className='top-px right-[calc(100%+20px)] text-sm font-medium md:absolute md:text-[18px]'>
           {`${time.split(':')[0]}:${time.split(':')[1]}`}

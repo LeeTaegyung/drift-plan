@@ -1,7 +1,10 @@
 import { Fragment } from 'react/jsx-runtime';
 
+import { ArrowRight, Plane } from 'lucide-react';
+
 import { FlightCardFormValues } from '@/features/trips/tripSchedule/model/scheduleForm.schema';
-import SDTable from '@/features/trips/tripSchedule/ui/TripScheduleContent/TripScheduleDetail/SDTable';
+import SDCardWrapper from '@/features/trips/tripSchedule/ui/TripScheduleContent/TripScheduleDetail/SDCardWrapper';
+import { convertTimeTaken } from '@/features/trips/tripSchedule/utils/convertTimeTaken';
 import { formatTimeToString } from '@/features/trips/tripSchedule/utils/formatTimeToString';
 
 interface Props {
@@ -17,73 +20,88 @@ export default function FlightDetailCard({ detail }: Props) {
   const { flight_type, platform, segments } = detail;
 
   return (
-    <SDTable>
-      <SDTable.Tbody>
-        <SDTable.Tr>
-          <SDTable.Th>여정 구분</SDTable.Th>
-          <SDTable.Td colSpan={2}>{FLIGHT_TYPE[flight_type]}</SDTable.Td>
-          <SDTable.Th>예약 플랫폼</SDTable.Th>
-          <SDTable.Td colSpan={2}>{platform ?? '-'}</SDTable.Td>
-        </SDTable.Tr>
-        {segments.map((segment, idx) => (
-          <Fragment key={`segment-${idx}`}>
-            {segments.length > 1 && (
-              <SDTable.Tr>
-                <SDTable.Th
-                  colSpan={6}
-                  className='bg-surface text-text-primary text-left'
-                >
-                  경유{idx + 1}
-                </SDTable.Th>
-              </SDTable.Tr>
-            )}
-            <SDTable.Tr>
-              <SDTable.Th>출발지</SDTable.Th>
-              <SDTable.Td colSpan={2}>{segment.departure}</SDTable.Td>
-              <SDTable.Th>도착지</SDTable.Th>
-              <SDTable.Td colSpan={2}>{segment.arrival}</SDTable.Td>
-            </SDTable.Tr>
-            <SDTable.Tr>
-              <SDTable.Th>출발 시간</SDTable.Th>
-              <SDTable.Td colSpan={2}>
-                {formatTimeToString(
-                  segment.departure_time_hour,
-                  segment.departure_time_min
+    <SDCardWrapper>
+      <SDCardWrapper.Grid>
+        <SDCardWrapper.Item label='여정 구분'>
+          {FLIGHT_TYPE[flight_type]}
+        </SDCardWrapper.Item>
+        <SDCardWrapper.Item label='예약 플랫폼'>
+          {platform ?? '-'}
+        </SDCardWrapper.Item>
+      </SDCardWrapper.Grid>
+
+      {segments.map((segment, idx) => (
+        <Fragment key={`segment-${idx}`}>
+          <SDCardWrapper.Header
+            icon={Plane}
+            className='bg-info-bg text-info-text'
+          >
+            <div>
+              <div className='flex items-center gap-1 text-sm font-medium'>
+                {segment.departure} <ArrowRight className='size-4' />{' '}
+                {segment.arrival}
+              </div>
+
+              {segment.flight_time_taken_hour !== null &&
+                segment.flight_time_taken_minute !== null && (
+                  <div className='flex items-center gap-1 text-xs text-black/70'>
+                    {convertTimeTaken(
+                      convertTimeTaken(
+                        `${segment.flight_time_taken_hour ?? '00'}:${segment.flight_time_taken_minute ?? '00'}`
+                      )
+                    )}
+                  </div>
                 )}
-              </SDTable.Td>
-              <SDTable.Th>도착 시간</SDTable.Th>
-              <SDTable.Td colSpan={2}>
-                {formatTimeToString(
-                  segment.arrival_time_hour,
-                  segment.arrival_time_min
+            </div>
+          </SDCardWrapper.Header>
+          <SDCardWrapper.Grid>
+            <SDCardWrapper.Item label='출발 시간'>
+              {formatTimeToString(
+                segment.departure_time_hour,
+                segment.departure_time_min
+              )}
+            </SDCardWrapper.Item>
+            <SDCardWrapper.Item label='도착 시간'>
+              {formatTimeToString(
+                segment.arrival_time_hour,
+                segment.arrival_time_min
+              )}
+            </SDCardWrapper.Item>
+            <SDCardWrapper.Item label='항공사명'>
+              {segment.airline ?? '-'}
+            </SDCardWrapper.Item>
+            <SDCardWrapper.Item label='항공기 편명'>
+              {segment.flight_number ?? '-'}
+            </SDCardWrapper.Item>
+            <SDCardWrapper.Item label='항공사 예약번호'>
+              {segment.booking_ref ?? '-'}
+            </SDCardWrapper.Item>
+            <SDCardWrapper.Item label='좌석'>
+              {segment.seat ?? '-'}
+            </SDCardWrapper.Item>
+            <SDCardWrapper.Item label='수하물' className=''>
+              <div className='flex items-center gap-1'>
+                {segment.carry_on_weight && (
+                  <span>
+                    기내{' '}
+                    {segment.carry_on_weight
+                      ? `${segment.carry_on_weight}kg`
+                      : '-'}
+                  </span>
                 )}
-              </SDTable.Td>
-            </SDTable.Tr>
-            <SDTable.Tr>
-              <SDTable.Th>항공사명</SDTable.Th>
-              <SDTable.Td>{segment.airline ?? '-'}</SDTable.Td>
-              <SDTable.Th>항공기 편명</SDTable.Th>
-              <SDTable.Td>{segment.flight_number ?? '-'}</SDTable.Td>
-              <SDTable.Th>항공사 예약번호</SDTable.Th>
-              <SDTable.Td>{segment.booking_ref ?? '-'}</SDTable.Td>
-            </SDTable.Tr>
-            <SDTable.Tr>
-              <SDTable.Th>좌석</SDTable.Th>
-              <SDTable.Td>{segment.seat ?? '-'}</SDTable.Td>
-              <SDTable.Th>기내수하물 중량</SDTable.Th>
-              <SDTable.Td>
-                {segment.carry_on_weight ? `${segment.carry_on_weight}kg` : '-'}
-              </SDTable.Td>
-              <SDTable.Th>위탁수하물 중량</SDTable.Th>
-              <SDTable.Td>
-                {segment.checked_bag_weight
-                  ? `${segment.carry_on_weight}kg`
-                  : '-'}
-              </SDTable.Td>
-            </SDTable.Tr>
-          </Fragment>
-        ))}
-      </SDTable.Tbody>
-    </SDTable>
+                {segment.checked_bag_weight && (
+                  <span className='before:pr-1 before:content-["/"] first-of-type:before:hidden'>
+                    기내{' '}
+                    {segment.checked_bag_weight
+                      ? `${segment.checked_bag_weight}kg`
+                      : '-'}
+                  </span>
+                )}
+              </div>
+            </SDCardWrapper.Item>
+          </SDCardWrapper.Grid>
+        </Fragment>
+      ))}
+    </SDCardWrapper>
   );
 }
