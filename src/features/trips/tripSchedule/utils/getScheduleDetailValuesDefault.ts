@@ -5,16 +5,16 @@ import { convertTimeTaken } from '@/features/trips/tripSchedule/utils/convertTim
 
 export const getScheduleValuesDefault = (initValue?: TripScheduleCardType) => {
   if (initValue) {
+    const timeTaken = initValue.time_taken
+      ? convertTimeTaken(initValue.time_taken)
+      : null;
+
     return {
       title: initValue.title,
       time_hour: initValue.time ? Number(initValue.time.split(':')[0]) : null,
       time_minute: initValue.time ? Number(initValue.time.split(':')[1]) : null,
-      time_taken_hour: initValue.time_taken
-        ? Number(convertTimeTaken(initValue.time_taken).split(':')[0])
-        : null,
-      time_taken_minute: initValue.time_taken
-        ? Number(convertTimeTaken(initValue.time_taken).split(':')[1])
-        : null,
+      time_taken_hour: timeTaken ? Number(timeTaken.hour) : null,
+      time_taken_minute: timeTaken ? Number(timeTaken.min) : null,
       memo: initValue.memo,
       card_type: initValue.card_type as CardType,
       detail: {

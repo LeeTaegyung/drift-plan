@@ -1,16 +1,14 @@
-import { useEffect } from 'react';
 import { Control, Controller, useForm } from 'react-hook-form';
 import { useParams } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { uploadImage } from '@/entities/image/api/image.api';
 import {
   TripScheduleCardFormType,
   TripScheduleCardType,
 } from '@/entities/trips/type';
 import { useCurrentUser } from '@/entities/user/query/useCurrentUser';
-import { CARD_TYPES } from '@/features/trips/tripSchedule/constants';
+import { CARD_TYPES, CardType } from '@/features/trips/tripSchedule/constants';
 import {
   AccommodationCardFormValues,
   AttractionCardFormValues,
@@ -68,13 +66,6 @@ export default function TripScheduleForm({
   });
   const cardType = watch('card_type');
   const isEditMode = !!initValue;
-
-  useEffect(() => {
-    reset({
-      ...getValues(),
-      ...getScheduleDetailValuesDefault(cardType),
-    });
-  }, [cardType, getValues, reset]);
 
   const onSubmitForm = handleSubmit(async (formData) => {
     const originData: Partial<ScheduleCardFormValues> = isEditMode
@@ -140,7 +131,16 @@ export default function TripScheduleForm({
             <Select
               inputSize='sm'
               value={field.value}
-              onChange={field.onChange}
+              onChange={(e) => {
+                const newCardType = e.target.value as CardType;
+
+                field.onChange(e);
+                reset({
+                  ...getValues(),
+                  ...getScheduleDetailValuesDefault(newCardType),
+                });
+              }}
+              disabled={isEditMode}
             >
               <option value=''>카드 타입을 선택해주세요.</option>
               {CARD_TYPES.map((type) => (
