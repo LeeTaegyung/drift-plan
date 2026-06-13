@@ -37,7 +37,7 @@ function SDCardHeader({
     <div className='flex items-center gap-2'>
       <div
         className={cn(
-          'flex h-8 w-8 items-center justify-center rounded-sm bg-gray-500',
+          'flex h-8 w-8 shrink-0 items-center justify-center rounded-sm bg-gray-500',
           className
         )}
       >
@@ -58,7 +58,7 @@ function SDCardGrid({
   return (
     <div
       className={cn(
-        'grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2',
+        'grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-x-4 md:gap-y-2',
         className
       )}
     >

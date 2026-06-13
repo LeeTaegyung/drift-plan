@@ -41,7 +41,7 @@ export default function AccommodationDetailCard({ detail }: Props) {
         <SDCardWrapper.Item label='예약 번호'>
           {detail.platform_ref ?? '-'}
         </SDCardWrapper.Item>
-        <SDCardWrapper.Item label='주소' className='col-span-2'>
+        <SDCardWrapper.Item label='주소' className='md:col-span-2'>
           {detail.address ?? '-'}
         </SDCardWrapper.Item>
         <SDCardWrapper.Item label='체크인'>
@@ -57,7 +57,7 @@ export default function AccommodationDetailCard({ detail }: Props) {
           {detail.city_tax_currency} {detail.city_tax ?? '-'}
         </SDCardWrapper.Item>
       </SDCardWrapper.Grid>
-      <SDCardWrapper.Grid className='grid-cols-1 md:grid-cols-3'>
+      <SDCardWrapper.Grid className='grid-cols-3 md:grid-cols-3'>
         <SDCardWrapper.Item label='수건'>
           {detail.has_towel ? (
             <Circle className='size-4' />
