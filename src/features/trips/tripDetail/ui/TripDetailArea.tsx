@@ -33,7 +33,11 @@ export default function TripDetailArea({ tripId }: Props) {
   return (
     <div className='content-inner flex flex-col items-center gap-3 py-5 md:gap-5 md:py-10'>
       <div className='bg-bg sticky top-12 z-1 flex w-full items-center justify-between py-1.5 md:top-14'>
-        <BackBtn text='뒤로가기' className='text-xs md:text-sm' />
+        <BackBtn
+          text='뒤로가기'
+          className='text-xs md:text-sm'
+          href={PATH.global.trips.list}
+        />
         <Button
           asChild
           size={'sm'}
