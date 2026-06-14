@@ -10,7 +10,7 @@ import { Label } from '@/shared/shadcn/components/ui/label';
 
 interface Props {
   value: File | string | null;
-  onChange: (file: File) => void;
+  onChange: (file: File | null) => void;
 }
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
@@ -49,6 +49,7 @@ export default function ImageUploadOnlyOne({ value, onChange }: Props) {
     if (!preview) return;
     URL.revokeObjectURL(preview);
     setPreview(null);
+    onChange(null);
   };
 
   useEffect(() => {
