@@ -1,12 +1,15 @@
 'use client';
 
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
 
+import { deleteTripSchedule } from '@/entities/trips/api/trips.api';
 import { TRIPS_QUERIES } from '@/entities/trips/query/trips.queries';
 import { TripScheduleCardFormType } from '@/entities/trips/type';
+import { useDeleteTripSchedule } from '@/features/trips/tripSchedule/mutation/useDeleteTripSchedule';
 import { useUpdateTripSchedule } from '@/features/trips/tripSchedule/mutation/useUpdateTripSchedule';
 import TripScheduleAddArea from '@/features/trips/tripSchedule/ui/TripScheduleContent/TripScheduleAddArea';
 import TripScheduleCard from '@/features/trips/tripSchedule/ui/TripScheduleContent/TripScheduleCard';
+import { useAlertModalStore } from '@/shared/store/alertModalStore';
 
 interface Props {
   tripId: string;
@@ -17,7 +20,11 @@ export default function TripScheduleContent({ tripId, dateId }: Props) {
   const { data: tripSchedules } = useSuspenseQuery(
     TRIPS_QUERIES.schedule.queryOptions(tripId, dateId)
   );
+  const openAlertModal = useAlertModalStore((state) => state.openAlertModal);
   const { mutateAsync: updateTripScheduleCardMutation } = useUpdateTripSchedule(
+    { tripId, dateId }
+  );
+  const { mutateAsync: deleteTripScheduleCardMutation } = useDeleteTripSchedule(
     { tripId, dateId }
   );
 
@@ -34,6 +41,14 @@ export default function TripScheduleContent({ tripId, dateId }: Props) {
     );
   };
 
+  const handleDeleteCard = (id: string) => {
+    openAlertModal({
+      title: '여행 일정 삭제',
+      desc: '정말로 삭제하시겠습니까?',
+      onAction: () => deleteTripScheduleCardMutation(id),
+    });
+  };
+
   const isEmpty = tripSchedules?.length === 0;
 
   return (
@@ -46,6 +61,7 @@ export default function TripScheduleContent({ tripId, dateId }: Props) {
             key={schedule.id}
             data={schedule}
             onUpdateSubmit={handleUpdateSubmit}
+            onDeleteCard={handleDeleteCard}
           />
         ))}
 

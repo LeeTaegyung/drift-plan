@@ -163,3 +163,7 @@ export const updateTripSchedule = async ({
     .update(formData)
     .eq('id', id);
 };
+
+export const deleteTripSchedule = async (id: string) => {
+  return await supabase.from('trip_schedule_cards').delete().eq('id', id);
+};
