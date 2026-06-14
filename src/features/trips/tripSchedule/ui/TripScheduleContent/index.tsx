@@ -53,8 +53,6 @@ export default function TripScheduleContent({ tripId, dateId }: Props) {
     });
   };
 
-  console.log(tripSchedules);
-
   const isEmpty = tripSchedules?.length === 0;
 
   return (
