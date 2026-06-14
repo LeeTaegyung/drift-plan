@@ -58,7 +58,7 @@ export default function TripScheduleForm({
     getValues,
     control,
     watch,
-    formState: { isValid, isSubmitting, isDirty, errors, dirtyFields },
+    formState: { isValid, isSubmitting, isDirty, dirtyFields, errors },
   } = useForm<ScheduleCardFormValues>({
     resolver: zodResolver(scheduleCardSchema),
     defaultValues: getScheduleValuesDefault(initValue),
@@ -66,6 +66,13 @@ export default function TripScheduleForm({
   });
   const cardType = watch('card_type');
   const isEditMode = !!initValue;
+  const submitText = isEditMode
+    ? isSubmitting
+      ? '수정중...'
+      : '수정'
+    : isSubmitting
+      ? '등록중...'
+      : '등록';
 
   const onSubmitForm = handleSubmit(async (formData) => {
     const originData: Partial<ScheduleCardFormValues> = isEditMode
@@ -85,6 +92,9 @@ export default function TripScheduleForm({
     if ('time_taken_hour' in originData || 'time_taken_minute' in originData) {
       originData.time_taken_hour = formData.time_taken_hour;
       originData.time_taken_minute = formData.time_taken_minute;
+    }
+    if ('detail' in originData) {
+      originData.card_type = formData.card_type;
     }
 
     const {
@@ -287,7 +297,7 @@ export default function TripScheduleForm({
           className='flex-1'
           disabled={!isValid || isSubmitting || !isDirty}
         >
-          등록
+          {submitText}
         </Button>
         <Button
           type='button'

@@ -150,3 +150,16 @@ export const createTripSchedule = async (
     .select()
     .single();
 };
+
+export const updateTripSchedule = async ({
+  formData,
+  id,
+}: {
+  formData: Partial<TripScheduleCardFormType>;
+  id: string;
+}) => {
+  return await supabase
+    .from('trip_schedule_cards')
+    .update(formData)
+    .eq('id', id);
+};
