@@ -165,5 +165,16 @@ export const updateTripSchedule = async ({
 };
 
 export const deleteTripSchedule = async (id: string) => {
-  return await supabase.from('trip_schedule_cards').delete().eq('id', id);
+  return await supabase
+    .from('trip_schedule_cards')
+    .delete()
+    .eq('id', id)
+    .select()
+    .single();
+};
+
+export const updateTripScheduleOrderIdx = async (
+  cards: TripScheduleCardType[]
+) => {
+  return await supabase.from('trip_schedule_cards').upsert(cards);
 };

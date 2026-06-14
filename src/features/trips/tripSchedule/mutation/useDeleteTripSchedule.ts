@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { deleteTripSchedule } from '@/entities/trips/api/trips.api';
 import { TRIPS_QUERIES } from '@/entities/trips/query/trips.queries';
+import { deleteScheduleUpdateOrder } from '@/features/trips/tripSchedule/api/deleteScheduleUpdateOrder';
 
 interface Props {
   tripId: string;
@@ -13,7 +13,7 @@ export const useDeleteTripSchedule = ({ tripId, dateId }: Props) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: deleteTripSchedule,
+    mutationFn: deleteScheduleUpdateOrder,
     onSuccess: async () => {
       await queryClient.invalidateQueries({
         queryKey: TRIPS_QUERIES.schedule.queryKey(tripId, dateId),

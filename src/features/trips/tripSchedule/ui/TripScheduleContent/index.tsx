@@ -9,6 +9,7 @@ import { useDeleteTripSchedule } from '@/features/trips/tripSchedule/mutation/us
 import { useUpdateTripSchedule } from '@/features/trips/tripSchedule/mutation/useUpdateTripSchedule';
 import TripScheduleAddArea from '@/features/trips/tripSchedule/ui/TripScheduleContent/TripScheduleAddArea';
 import TripScheduleCard from '@/features/trips/tripSchedule/ui/TripScheduleContent/TripScheduleCard';
+import { reorderCards } from '@/features/trips/tripSchedule/utils/reorderCards';
 import { useAlertModalStore } from '@/shared/store/alertModalStore';
 
 interface Props {
@@ -41,13 +42,18 @@ export default function TripScheduleContent({ tripId, dateId }: Props) {
     );
   };
 
-  const handleDeleteCard = (id: string) => {
+  const handleDeleteCard = (id: string, order: number) => {
+    const updateCards = reorderCards(tripSchedules.slice(order + 1), order);
+
     openAlertModal({
       title: '여행 일정 삭제',
       desc: '정말로 삭제하시겠습니까?',
-      onAction: () => deleteTripScheduleCardMutation(id),
+      onAction: () =>
+        deleteTripScheduleCardMutation({ id, cards: updateCards }),
     });
   };
+
+  console.log(tripSchedules);
 
   const isEmpty = tripSchedules?.length === 0;
 

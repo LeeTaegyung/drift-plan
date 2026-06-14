@@ -22,7 +22,7 @@ interface Props {
     id: string,
     onSuccess: () => void
   ) => void;
-  onDeleteCard: (id: string) => void;
+  onDeleteCard: (id: string, order: number) => void;
 }
 
 export default function TripScheduleCard({
@@ -31,14 +31,15 @@ export default function TripScheduleCard({
   onDeleteCard,
 }: Props) {
   const [isEdit, setIsEdit] = useState(false);
-  const { id, card_type, title, time, time_taken, detail, memo } = data;
+  const { id, card_type, title, time, time_taken, detail, memo, order_index } =
+    data;
 
   const handleCancel = () => setIsEdit(false);
 
   const handleSubmit = (formData: Partial<TripScheduleCardFormType>) =>
     onUpdateSubmit(formData, id, () => setIsEdit(false));
 
-  const handleDelete = () => onDeleteCard(id);
+  const handleDelete = () => onDeleteCard(id, order_index);
 
   return (
     <>
