@@ -20,86 +20,87 @@ export const transformTripScheduleData = async (
   // detail을 세부적으로 변환해줄 유틸함수
   const result: Partial<TripScheduleCardFormType> = {};
 
-  if ('time_hour' in formData || 'time_minute' in formData) {
+  if (formData.time_hour || formData.time_minute) {
     const hour = formData.time_hour ?? '00';
     const min = formData.time_minute ?? '00';
     const timeText = `${hour}:${min}`;
     result.time = timeText === '00:00' ? null : timeText;
   }
 
-  if ('time_taken_hour' in formData || 'time_taken_minute' in formData) {
+  if (formData.time_taken_hour || formData.time_taken_minute) {
     const hour = formData.time_taken_hour ?? '00';
     const min = formData.time_taken_minute ?? '00';
     const timeTaken = convertTimeTaken(`${hour}:${min}`);
     result.time_taken = timeTaken === 0 ? null : timeTaken;
   }
 
-  if ('card_type' in formData) {
+  if (formData.card_type) {
     result.card_type = formData.card_type;
+  }
 
-    if ('detail' in formData)
-      switch (formData.card_type) {
-        case 'flight': {
-          result.detail = formData.detail as FlightCardFormValues['detail'];
-          break;
-        }
-        case 'accommodation': {
-          const { term_date, ...data } =
-            formData.detail as AccommodationCardFormValues['detail'];
-
-          result.detail = {
-            ...data,
-            term_date:
-              term_date && typeof term_date === 'object'
-                ? `${formatTripDate(term_date.from)}~${formatTripDate(term_date.to ? term_date.to : term_date.from)}`
-                : null,
-          };
-          break;
-        }
-        case 'transport': {
-          result.detail = formData.detail as TransportCardFormValues['detail'];
-          break;
-        }
-        case 'attraction': {
-          const detail = formData.detail as AttractionCardFormValues['detail'];
-          const photoUrl =
-            detail.photo_url instanceof File
-              ? await uploadScheduleImage(detail.photo_url, userId, tripId)
-              : detail.photo_url;
-
-          result.detail = {
-            ...detail,
-            photo_url: photoUrl,
-          };
-          break;
-        }
-        case 'tour': {
-          const detail = formData.detail as TourCardFormValues['detail'];
-          const photoUrl =
-            detail.photo_url instanceof File
-              ? await uploadScheduleImage(detail.photo_url, userId, tripId)
-              : detail.photo_url;
-
-          result.detail = {
-            ...detail,
-            photo_url: photoUrl,
-          };
-          break;
-        }
-        case 'etc': {
-          const detail = formData.detail as EtcCardFormValues['detail'];
-          const photoUrl =
-            detail.photo_url instanceof File
-              ? await uploadScheduleImage(detail.photo_url, userId, tripId)
-              : detail.photo_url;
-
-          result.detail = {
-            ...detail,
-            photo_url: photoUrl,
-          };
-          break;
-        }
+  if (formData.detail) {
+    switch (formData.card_type) {
+      case 'flight': {
+        result.detail = formData.detail as FlightCardFormValues['detail'];
+        break;
       }
+      case 'accommodation': {
+        const { term_date, ...data } =
+          formData.detail as AccommodationCardFormValues['detail'];
+
+        result.detail = {
+          ...data,
+          term_date:
+            term_date && typeof term_date === 'object'
+              ? `${formatTripDate(term_date.from)}~${formatTripDate(term_date.to ? term_date.to : term_date.from)}`
+              : null,
+        };
+        break;
+      }
+      case 'transport': {
+        result.detail = formData.detail as TransportCardFormValues['detail'];
+        break;
+      }
+      case 'attraction': {
+        const detail = formData.detail as AttractionCardFormValues['detail'];
+        const photoUrl =
+          detail.photo_url instanceof File
+            ? await uploadScheduleImage(detail.photo_url, userId, tripId)
+            : detail.photo_url;
+
+        result.detail = {
+          ...detail,
+          photo_url: photoUrl,
+        };
+        break;
+      }
+      case 'tour': {
+        const detail = formData.detail as TourCardFormValues['detail'];
+        const photoUrl =
+          detail.photo_url instanceof File
+            ? await uploadScheduleImage(detail.photo_url, userId, tripId)
+            : detail.photo_url;
+
+        result.detail = {
+          ...detail,
+          photo_url: photoUrl,
+        };
+        break;
+      }
+      case 'etc': {
+        const detail = formData.detail as EtcCardFormValues['detail'];
+        const photoUrl =
+          detail.photo_url instanceof File
+            ? await uploadScheduleImage(detail.photo_url, userId, tripId)
+            : detail.photo_url;
+
+        result.detail = {
+          ...detail,
+          photo_url: photoUrl,
+        };
+        break;
+      }
+    }
   }
 
   return result;
