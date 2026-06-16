@@ -44,10 +44,9 @@ const accommodationDetailSchema = z.object({
   term_date: z
     .union([
       z.undefined(),
-      z.string(),
       z.object({
-        from: z.date(),
-        to: z.date().optional(),
+        from: z.string(),
+        to: z.string().optional(),
       }),
     ])
     .superRefine((data, ctx) => {

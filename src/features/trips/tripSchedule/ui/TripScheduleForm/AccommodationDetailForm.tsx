@@ -9,6 +9,7 @@ import { LabelInputField } from '@/shared/ui/form';
 import CostInput from '@/shared/ui/form/CostInput';
 import NumberOnlyInput from '@/shared/ui/form/NumberOnlyInput';
 import RangeDate from '@/shared/ui/form/RangeDate';
+import { formatTripDate } from '@/shared/utils/dateUtils';
 
 interface Props {
   control: Control<AccommodationCardFormValues>;
@@ -92,8 +93,24 @@ export default function AccommodationDetailForm({ control }: Props) {
           <LabelInputField inputSize='sm' title='기간'>
             {/* from => date_term_start, to => date_term_end */}
             <RangeDate
-              selectDate={field.value}
-              setSelectDate={field.onChange}
+              selectDate={
+                field.value
+                  ? {
+                      from: new Date(field.value.from),
+                      to: field.value.to ? new Date(field.value.to) : undefined,
+                    }
+                  : undefined
+              }
+              setSelectDate={(date) => {
+                field.onChange(
+                  date
+                    ? {
+                        from: date.from ? formatTripDate(date.from) : '',
+                        to: date.to ? formatTripDate(date.to) : undefined,
+                      }
+                    : undefined
+                );
+              }}
               inputSize='sm'
             />
           </LabelInputField>

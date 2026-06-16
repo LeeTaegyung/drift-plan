@@ -10,8 +10,6 @@ interface Props {
 }
 
 export default function AccommodationDetailCard({ detail }: Props) {
-  const term_date = detail.term_date as string | null;
-
   return (
     <SDCardWrapper>
       <SDCardWrapper.Header
@@ -22,12 +20,17 @@ export default function AccommodationDetailCard({ detail }: Props) {
           <div className='text-sm font-medium'>{detail.accommodation_name}</div>
           <div className='flex items-center gap-1 text-xs text-black/70 dark:text-gray-200'>
             {detail.city && <span>{detail.city}</span>}
-            {term_date && (
+            {detail.term_date && (
               <span className='before:pr-1 before:content-["·"] first-of-type:before:hidden'>
-                {term_date.split('~')[0]} (
-                {getDayByStringDate(term_date.split('~')[0])}) ~{' '}
-                {term_date.split('~')[1]} (
-                {getDayByStringDate(term_date.split('~')[1])})
+                {detail.term_date.from} (
+                {getDayByStringDate(detail.term_date.from)})
+                {detail.term_date.to && (
+                  <>
+                    {' '}
+                    ~ {detail.term_date.to} (
+                    {getDayByStringDate(detail.term_date.to)})
+                  </>
+                )}
               </span>
             )}
           </div>
